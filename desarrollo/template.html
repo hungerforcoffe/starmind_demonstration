@@ -67,10 +67,15 @@ dialog input[type=number]{width:70px}
 dialog td input[type=text]{width:70px}
 .prog{font-family:var(--mono);color:var(--text-secondary)}
 a{color:#8cb8f2}
+#liteBanner{flex-basis:100%;display:none;gap:8px;align-items:center;flex-wrap:wrap;background:#3a3417;color:var(--text-primary);border:1px solid #6b5d22;border-radius:6px;padding:6px 10px;font-size:12px}
+#liteBanner.on{display:flex}
 @media (max-width:1100px){
-  #app{height:auto;grid-template-columns:1fr;grid-template-rows:auto auto 70vh auto auto;grid-template-areas:"hdr" "ctl" "god" "right" "tabs"}
-  #ctl{max-height:none}
+  /* pantallas angostas: primero las vistas, después los controles */
+  #app{height:auto;grid-template-columns:1fr;grid-template-rows:auto 60vh auto auto auto;grid-template-areas:"hdr" "god" "right" "ctl" "tabs"}
+  #ctl{max-height:none;border-right:none;border-top:1px solid var(--line)}
+  #right{border-left:none}
   #tabs{min-height:380px}
+  header .fps{margin-left:0}
 }
 </style>
 <script type="importmap">
@@ -88,6 +93,7 @@ a{color:#8cb8f2}
     <h1>Starmind × Rubin — mapa orbital</h1>
     <span class="clock" id="clock">cargando…</span>
     <span class="fps" id="fps"></span>
+    <div id="liteBanner"><span id="liteText"></span><button id="bLiteFull">Cargar 100 %</button></div>
   </header>
 
   <aside id="ctl">

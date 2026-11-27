@@ -7,9 +7,13 @@ const SCEN_COLORS = ['#3987e5', '#199e70', '#d95926'];
 const nf = (x, d = 0) => (x === null || x === undefined || !isFinite(x)) ? '—' : Number(x).toLocaleString('es-CL', { minimumFractionDigits: d, maximumFractionDigits: d });
 const clone = o => JSON.parse(JSON.stringify(o));
 const params = new URLSearchParams(location.search);
+// Modo liviano en celulares (o con ?lite): Starmind al 10 % y resolución 1×. ?full lo desactiva.
+const MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+const LITE = params.has('lite') || (MOBILE && !params.has('full'));
+const LITE_DEPLOY = 0.1;
 
 const state = {
-  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, on: [true, false, true],
+  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: LITE ? LITE_DEPLOY : 1, on: [true, false, true],
   Mstar: BRILLO.central, phaseOn: false, conical: false, magLim: 12, godShadow: true, skyShadow: false, coneX: false,
   alt: 60, az: 180, band: 'r', twoSnaps: false, emin: 30,
   groupsStarmind: clone(DEFAULT_STARMIND), groupsGen2: clone(DEFAULT_GEN2), starmindPreset: 'FCC',
@@ -40,8 +44,8 @@ function parseTLE(text) {
 
 // --------------------------------------------------------------- renderer
 const canvas = $('gl');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-const DPR = Math.min(window.devicePixelRatio || 1, 2);
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: !LITE, powerPreference: 'high-performance' });
+const DPR = LITE ? 1 : Math.min(window.devicePixelRatio || 1, 2);
 renderer.setPixelRatio(DPR);
 renderer.setSize(window.innerWidth, window.innerHeight, false);
 renderer.setScissorTest(true);
@@ -727,7 +731,8 @@ $('tLocal').onchange = e => {
   const guess = Date.UTC(Y, Mo - 1, D, h, mi); setTime(guess - chileOffsetH(guess) * 3600000);
 };
 ['onS0', 'onS1', 'onS2'].forEach((id, i) => $(id).onchange = e => { state.on[i] = e.target.checked; statusLast = 0; if (i === 0) updateTLEPositions(true); });
-$('deploy').oninput = e => { state.deploy = e.target.value / 100; $('deployLab').textContent = `${e.target.value} %`; statusLast = 0; };
+$('deploy').oninput = e => { state.deploy = e.target.value / 100; $('deployLab').textContent = `${e.target.value} %`; statusLast = 0; if (state.deploy === 1) $('liteBanner').classList.remove('on'); };
+$('bLiteFull').onclick = () => { state.deploy = 1; syncInputs(); statusLast = 0; $('liteBanner').classList.remove('on'); };
 $('brillo').onchange = e => { const v = e.target.value; $('Mcustom').style.display = v === 'custom' ? '' : 'none'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; };
 $('Mcustom').onchange = e => state.Mstar = +e.target.value;
 $('phase').onchange = e => state.phaseOn = e.target.checked;
@@ -770,6 +775,14 @@ window.addEventListener('resize', () => drawChart());
 setTLE(parseTLE($('tle-snapshot').textContent), 'Snapshot CelesTrak 26-nov-2026');
 state.simMs = params.has('t') ? Date.parse(params.get('t')) : (astroTwilightEnd(Date.now()) || Date.now());
 buildSynthetic();
+if (LITE) {
+  let nStar = 0; for (let k = 0; k < SYN.n; k++) if (SYN.misc[2 * k] > 1.5) nStar++;
+  $('liteText').textContent = `Modo celular: Starmind al ${LITE_DEPLOY * 100} % (≈${nf(nStar * LITE_DEPLOY / 1000, 0)} mil satélites, misma distribución) para que fluya. Multiplica los conteos ×${1 / LITE_DEPLOY} para el escenario completo.`;
+  $('liteBanner').classList.add('on');
+  $('nStep').value = '30'; $('nPerStep').value = '20'; $('nStat').value = '100';
+  document.querySelector('#god .legend').textContent = 'Vista orbital libre · arrastrar = rotar · pellizcar = zoom · línea amarilla = dirección del Sol · punto rojo = Cerro Pachón';
+  ['Brillo y sombra', 'Vistas', 'Estado (cada ~1 s)'].forEach(t => { const d = [...document.querySelectorAll('#ctl details')].find(x => x.querySelector('summary').textContent === t); if (d) d.open = false; });
+}
 fillSources(); syncInputs(); drawChart(); drawCCD({ trails: [], band: state.band, twoSnaps: false });
 updateUniforms(); updateTLEPositions(true);
 { const o = eci2three(F.obs); camGod.position.copy(o.clone().normalize().multiplyScalar(26).add(new THREE.Vector3(0, 6, 0))); }
