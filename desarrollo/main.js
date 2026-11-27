@@ -13,7 +13,7 @@ const MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (na
 const LITE = params.has('lite') || (MOBILE && !params.has('full'));
 
 const state = {
-  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [true, false, true], mode: 'simple', moment: null,
+  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [false, false, true], mode: 'simple',
   Mstar: BRILLO.central, phaseOn: false, conical: false, magLim: 12, godShadow: true, skyShadow: false, coneX: false,
   alt: 60, az: 180, band: 'r', twoSnaps: false, emin: 30,
   groupsStarmind: clone(DEFAULT_STARMIND), groupsGen2: clone(DEFAULT_GEN2), starmindPreset: 'FCC',
@@ -237,7 +237,7 @@ function buildSynthetic() {
   synSrc = synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [state.on[0], state.on[1], state.on[2], false], M: Mvec() }));
   let n1 = 0, n2 = 0; for (let k = 0; k < SYN.n; k++) (SYN.misc[2 * k] < 1.5 ? n1++ : n2++);
   $('nS1').textContent = nf(n1); $('nS2').textContent = nf(n2) + (state.starmindPreset !== 'FCC' ? ' · ' + state.starmindPreset : '');
-  const so = $('sScen').options; so[0].textContent = `Starmind · ${nf(n2)} + Starlink actual`; so[2].textContent = `Starlink Gen2 · ${nf(n1)} + actual`;
+  $('sN2').textContent = nf(n2); $('sN1').textContent = nf(n1);
 }
 function maybeRebase() {
   const dt = (state.simMs - state.tRef) / 1000;
@@ -260,7 +260,7 @@ function setTLE(parsed, origin) {
   sceneGod.add(tleGod); sceneSky.add(tleSky);
   tleSrc = tleSource(TLE.recs, TLE.Ms, satellite, () => ({ on: state.on[0] }));
   tleLastMs = NaN;
-  $('nS0').textContent = nf(TLE.recs.length); $('sScen').options[1].textContent = `Solo Starlink actual · ${nf(TLE.recs.length)}`;
+  $('nS0').textContent = nf(TLE.recs.length); $('sN0').textContent = nf(TLE.recs.length);
   $('tleInfo').textContent = `${origin}: ${nf(TLE.recs.length)} objetos; época más reciente ${new Date(TLE.epoch).toISOString().slice(0, 16).replace('T', ' ')} UTC.`;
 }
 function updateTLEPositions(force) {
@@ -334,11 +334,10 @@ function updateClock() {
   const lst = mod(F.theta * RAD + RUBIN.lon, 360) / 15;
   $('clock').textContent = `Simulación · ${fechaCorta(state.simMs)} · ${horaChile(state.simMs, true)} hora de Chile · Sol ${nf(sa, 1)}°`;
   $('clockFull').textContent = `UTC ${new Date(state.simMs).toISOString().slice(11, 19)} · TSL ${String(Math.floor(lst)).padStart(2, '0')}:${String(Math.floor((lst % 1) * 60)).padStart(2, '0')} · Sol ${nf(sa, 1)}°`;
-  $('sClock').textContent = `${fechaCorta(state.simMs, false)} · ${horaChile(state.simMs)} hora de Chile · Sol ${nf(sa, 1)}°`;
   if (document.activeElement !== $('tLocal')) $('tLocal').value = c.input;
   $('tzlab').textContent = `Fecha y hora en Chile (UTC${c.off})`;
   $('dockPoint').textContent = `Alt ${nf(state.alt, 0)}° · Az ${nf(state.az, 0)}°`;
-  document.querySelectorAll('[data-moment]').forEach(b => b.classList.toggle('selected', b.dataset.moment === state.moment));
+  syncHourSlider();
   if (state.mode === 'simple' && Math.abs(state.simMs - impactMs) > 600000 && !impactBusy) scheduleImpact();
 }
 let statusLast = 0, statusMs = NaN;
@@ -744,7 +743,7 @@ async function runDiagnostics() {
 }
 
 // --------------------------------------------------------------- controles
-function setTime(ms, moment = null) { state.simMs = ms; state.moment = moment; statusLast = 0; }
+function setTime(ms) { state.simMs = ms; statusLast = 0; }
 function syncInputs() {
   ['onS0', 'onS1', 'onS2'].forEach((id, i) => $(id).checked = state.on[i]);
   $('deploy').value = Math.round(state.deploy * 100); $('deployLab').textContent = `${Math.round(state.deploy * 100)} %`;
@@ -819,24 +818,37 @@ function setMode(m) {
   }
   $('mSimple').classList.toggle('active', m === 'simple'); $('mExpert').classList.toggle('active', m === 'expert');
   try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
-  if (m === 'simple') { syncSimpleScenario(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
+  if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
 }
 $('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
 $('toExpert').onclick = () => { setMode('expert'); scrollTo(0, 0); };
 $('toSimple').onclick = () => { setMode('simple'); scrollTo(0, 0); };
 
-// escenario del modo simple ↔ casillas del modo científico
-const SIMPLE_ON = { starmind: [true, false, true], actual: [true, false, false], gen2: [true, true, false] };
-function syncSimpleScenario() { $('sScen').value = state.on[2] ? 'starmind' : state.on[1] ? 'gen2' : 'actual'; }
-$('sScen').onchange = e => { state.on = [...SIMPLE_ON[e.target.value]]; syncInputs(); updateTLEPositions(true); statusLast = 0; scheduleImpact(true); setTimeout(simpleExpose, 60); };
+// casillas de constelaciones del modo simple ↔ las del modo avanzado (mismo estado)
+function syncSimpleScenario() { [0, 1, 2].forEach(i => $('sOn' + i).checked = state.on[i]); }
+[0, 1, 2].forEach(i => $('sOn' + i).onchange = e => {
+  state.on[i] = e.target.checked; syncInputs(); if (i === 0) updateTLEPositions(true); statusLast = 0; scheduleImpact(true); setTimeout(simpleExpose, 60);
+});
 
-// momentos de la noche (la misma noche que contiene la hora simulada)
-function momentTime(k) {
-  if (k === 'twi') return astroTwilightEnd(state.simMs);
-  if (k === 'mid') return solarMidnight(state.simMs).ms;
-  return nightWindow(state.simMs, -18).end; // inicio del crepúsculo astronómico matutino
+// hora del modo simple: deslizador de la noche que contiene la hora simulada (puesta → salida del sol, pasos de 5 min)
+const HSTEP = 300000;
+let hourWin = null, hourDrag = false;
+function setupHourSlider() {
+  const w = nightWindow(state.simMs, -0.833); if (!w.start || !w.end) return;
+  hourWin = w; const s = $('sHour');
+  s.max = String(Math.round((w.end - w.start) / HSTEP));
+  $('sStart').textContent = `${horaChile(w.start)} puesta de sol`; $('sEnd').textContent = `salida del sol ${horaChile(w.end)}`;
+  $('sNight').textContent = `Hora en Cerro Pachón · noche del ${fechaCorta(w.start, false)} al ${fechaCorta(w.end, false)}`;
+  syncHourSlider(true);
 }
-document.querySelectorAll('[data-moment]').forEach(b => b.onclick = () => { const t = momentTime(b.dataset.moment); if (t) { setTime(t, b.dataset.moment); scheduleImpact(true); setTimeout(() => { updateUniforms(); simpleExpose(); }, 60); } });
+function syncHourSlider(force) {
+  if (!hourWin || (hourDrag && !force)) return;
+  if (state.simMs < hourWin.start - 60000 || state.simMs > hourWin.end + 60000) { if (state.mode === 'simple') setupHourSlider(); return; }
+  $('sHour').value = String(Math.round((state.simMs - hourWin.start) / HSTEP)); $('sTime').textContent = horaChile(state.simMs);
+}
+$('sHour').addEventListener('input', e => { hourDrag = true; setTime(hourWin.start + +e.target.value * HSTEP); $('sTime').textContent = horaChile(state.simMs); scheduleImpact(); });
+$('sHour').addEventListener('change', () => { hourDrag = false; scheduleImpact(true); setTimeout(() => { updateUniforms(); simpleExpose(); }, 60); });
+
 // En el modo simple, tocar el cielo ES la exposición (no hay botón): el resultado aparece en la tarjeta de
 // LSSTCam y se resume bajo el cielo. Al entrar se expone un campo al azar sobre 30° para que la imagen no parta vacía.
 let userPointed = false, skyHover = null;
@@ -857,27 +869,6 @@ skyov.addEventListener('click', () => { if (state.mode !== 'simple') return; use
 skyov.addEventListener('mousemove', ev => { const r = skyov.getBoundingClientRect(); skyHover = [(ev.clientX - r.left) * DPR, (ev.clientY - r.top) * DPR]; });
 skyov.addEventListener('mouseleave', () => { skyHover = null; });
 
-// perfil de la noche: % de imágenes con trazas en crepúsculo, medianoche y amanecer (misma K y semilla que el impacto)
-const PROF = [['twi', 'Crepúsculo'], ['mid', 'Medianoche'], ['dawn', 'Amanecer']];
-let profKey = '', profVals = {};
-function drawProfile() {
-  $('profRows').innerHTML = PROF.map(([k, lab]) => { const v = profVals[k];
-    return `<div class="prof-row${state.moment === k ? ' cur' : ''}"><span><b>${lab}</b> ${v ? horaChile(v.t) : ''}</span><div class="prof-bar"><span style="width:${v ? Math.min(100, v.p * 100).toFixed(1) : 0}%"></span></div><span class="prof-pct">${v ? nf(v.p * 100, 0) + ' %' : '…'}</span></div>`; }).join('');
-}
-function computeProfile() {
-  const key = [nightWindow(state.simMs, -0.833).start, state.on.join(), state.conical, state.deploy, state.starmindPreset].join('|');
-  if (key === profKey) { drawProfile(); return; }
-  profKey = key; profVals = {}; drawProfile();
-  let i = 0;
-  const step = () => {
-    if (profKey !== key || i >= PROF.length) return;
-    const [k] = PROF[i++], t = momentTime(k);
-    if (t) profVals[k] = { t, p: pointingStats(enabledSources(), t, 200, 30, { twoSnaps: false, conical: state.conical }, 11).pAny };
-    drawProfile(); setTimeout(step, 20);
-  };
-  setTimeout(step, 20);
-}
-
 // impacto real: apuntados al azar sobre 30° con la constelación completa (no con lo dibujado)
 let impactMs = NaN, impactBusy = false, impactTimer = 0;
 function scheduleImpact(now = false) { clearTimeout(impactTimer); impactTimer = setTimeout(computeImpact, now ? 30 : 400); }
@@ -885,27 +876,26 @@ function computeImpact() {
   if (impactBusy || !SYN) return;
   impactBusy = true; impactMs = state.simMs;
   const t0 = state.simMs, sa = sunAlt(t0), K = 200; // mismo K y semilla en todo dispositivo: la cifra es reproducible
-  $('impWhen').textContent = `${fechaCorta(t0)} · ${horaChile(t0)} hora de Chile · Sol ${nf(sa, 1)}°`;
   $('impTitle').textContent = 'Calculando…';
   setTimeout(() => {
-    const st = pointingStats(enabledSources(), t0, K, 30, { twoSnaps: false, conical: state.conical }, 11);
-    const k = Math.round(st.pAny * 10), pct = st.pAny * 100;
-    let title, text;
-    if (sa > -12) { title = 'Todavía no es de noche'; text = `El Sol está a ${nf(sa, 1)}°: el cielo aún es demasiado claro para observar. Elige crepúsculo, medianoche o amanecer.`; }
-    else if (st.pAny < 0.05) { title = 'Casi ninguna imagen tendría trazas a esta hora'; text = `La sombra de la Tierra cubre la constelación: en promedio ${nf(st.mean, 2)} satélites iluminados por exposición. El daño se concentra en las horas que siguen al anochecer y en las que preceden al amanecer.`; }
-    else { title = `${k} de cada 10 imágenes tendrían trazas`; text = `Una exposición de 30 s apuntada al azar sobre 30° de altura cruzaría en promedio ${nf(st.mean, 1)} satélites iluminados; la mitad de las exposiciones tendría ${st.p50} o más, y una de cada diez, ${st.p90} o más.`; }
+    let title, text, k = 0;
+    if (!state.on.some(Boolean)) { title = 'Marca al menos una constelación'; text = 'Elige arriba qué satélites quieres poner en el cielo.'; }
+    else if (sa > -12) { title = 'Todavía hay luz en el cielo'; text = `A esta hora el Sol está apenas bajo el horizonte (${nf(sa, 0)}°) y el telescopio aún no observa. Mueve la hora hacia la noche.`; }
+    else {
+      const st = pointingStats(enabledSources(), t0, K, 30, { twoSnaps: false, conical: state.conical }, 11);
+      k = Math.round(st.pAny * 10);
+      if (st.pAny < 0.05) { title = 'Casi ninguna imagen tendría satélites a esta hora'; text = 'A esta hora la sombra de la Tierra oculta a los satélites. El problema es mayor en las horas que siguen a la puesta de sol y en las que preceden al amanecer.'; }
+      else { title = `${k} de cada 10 imágenes saldrían con trazas de satélites`; text = `En una foto de 30 segundos aparecerían en promedio ${nf(st.mean, 0)} satélites cruzando la imagen; en algunas direcciones del cielo, más de ${nf(st.p90, 0)}.`; }
+    }
     $('impTitle').textContent = title; $('impText').textContent = text;
-    $('impBar').style.width = `${Math.min(100, pct).toFixed(1)}%`; $('impPct').textContent = `${nf(pct, 0)} %`;
-    $('impNote').textContent = `${K} apuntados al azar, escenario «${$('sScen').selectedOptions[0].textContent}». Cuenta satélites iluminados que cruzan el campo de LSSTCam; el brillo supuesto (M₁₀₀₀ ${nf(state.Mstar, 1)}) solo cambia cuántos saturan.`;
+    $('impDots').innerHTML = Array.from({ length: 10 }, (_, i) => `<i class="${i < k ? 'on' : ''}"></i>`).join('');
     impactBusy = false;
-    computeProfile();
   }, 30);
 }
 
 // --------------------------------------------------------------- inicio
 setTLE(parseTLE($('tle-snapshot').textContent), 'Snapshot CelesTrak 26-nov-2026');
 state.simMs = params.has('t') ? Date.parse(params.get('t')) : (astroTwilightEnd(Date.now()) || Date.now());
-if (!params.has('t')) state.moment = 'twi';
 buildSynthetic();
 if (LITE) {
   $('liteText').textContent = 'En celular se dibuja 1 de cada 10 satélites de Starmind para que fluya; los números usan la constelación completa.';
@@ -916,7 +906,7 @@ if (MOBILE) $('godHint').textContent = 'Arrastra para rotar · pellizca para ace
 fillSources(); syncInputs(); drawChart(); drawCCD({ trails: [], band: state.band, twoSnaps: false });
 updateUniforms(); updateTLEPositions(true);
 { const o = eci2three(F.obs); camGod.position.copy(o.clone().normalize().multiplyScalar(26).add(new THREE.Vector3(0, 6, 0))); }
-let modo0 = params.get('modo') === 'cientifico' ? 'expert' : params.get('modo') === 'simple' ? 'simple' : null;
+let modo0 = ['cientifico', 'avanzado'].includes(params.get('modo')) ? 'expert' : params.get('modo') === 'simple' ? 'simple' : null;
 if (!modo0) { try { modo0 = localStorage.getItem('modo'); } catch (e) { /* sin almacenamiento */ } }
 if (params.has('diag') || params.has('fps')) modo0 = 'expert';
 setMode(modo0 === 'expert' ? 'expert' : 'simple');
