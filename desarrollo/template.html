@@ -43,6 +43,14 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 .mode-switch button.active,.coord-switch button.active{background:var(--surface-3);color:var(--text);box-shadow:0 0 0 1px var(--line-bright)}
 .lite-note{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:9px 28px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
 
+.boot{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;padding:24px}
+.boot-card{max-width:480px;display:grid;gap:12px;justify-items:start}
+.boot-card .brand-mark{width:34px;height:34px}
+.boot-card h2{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.boot-card p{color:var(--muted);line-height:1.55}
+.boot-hint{font-size:13px;border-left:2px solid var(--line-bright);padding-left:10px}
+.boot-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.boot[data-failed] .boot-card h2{color:#f0a07c}
 /* piezas comunes */
 .icon{flex:0 0 auto}
 .icon-button{width:32px;height:32px;border:1px solid transparent;border-radius:7px;background:transparent;display:inline-flex;align-items:center;justify-content:center;color:var(--muted)}
@@ -269,6 +277,69 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
 </script>
 </head>
 <body data-mode="simple">
+<!-- pantalla de carga; si algo falla se convierte en un mensaje que explica qué hacer -->
+<div id="boot" class="boot" role="status" aria-live="polite">
+  <div class="boot-card">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <h2 id="bootTitle">Cargando la simulación</h2>
+    <p id="bootText">Descargando las librerías y preparando un millón de satélites. Puede tardar unos segundos.</p>
+    <p id="bootHint" class="boot-hint" hidden></p>
+    <div id="bootActions" class="boot-actions" hidden>
+      <button class="primary-button" id="bootRetry" type="button">Reintentar</button>
+      <button class="secondary-button" id="bootCopy" type="button">Copiar enlace</button>
+      <a class="text-button" href="https://github.com/hungerforcoffe/starmind_demonstration" target="_blank" rel="noopener">Ver el proyecto en GitHub</a>
+    </div>
+  </div>
+</div>
+<script>
+// Script clásico (no módulo): corre incluso en navegadores que no entienden import maps.
+(function () {
+  var failed = false, oldBrowser = false;
+  function $(id) { return document.getElementById(id); }
+  function show(title, text, hard) {
+    if (window.__ready && !hard) return;
+    var b = $('boot'); if (!b) return;
+    if (hard) { failed = true; b.dataset.failed = '1'; }
+    $('bootTitle').textContent = title; $('bootText').textContent = text;
+    var inApp = /LinkedInApp|FBAN|FBAV|Instagram|Line\//i.test(navigator.userAgent);
+    var h = $('bootHint');
+    h.textContent = inApp ? 'Lo abriste dentro de una app. Ábrelo en tu navegador: menú ⋯ y luego «Abrir en el navegador».'
+                          : 'Si lo abriste desde una app (LinkedIn, Instagram…), prueba abrirlo en el navegador del teléfono o en un computador.';
+    h.hidden = false; $('bootActions').hidden = false;
+  }
+  window.__bootFail = function (title, text) { show(title, text, true); };
+  $('bootRetry').onclick = function () { location.reload(); };
+  $('bootCopy').onclick = function () {
+    var url = location.href.split('?')[0], btn = this;
+    var ok = function () { btn.textContent = 'Enlace copiado'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok, function () { prompt('Copia el enlace:', url); });
+    else prompt('Copia el enlace:', url);
+  };
+  var im = !!(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('importmap'));
+  var gl = null; try { gl = document.createElement('canvas').getContext('webgl2'); } catch (e) { gl = null; }
+  // sin import maps el módulo no podrá cargar; aviso suave por si la detección se equivoca (si la página arranca, se abre igual)
+  if (!im) { oldBrowser = true; show('Tu navegador es demasiado antiguo', 'La simulación necesita un navegador actualizado: Chrome o Edge 96+, Firefox 108+ o Safari 16.4+. En iPhone o iPad, actualiza iOS a la versión 16.4 o posterior.', false); }
+  else if (!gl) show('Este dispositivo no tiene WebGL 2 disponible', 'La simulación dibuja un millón de satélites con la tarjeta gráfica (WebGL 2). Puede estar desactivado en la configuración del navegador o no estar soportado por este equipo. Prueba con otro navegador o en un computador.', true);
+  // errores antes de terminar de cargar: librerías que no llegan o fallas al iniciar
+  window.addEventListener('error', function (e) {
+    if (window.__ready || failed || oldBrowser) return;
+    var t = e.target;
+    if (t && t.tagName === 'SCRIPT') { show('No se pudieron descargar las librerías', 'La simulación descarga Three.js y satellite.js desde cdn.jsdelivr.net. Revisa tu conexión o si tu red bloquea ese sitio, y vuelve a intentarlo.', true); return; }
+    if (e instanceof ErrorEvent) show('No se pudo iniciar la simulación', 'Ocurrió un error al arrancar: «' + (e.message || 'desconocido') + '». Si se repite, avísanos con este mensaje y el nombre de tu navegador.', true);
+  }, true);
+  window.addEventListener('unhandledrejection', function (e) {
+    if (window.__ready || failed || oldBrowser) return;
+    show('No se pudo iniciar la simulación', 'Ocurrió un error al arrancar: «' + ((e.reason && e.reason.message) || e.reason || 'desconocido') + '».', true);
+  });
+  // carga lenta: aviso suave (si termina de cargar después, la página se abre igual)
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      if (window.__ready || failed || oldBrowser) return;
+      show('Está tardando más de lo normal', 'Puede ser una conexión lenta o que tu red bloquee cdn.jsdelivr.net, desde donde se descargan las librerías. Si termina de cargar, la simulación se abrirá sola.', false);
+    }, 25000);
+  });
+})();
+</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
   <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>

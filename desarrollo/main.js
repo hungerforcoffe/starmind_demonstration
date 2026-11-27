@@ -911,6 +911,8 @@ if (!modo0) { try { modo0 = localStorage.getItem('modo'); } catch (e) { /* sin a
 if (params.has('diag') || params.has('fps')) modo0 = 'expert';
 setMode(modo0 === 'expert' ? 'expert' : 'simple');
 requestAnimationFrame(loop);
+window.__ready = true; // la pantalla de carga se retira solo si no hubo un error grave
+{ const b = $('boot'); if (b && !b.dataset.failed) b.remove(); }
 if (params.has('diag')) { showTab('tDiag'); setTimeout(runDiagnostics, 800); }
 if (params.has('fps')) setTimeout(async () => { const fps = await measureFPS(5000); const gl = renderer.getContext(), dbg = gl.getExtension('WEBGL_debug_renderer_info');
   window.__fps = { fps, gpu: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : '?' }; document.title = 'fps ' + fps.toFixed(1); }, 2500);
