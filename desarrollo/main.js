@@ -294,7 +294,16 @@ const enabledSources = () => [tleSrc, synSrc].filter(Boolean);
 // --------------------------------------------------------------- uniformes por cuadro
 let F = frameAt(state.simMs);
 function pointingECI(Fx) { return altAzToECI(Fx, state.alt, state.az); }
+// leyenda de la vista orbital: solo las constelaciones visibles
+let legendKey = '';
+function syncLegend() {
+  const k = state.on.join() + state.low600; if (k === legendKey) return; legendKey = k;
+  [0, 1, 2].forEach(i => $('lg' + i).hidden = !state.on[i]);
+  $('lg2t').textContent = state.low600 ? 'Starmind · bajo 600 km' : 'Starmind';
+  $('godLegend').hidden = !state.on.some(Boolean);
+}
 function updateUniforms() {
+  syncLegend();
   F = frameAt(state.simMs);
   maybeRebase();
   U.uT.value = (state.simMs - state.tRef) / 1000; U.uSunRA.value = F.sunRA;

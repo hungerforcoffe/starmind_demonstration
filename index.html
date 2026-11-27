@@ -534,7 +534,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
   <section class="earth-panel" id="god" aria-labelledby="orbital-title">
     <div class="panel-label"><span class="eyebrow">Vista orbital</span><h2 id="orbital-title">Un millón de satélites alrededor de la Tierra</h2></div>
     <canvas class="scene-canvas" id="godCv" aria-label="Vista orbital 3D de la Tierra"></canvas>
-    <div class="canvas-legend"><span><i class="legend-dot blue"></i>Starlink actual</span><span><i class="legend-dot green"></i>Gen2</span><span><i class="legend-dot orange"></i>Starmind 1M</span></div>
+    <div class="canvas-legend" id="godLegend"><span id="lg0"><i class="legend-dot blue"></i>Starlink actual</span><span id="lg1"><i class="legend-dot green"></i>Starlink Gen2</span><span id="lg2"><i class="legend-dot orange"></i><span id="lg2t">Starmind</span></span></div>
     <div class="scene-hint" id="godHint">Arrastra para rotar · rueda para acercar · línea amarilla: dirección del Sol · punto rojo: Cerro Pachón</div>
   </section>
   <section class="visual-card sky-card" id="skyCard">
@@ -34981,7 +34981,16 @@ const enabledSources = () => [tleSrc, synSrc].filter(Boolean);
 // --------------------------------------------------------------- uniformes por cuadro
 let F = frameAt(state.simMs);
 function pointingECI(Fx) { return altAzToECI(Fx, state.alt, state.az); }
+// leyenda de la vista orbital: solo las constelaciones visibles
+let legendKey = '';
+function syncLegend() {
+  const k = state.on.join() + state.low600; if (k === legendKey) return; legendKey = k;
+  [0, 1, 2].forEach(i => $('lg' + i).hidden = !state.on[i]);
+  $('lg2t').textContent = state.low600 ? 'Starmind · bajo 600 km' : 'Starmind';
+  $('godLegend').hidden = !state.on.some(Boolean);
+}
 function updateUniforms() {
+  syncLegend();
   F = frameAt(state.simMs);
   maybeRebase();
   U.uT.value = (state.simMs - state.tRef) / 1000; U.uSunRA.value = F.sunRA;
