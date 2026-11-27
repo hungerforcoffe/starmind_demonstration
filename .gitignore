@@ -3,3 +3,9 @@ __pycache__/
 node_modules/
 .vscode/
 Thumbs.db
+video_linkedin/
+figma_files/
+desarrollo/video/frames_*/
+desarrollo/video/out_*/
+desarrollo/video/fonts/
+desarrollo/video/edgeprof_v/

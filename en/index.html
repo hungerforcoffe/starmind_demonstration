@@ -34732,6 +34732,7 @@ const params = new URLSearchParams(location.search);
 // los cálculos siempre usan la constelación completa. ?full lo desactiva.
 const MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
 const LITE = params.has('lite') || (MOBILE && !params.has('full'));
+const REC = params.has('rec'); // modo de grabación de video (oculto): dibuja todas las vistas aunque estén fuera de pantalla
 
 const state = {
   simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [false, false, true], low600: false, mode: 'simple',
@@ -34777,7 +34778,7 @@ renderer.autoClear = false;
 let glW = 0, glH = 0;
 function drawView(cv, scene, cam, bg) {
   const r = cv.getBoundingClientRect();
-  if (r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth) return false;
+  if (r.width < 2 || r.height < 2 || (!REC && (r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth))) return false;
   // mismo redondeo hacia abajo que three.js en setViewport: si no, con escalado 125/150 % se copia 1 px de la otra vista
   const w = Math.round(r.width), h = Math.round(r.height), pw = Math.floor(w * DPR), ph = Math.floor(h * DPR);
   if (w > glW || h > glH) { glW = Math.max(glW, w); glH = Math.max(glH, h); renderer.setSize(glW, glH, false); }
@@ -35668,6 +35669,22 @@ if (!modo0) { try { modo0 = localStorage.getItem('modo'); } catch (e) { /* sin a
 if (params.has('diag') || params.has('fps')) modo0 = 'expert';
 setMode(modo0 === 'expert' ? 'expert' : 'simple');
 requestAnimationFrame(loop);
+// grabación de video cuadro a cuadro (?rec): hora y cámara controladas desde fuera, sin depender del reloj real
+if (REC) {
+  $('ccd').width = $('ccd').height = 1080;
+  window.__rec = {
+    camPos() { const p = camGod.position, d = p.length(); return [Math.atan2(p.x, p.z) * RAD, Math.asin(p.y / d) * RAD, d]; },
+    frame(ms, cam) {
+      if (ms) state.simMs = ms;
+      if (cam) { const [az, el, d] = cam, a = az * DEG, e = el * DEG; camGod.position.set(d * Math.cos(e) * Math.sin(a), d * Math.sin(e), d * Math.cos(e) * Math.cos(a)); controls.target.set(0, 0, 0); camGod.lookAt(0, 0, 0); }
+      updateUniforms(); updateTLEPositions(true); render(); drawSkyOverlay(); return true;
+    },
+    grab(id) { return $(id).toDataURL('image/png'); },
+    lit30() { const cs = countByScen(synSrc, F, 30, state.conical); return cs && cs[2] ? cs[2].litE : 0; },
+    sun() { return Math.asin(dot(F.sun, F.U)) * RAD; },
+    expose(alt, az) { state.alt = alt; state.az = az; runExposure(); return { n: $('camTrails').textContent, loss: $('camLoss').textContent }; },
+  };
+}
 window.__ready = true; // la pantalla de carga se retira solo si no hubo un error grave
 { const b = $('boot'); if (b && !b.dataset.failed) b.remove(); }
 if (params.has('diag')) { showTab('tDiag'); setTimeout(runDiagnostics, 800); }
