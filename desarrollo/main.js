@@ -3,17 +3,17 @@
 // ============================================================================
 const $ = id => document.getElementById(id);
 const SCEN_NAMES = ['Starlink actual', 'Starlink Gen2 autorizado', 'Starmind 1M'];
-const SCEN_COLORS = ['#3987e5', '#199e70', '#d95926'];
+const SCEN_COLORS = ['#3f8ee8', '#1fae77', '#e8652f']; // validados (CVD y luminosidad) sobre el fondo oscuro
 const nf = (x, d = 0) => (x === null || x === undefined || !isFinite(x)) ? '—' : Number(x).toLocaleString('es-CL', { minimumFractionDigits: d, maximumFractionDigits: d });
 const clone = o => JSON.parse(JSON.stringify(o));
 const params = new URLSearchParams(location.search);
-// Modo liviano en celulares (o con ?lite): Starmind al 10 % y resolución 1×. ?full lo desactiva.
+// Modo liviano en celulares (o con ?lite): se DIBUJA 1 de cada 10 satélites de Starmind y resolución 1×;
+// los cálculos siempre usan la constelación completa. ?full lo desactiva.
 const MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
 const LITE = params.has('lite') || (MOBILE && !params.has('full'));
-const LITE_DEPLOY = 0.1;
 
 const state = {
-  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: LITE ? LITE_DEPLOY : 1, on: [true, false, true],
+  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [true, false, true], mode: 'simple', moment: null,
   Mstar: BRILLO.central, phaseOn: false, conical: false, magLim: 12, godShadow: true, skyShadow: false, coneX: false,
   alt: 60, az: 180, band: 'r', twoSnaps: false, emin: 30,
   groupsStarmind: clone(DEFAULT_STARMIND), groupsGen2: clone(DEFAULT_GEN2), starmindPreset: 'FCC',
@@ -43,26 +43,29 @@ function parseTLE(text) {
 }
 
 // --------------------------------------------------------------- renderer
-const canvas = $('gl');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: !LITE, powerPreference: 'high-performance' });
+// Un solo contexto WebGL fuera de pantalla; cada vista (órbita, cielo) es un <canvas> 2D normal del DOM
+// al que se copia el cuadro. Así las vistas se desplazan, recortan y apilan como cualquier elemento.
+const glCanvas = document.createElement('canvas');
+const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: !LITE, powerPreference: 'high-performance' });
 const DPR = LITE ? 1 : Math.min(window.devicePixelRatio || 1, 2);
 renderer.setPixelRatio(DPR);
 renderer.setScissorTest(true);
 renderer.autoClear = false;
-// El lienzo cubre solo la unión de la vista global y el panel derecho, en coordenadas de página.
-// Así el navegador lo desplaza junto con el DOM al hacer scroll (en celulares el scroll va antes que JS).
-const glBox = { x: 0, y: 0, w: 0, h: 0 };
-function layoutCanvas() {
-  const a = $('god').getBoundingClientRect(), b = $('right').getBoundingClientRect();
-  const x = Math.min(a.left, b.left) + scrollX, y = Math.min(a.top, b.top) + scrollY;
-  const w = Math.max(a.right, b.right) + scrollX - x, h = Math.max(a.bottom, b.bottom) + scrollY - y;
-  if (Math.abs(x - glBox.x) + Math.abs(y - glBox.y) + Math.abs(w - glBox.w) + Math.abs(h - glBox.h) < 1) return;
-  Object.assign(glBox, { x, y, w, h });
-  canvas.style.left = x + 'px'; canvas.style.top = y + 'px';
-  renderer.setSize(Math.max(1, Math.round(w)), Math.max(1, Math.round(h)), false);
-  canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+let glW = 0, glH = 0;
+function drawView(cv, scene, cam, bg) {
+  const r = cv.getBoundingClientRect();
+  if (r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth) return false;
+  const w = Math.round(r.width), h = Math.round(r.height), pw = Math.round(w * DPR), ph = Math.round(h * DPR);
+  if (w > glW || h > glH) { glW = Math.max(glW, w); glH = Math.max(glH, h); renderer.setSize(glW, glH, false); }
+  if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+  if (cam.isPerspectiveCamera) { cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  else { const a = w / h; cam.left = -Math.max(1, a); cam.right = Math.max(1, a); cam.top = Math.max(1, 1 / a); cam.bottom = -Math.max(1, 1 / a); cam.updateProjectionMatrix(); }
+  renderer.setViewport(0, 0, w, h); renderer.setScissor(0, 0, w, h);
+  renderer.setClearColor(bg, 1); renderer.clear(); renderer.render(scene, cam);
+  const ctx = cv._ctx || (cv._ctx = cv.getContext('2d'));
+  ctx.drawImage(glCanvas, 0, glCanvas.height - ph, pw, ph, 0, 0, pw, ph);
+  return true;
 }
-layoutCanvas();
 
 const sceneGod = new THREE.Scene(), sceneSky = new THREE.Scene();
 const camGod = new THREE.PerspectiveCamera(45, 1, 0.05, 5000);
@@ -233,7 +236,8 @@ function buildSynthetic() {
   sceneGod.add(synGod); sceneSky.add(synSky);
   synSrc = synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [state.on[0], state.on[1], state.on[2], false], M: Mvec() }));
   let n1 = 0, n2 = 0; for (let k = 0; k < SYN.n; k++) (SYN.misc[2 * k] < 1.5 ? n1++ : n2++);
-  $('nS1').textContent = `(${nf(n1)})`; $('nS2').textContent = `(${nf(n2)}${state.starmindPreset !== 'FCC' ? ', ' + state.starmindPreset : ''})`;
+  $('nS1').textContent = nf(n1); $('nS2').textContent = nf(n2) + (state.starmindPreset !== 'FCC' ? ' · ' + state.starmindPreset : '');
+  const so = $('sScen').options; so[0].textContent = `Starmind · ${nf(n2)} + Starlink actual`; so[2].textContent = `Starlink Gen2 · ${nf(n1)} + actual`;
 }
 function maybeRebase() {
   const dt = (state.simMs - state.tRef) / 1000;
@@ -256,7 +260,7 @@ function setTLE(parsed, origin) {
   sceneGod.add(tleGod); sceneSky.add(tleSky);
   tleSrc = tleSource(TLE.recs, TLE.Ms, satellite, () => ({ on: state.on[0] }));
   tleLastMs = NaN;
-  $('nS0').textContent = `(${nf(TLE.recs.length)})`;
+  $('nS0').textContent = nf(TLE.recs.length); $('sScen').options[1].textContent = `Solo Starlink actual · ${nf(TLE.recs.length)}`;
   $('tleInfo').textContent = `${origin}: ${nf(TLE.recs.length)} objetos; época más reciente ${new Date(TLE.epoch).toISOString().slice(0, 16).replace('T', ' ')} UTC.`;
 }
 function updateTLEPositions(force) {
@@ -283,7 +287,7 @@ function updateUniforms() {
   maybeRebase();
   U.uT.value = (state.simMs - state.tRef) / 1000; U.uSunRA.value = F.sunRA;
   U.uSun.value.set(...F.sun); U.uObs.value.set(...F.obs); U.uE.value.set(...F.E); U.uN.value.set(...F.N); U.uU.value.set(...F.U);
-  U.uOn.value.set(+state.on[0], +state.on[1], +state.on[2]); U.uDeploy.value = state.deploy;
+  U.uOn.value.set(+state.on[0], +state.on[1], +state.on[2]); U.uDeploy.value = state.deploy * state.renderFrac;
   U.uM.value.set(0, M_GEN2, state.Mstar); U.uConical.value = +state.conical; U.uPhaseOn.value = +state.phaseOn;
   U.uMagLim.value = state.magLim; U.uShowShadowGod.value = +state.godShadow; U.uShowShadowSky.value = +state.skyShadow;
   earth.rotation.y = F.theta;
@@ -296,31 +300,13 @@ function updateUniforms() {
 }
 
 // --------------------------------------------------------------- render
-function viewRect(el, c) { // rectángulo en coordenadas del lienzo (origen abajo a la izquierda)
-  const r = el.getBoundingClientRect(), m = window.innerHeight; // margen de una pantalla para que el scroll no muestre zonas sin dibujar
-  if (r.width < 2 || r.height < 2 || r.bottom < -m || r.top > 2 * m) return null;
-  return { x: r.left - c.left, y: c.bottom - r.bottom, w: r.width, h: r.height };
-}
 function skyBg(alt) {
   if (alt > -6) return 0x24364f; if (alt > -12) return 0x162235; if (alt > -18) return 0x0c1220; return 0x05070b;
 }
 let fpsT0 = performance.now(), fpsN = 0, fpsVal = 0, lastReal = performance.now(), frameTimes = [];
 function render() {
-  layoutCanvas();
-  const c = canvas.getBoundingClientRect();
-  renderer.setScissorTest(false); renderer.setClearColor(0x1a1a19, 1); renderer.clear(); renderer.setScissorTest(true);
-  const rg = viewRect($('god'), c);
-  if (rg) {
-    camGod.aspect = rg.w / rg.h; camGod.updateProjectionMatrix();
-    renderer.setViewport(rg.x, rg.y, rg.w, rg.h); renderer.setScissor(rg.x, rg.y, rg.w, rg.h);
-    renderer.setClearColor(0x050608, 1); renderer.clear(); renderer.render(sceneGod, camGod);
-  }
-  const rs = viewRect($('sky'), c);
-  if (rs) {
-    const s = Math.min(rs.w, rs.h);
-    renderer.setViewport(rs.x, rs.y, s, s); renderer.setScissor(rs.x, rs.y, s, s);
-    renderer.setClearColor(skyBg(Math.asin(dot(F.sun, F.U)) * RAD), 1); renderer.clear(); renderer.render(sceneSky, camSky);
-  }
+  drawView($('godCv'), sceneGod, camGod, 0x04080c);
+  drawView($('skyCv'), sceneSky, camSky, skyBg(Math.asin(dot(F.sun, F.U)) * RAD));
 }
 function loop(now) {
   const dt = Math.min(0.25, (now - lastReal) / 1000); lastReal = now;
@@ -329,7 +315,7 @@ function loop(now) {
   controls.update();
   render(); drawSkyOverlay(); updateClock(); tickStatus();
   fpsN++; frameTimes.push(now); if (frameTimes.length > 240) frameTimes.shift();
-  if (now - fpsT0 > 1000) { fpsVal = fpsN * 1000 / (now - fpsT0); fpsN = 0; fpsT0 = now; $('fps').textContent = `${nf(fpsVal, 0)} fps · ${nf(SYN ? SYN.n + (TLE ? TLE.recs.length : 0) : 0)} satélites cargados`; }
+  if (now - fpsT0 > 1000) { fpsVal = fpsN * 1000 / (now - fpsT0); fpsN = 0; fpsT0 = now; $('fps').textContent = `${nf(fpsVal, 0)} fps · ${nf(SYN ? SYN.n + (TLE ? TLE.recs.length : 0) : 0)} satélites`; }
   requestAnimationFrame(loop);
 }
 
@@ -339,19 +325,30 @@ function chileStr(ms) {
   return { s: d.toISOString().slice(0, 19).replace('T', ' '), off, input: d.toISOString().slice(0, 16) };
 }
 let clockLast = 0;
+const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+function fechaCorta(ms, conAno = true) { const d = new Date(ms + chileOffsetH(ms) * 3600000); return `${d.getUTCDate()} ${MESES[d.getUTCMonth()]}${conAno ? ' ' + d.getUTCFullYear() : ''}`; }
+function horaChile(ms, seg = false) { return new Date(ms + chileOffsetH(ms) * 3600000).toISOString().slice(11, seg ? 19 : 16); }
 function updateClock() {
   const now = performance.now(); if (now - clockLast < 150) return; clockLast = now;
   const c = chileStr(state.simMs), sa = Math.asin(dot(F.sun, F.U)) * RAD;
   const lst = mod(F.theta * RAD + RUBIN.lon, 360) / 15;
-  $('clock').textContent = `${c.s} Chile (UTC${c.off}) · ${new Date(state.simMs).toISOString().slice(11, 19)} UTC · Sol ${nf(sa, 1)}° · TSL ${String(Math.floor(lst)).padStart(2, '0')}:${String(Math.floor((lst % 1) * 60)).padStart(2, '0')}`;
+  $('clock').textContent = `Simulación · ${fechaCorta(state.simMs)} · ${horaChile(state.simMs, true)} hora de Chile · Sol ${nf(sa, 1)}°`;
+  $('clockFull').textContent = `UTC ${new Date(state.simMs).toISOString().slice(11, 19)} · TSL ${String(Math.floor(lst)).padStart(2, '0')}:${String(Math.floor((lst % 1) * 60)).padStart(2, '0')} · Sol ${nf(sa, 1)}°`;
+  $('sClock').textContent = `${fechaCorta(state.simMs, false)} · ${horaChile(state.simMs)} hora de Chile · Sol ${nf(sa, 1)}°`;
   if (document.activeElement !== $('tLocal')) $('tLocal').value = c.input;
-  $('tzlab').textContent = `hora de Chile (UTC${c.off})`;
+  $('tzlab').textContent = `Fecha y hora en Chile (UTC${c.off})`;
+  $('dockPoint').textContent = `Alt ${nf(state.alt, 0)}° · Az ${nf(state.az, 0)}°`;
+  document.querySelectorAll('[data-moment]').forEach(b => b.classList.toggle('selected', b.dataset.moment === state.moment));
+  if (state.mode === 'simple' && Math.abs(state.simMs - impactMs) > 600000 && !impactBusy) scheduleImpact();
 }
 let statusLast = 0, statusMs = NaN;
 function tickStatus() {
   const now = performance.now();
   if (state.measuring || now - statusLast < (state.playing ? 4000 : 1200) || (state.simMs === statusMs && now - statusLast < 5000)) return;
   statusLast = now; statusMs = state.simMs;
+  { const p = pointingECI(F), rd = eciToRadecJ2000(F.jd, p);
+    $('skyInfo').textContent = `Apuntado: alt ${nf(state.alt, 1)}°, az ${nf(state.az, 1)}° → RA ${nf(rd.ra, 2)}°, Dec ${nf(rd.dec, 2)}° (J2000). Clic en el cielo para apuntar.`; }
+  if (state.mode !== 'expert' || !$('secStatus').open) return;
   const lines = [];
   const cs = synSrc ? countByScen(synSrc, F, 30, state.conical) : null, ct = (tleSrc && state.on[0]) ? countVisible(tleSrc, F, 30, state.conical) : null;
   const rows = [[0, ct], [1, cs && cs[1]], [2, cs && cs[2]]];
@@ -360,8 +357,6 @@ function tickStatus() {
   const sa = Math.asin(dot(F.sun, F.U)) * RAD;
   lines.push(`Sol ${nf(sa, 1)}° · sombra sobre el cenit ≈ ${sa < 0 ? nf(shadowHeightZenith(-sa), 0) + ' km' : '—'}`);
   $('status').textContent = lines.join('\n');
-  const p = pointingECI(F), rd = eciToRadecJ2000(F.jd, p);
-  $('skyInfo').textContent = `Apuntado: alt ${nf(state.alt, 1)}°, az ${nf(state.az, 1)}° → RA ${nf(rd.ra, 2)}°, Dec ${nf(rd.dec, 2)}° (J2000). Color = magnitud V (blanco = brillante, rojo = débil); límite m < ${nf(state.magLim, 1)}.`;
 }
 
 // --------------------------------------------------------------- overlay del cielo
@@ -377,7 +372,7 @@ function drawSkyOverlay() {
   if (skyov.width !== W || skyov.height !== H) { skyov.width = W; skyov.height = H; }
   const c = sctx, R = W / 2, cx = W / 2, cy = H / 2, toXY = (alt, az) => { const zd = (90 - alt) / 90; return [cx - zd * Math.sin(az * DEG) * R, cy - zd * Math.cos(az * DEG) * R]; };
   c.clearRect(0, 0, W, H);
-  c.strokeStyle = 'rgba(200,205,215,0.45)'; c.lineWidth = DPR; c.fillStyle = 'rgba(200,205,215,0.8)'; c.font = `${11 * DPR}px system-ui`;
+  c.strokeStyle = 'rgba(200,205,215,0.45)'; c.lineWidth = DPR; c.fillStyle = 'rgba(200,205,215,0.8)'; c.font = `${11 * DPR}px 'DM Sans', system-ui`;
   for (const a of [0, 30, 60]) { c.beginPath(); c.arc(cx, cy, R * (90 - a) / 90 - (a === 0 ? DPR : 0), 0, TWO_PI); c.stroke(); if (a) c.fillText(a + '°', cx + 3 * DPR, cy - R * (90 - a) / 90 + 12 * DPR); }
   c.textAlign = 'center'; c.textBaseline = 'middle';
   c.fillText('N', cx, 10 * DPR); c.fillText('S', cx, H - 10 * DPR); c.fillText('E', 9 * DPR, cy); c.fillText('O', W - 9 * DPR, cy);
@@ -479,7 +474,7 @@ function drawCCD(E) {
   for (let i = 0; i < A.length; i += 4) if (A[i] > 127) { na++; if (Mk[i] > 127) nm++; }
   // marco del campo de 1,75°
   c.strokeStyle = 'rgba(255,255,255,0.25)'; c.setLineDash([4, 4]); c.beginPath(); c.arc(cx, cy, 1.75 * sc, 0, TWO_PI); c.stroke(); c.setLineDash([]);
-  c.fillStyle = '#c3c2b7'; c.font = '13px system-ui'; c.fillText('N', cx - 4, 14); c.fillText('E', 6, cy + 4);
+  c.fillStyle = '#c6d0d4'; c.font = '13px system-ui'; c.fillText('N', cx - 4, 14); c.fillText('E', 6, cy + 4);
   return { counts, loss: nm / na };
 }
 function runExposure() {
@@ -496,6 +491,9 @@ function runExposure() {
   lines.push(`Pérdida de píxeles estimada: ${nf(out.loss * 100, 2)} % (máscaras de Jangid et al. 2026: 20″ normal, 100″ saturada, CCD completo si m < 2).`);
   lines.push(`Trazas en sombra se cuentan pero no se dibujan. Cálculo: ${nf(performance.now() - t, 0)} ms.`);
   $('expOut').textContent = lines.join('\n');
+  let nLit = 0; for (const i of [0, 1, 2]) if (state.on[i] && out.counts[i]) nLit += out.counts[i].lit;
+  $('camTrails').textContent = nf(nLit); $('camLoss').textContent = `${nf(out.loss * 100, 1)} %`;
+  $('camWhen').textContent = `Exposición de 30 s · ${horaChile(t0)} · banda ${state.band}`;
 }
 function runStats() {
   const n = +$('nStat').value, emin = +$('emin').value, t0 = state.simMs, t = performance.now();
@@ -509,6 +507,7 @@ function runStats() {
   }
   lines.push(`(${nf(performance.now() - t, 0)} ms)`);
   $('statOut').textContent = lines.join('\n');
+  showTab('tExp');
 }
 
 // --------------------------------------------------------------- gráfico de la noche
@@ -544,7 +543,7 @@ function drawChart(hoverIdx = -1) {
   const N = state.night, W = chart.clientWidth, H = chart.clientHeight;
   chart.width = W * DPR; chart.height = H * DPR;
   const c = chart.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0); c.clearRect(0, 0, W, H);
-  c.font = '12px system-ui'; c.fillStyle = '#8d8c84';
+  c.font = "12px 'DM Sans', system-ui"; c.fillStyle = '#8b9ba4';
   if (!N) { wrapText(c, 'Pulsa «Calcular noche actual» (Sol < −12°): satélites iluminados sobre 30° y trazas por exposición de 30 s para cada escenario.', 10, 24, W - 20, 17); return; }
   const narrow = W < 600;
   // leyenda en una o varias filas según el ancho disponible
@@ -557,13 +556,13 @@ function drawChart(hoverIdx = -1) {
   chartGeom = { X, L, R, W, panels, ph };
   // sombreado del crepúsculo (Sol entre −12° y −18°)
   for (const P of panels) {
-    for (let j = 0; j + 1 < N.times.length; j++) if (N.sun[j] > -18) { c.fillStyle = 'rgba(144,133,233,0.10)'; c.fillRect(X(N.times[j]), P.y, X(N.times[j + 1]) - X(N.times[j]) + 0.5, ph); }
+    for (let j = 0; j + 1 < N.times.length; j++) if (N.sun[j] > -18) { c.fillStyle = 'rgba(130,215,232,0.07)'; c.fillRect(X(N.times[j]), P.y, X(N.times[j + 1]) - X(N.times[j]) + 0.5, ph); }
   }
   // leyenda
   c.textBaseline = 'middle';
   for (const it of leg) {
-    if (it.twi) { c.fillStyle = 'rgba(144,133,233,0.35)'; c.fillRect(it.x, it.y - 5, 12, 10); } else { c.fillStyle = it.color; c.fillRect(it.x, it.y - 1, 14, 3); }
-    c.fillStyle = '#c3c2b7'; c.fillText(it.name, it.x + 18, it.y);
+    if (it.twi) { c.fillStyle = 'rgba(130,215,232,0.30)'; c.fillRect(it.x, it.y - 5, 12, 10); } else { c.fillStyle = it.color; c.fillRect(it.x, it.y - 1, 14, 3); }
+    c.fillStyle = '#c6d0d4'; c.fillText(it.name, it.x + 18, it.y);
   }
   const logY = $('logY').checked;
   for (const P of panels) {
@@ -579,9 +578,9 @@ function drawChart(hoverIdx = -1) {
       ymax = ymax > 0 ? niceMax(ymax) : 1; Y = v => P.y + ph - v / ymax * ph; ticks = [0, 1, 2, 3, 4].map(k => ymax * k / 4); P.floor = 0;
     }
     P.Y = Y;
-    c.strokeStyle = '#2d2d2b'; c.lineWidth = 1; c.fillStyle = '#8d8c84'; c.textAlign = 'right';
+    c.strokeStyle = '#1e2c35'; c.lineWidth = 1; c.fillStyle = '#8b9ba4'; c.textAlign = 'right';
     for (const v of ticks) { const y = Y(v); c.beginPath(); c.moveTo(L, y); c.lineTo(W - R, y); c.stroke(); c.fillText(nf(v, v < 0.1 ? 2 : v < 1 ? 1 : 0), L - 6, y); }
-    c.textAlign = 'left'; c.fillStyle = '#c3c2b7'; c.fillText(narrow ? P.short + (logY ? ' · log' : '') : P.title + (logY ? ' · log (0 se dibuja en el piso)' : ''), L + 4, P.y + 8);
+    c.textAlign = 'left'; c.fillStyle = '#c6d0d4'; c.fillText(narrow ? P.short + (logY ? ' · log' : '') : P.title + (logY ? ' · log (0 se dibuja en el piso)' : ''), L + 4, P.y + 8);
     const labels = [];
     for (const s of N.series) {
       c.strokeStyle = SCEN_COLORS[s.i]; c.lineWidth = 2; c.lineJoin = 'round'; c.beginPath();
@@ -591,16 +590,16 @@ function drawChart(hoverIdx = -1) {
     labels.sort((a, b) => a.y - b.y);                       // etiquetas directas sin solaparse
     for (let q = 1; q < labels.length; q++) labels[q].y = Math.max(labels[q].y, labels[q - 1].y + 13);
     for (let q = labels.length - 2; q >= 0; q--) labels[q].y = Math.min(labels[q].y, labels[q + 1].y - 13);
-    c.fillStyle = '#c3c2b7'; for (const lb of labels) c.fillText(lb.t, W - R + 6, Math.min(P.y + ph, Math.max(P.y + 6, lb.y)));
+    c.fillStyle = '#c6d0d4'; for (const lb of labels) c.fillText(lb.t, W - R + 6, Math.min(P.y + ph, Math.max(P.y + 6, lb.y)));
   }
   // eje de tiempo (hora de Chile)
-  c.fillStyle = '#8d8c84'; c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+  c.fillStyle = '#8b9ba4'; c.textAlign = 'center'; c.textBaseline = 'alphabetic';
   const off = chileOffsetH(x0) * 3600000; let t = Math.ceil((x0 + off) / 3600000) * 3600000 - off;
-  for (; t <= x1; t += 3600000) { const x = X(t); c.fillText(new Date(t + off).toISOString().slice(11, 16), x, H - 8); c.strokeStyle = '#2d2d2b'; c.beginPath(); c.moveTo(x, T); c.lineTo(x, H - 22); c.stroke(); }
+  for (; t <= x1; t += 3600000) { const x = X(t); c.fillText(new Date(t + off).toISOString().slice(11, 16), x, H - 8); c.strokeStyle = '#1e2c35'; c.beginPath(); c.moveTo(x, T); c.lineTo(x, H - 22); c.stroke(); }
   c.textAlign = 'left';
   if (hoverIdx >= 0) {
-    const x = X(N.times[hoverIdx]); c.strokeStyle = '#c3c2b7'; c.lineWidth = 1; c.beginPath(); c.moveTo(x, T); c.lineTo(x, H - 22); c.stroke();
-    for (const P of panels) for (const s of N.series) { const y = P.Y(s[P.key][hoverIdx]); c.fillStyle = SCEN_COLORS[s.i]; c.strokeStyle = '#1a1a19'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, 4, 0, TWO_PI); c.fill(); c.stroke(); }
+    const x = X(N.times[hoverIdx]); c.strokeStyle = '#c6d0d4'; c.lineWidth = 1; c.beginPath(); c.moveTo(x, T); c.lineTo(x, H - 22); c.stroke();
+    for (const P of panels) for (const s of N.series) { const y = P.Y(s[P.key][hoverIdx]); c.fillStyle = SCEN_COLORS[s.i]; c.strokeStyle = '#05090d'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, 4, 0, TWO_PI); c.fill(); c.stroke(); }
   }
 }
 function wrapText(c, text, x, y, maxW, lh) { // texto con saltos de línea dentro de un canvas
@@ -632,11 +631,11 @@ function fillNightTable() {
 // --------------------------------------------------------------- fuentes y supuestos
 function fillSources() {
   const rows = JSON.parse($('fuentes').textContent);
-  let h = '<div class="muted">Tabla de la Fase 1 (detalle en FASE1_FASE2.md). Estado: CONFIRMADO = fuente primaria leída · SECUNDARIA = cita fiable de la primaria · DERIVADO = calculado · SUPUESTO = no público, editable · NO PÚBLICO · MODELO = aproximación del simulador.</div>';
+  let h = '<div class="muted" style="margin-bottom:10px">Tabla de la Fase 1 (detalle en FASE1_FASE2.md). Estado: CONFIRMADO = fuente primaria leída · SECUNDARIA = cita fiable de la primaria · DERIVADO = calculado · SUPUESTO = no público, editable · NO PÚBLICO · MODELO = aproximación del simulador.</div>';
   h += '<table><tr><th>#</th><th>Parámetro</th><th>Valor usado</th><th>Estado</th><th>Fuente / justificación</th></tr>';
   for (const r of rows) {
     const b = r.estado.startsWith('NO') ? 'NO' : r.estado;
-    h += `<tr><td>${r.id}</td><td>${r.p}</td><td>${r.v}</td><td><span class="badge b-${b}">${r.estado}</span></td><td>${r.url ? `<a href="${r.url}" target="_blank" rel="noopener">${r.f}</a>` : r.f}</td></tr>`;
+    h += `<tr><td>${r.id}</td><td>${r.p}</td><td>${r.v}</td><td><span class="st st-${b}">${r.estado}</span></td><td>${r.url ? `<a href="${r.url}" target="_blank" rel="noopener">${r.f}</a>` : r.f}</td></tr>`;
   }
   $('tSrc').innerHTML = h + '</table>';
 }
@@ -733,17 +732,17 @@ async function runDiagnostics() {
   const np = out.filter(r => r.estado === 'PASA').length, nfail = out.filter(r => r.estado === 'FALLA').length;
   prog.textContent = `${np} pasan · ${nfail} fallan · ${out.length - np - nfail} informativas`;
   $('diagOut').innerHTML = '<table><tr><th>#</th><th>Prueba</th><th>Obtenido</th><th>Esperado</th><th>Tolerancia</th><th>Estado</th><th>Nota</th></tr>' +
-    out.map(r => `<tr><td>${r.id}</td><td>${r.nombre}</td><td class="num">${r.obtenido}</td><td class="num">${r.esperado}</td><td>${r.tol}</td><td><span class="badge b-${r.estado}">${r.estado}</span></td><td class="muted">${r.nota || ''}</td></tr>`).join('') + '</table>';
+    out.map(r => `<tr><td>${r.id}</td><td>${r.nombre}</td><td class="num">${r.obtenido}</td><td class="num">${r.esperado}</td><td>${r.tol}</td><td><span class="st st-${r.estado}">${r.estado}</span></td><td class="muted">${r.nota || ''}</td></tr>`).join('') + '</table>';
   $('diag-json').textContent = JSON.stringify({ fecha: new Date().toISOString(), gpu, resultados: out });
   window.__diag = out; document.title = `Starmind × Rubin · diag ${np}/${out.length}`;
 }
 
 // --------------------------------------------------------------- controles
-function setTime(ms) { state.simMs = ms; statusLast = 0; }
+function setTime(ms, moment = null) { state.simMs = ms; state.moment = moment; statusLast = 0; }
 function syncInputs() {
   ['onS0', 'onS1', 'onS2'].forEach((id, i) => $(id).checked = state.on[i]);
   $('deploy').value = Math.round(state.deploy * 100); $('deployLab').textContent = `${Math.round(state.deploy * 100)} %`;
-  $('bPlay').textContent = state.playing ? '⏸ Pausa' : '▶ Reproducir';
+  $('bPlay').textContent = state.playing ? 'Pausa' : 'Reproducir';
 }
 $('bPlay').onclick = () => { state.playing = !state.playing; syncInputs(); };
 $('speed').onchange = e => state.speed = +e.target.value;
@@ -751,15 +750,16 @@ $('bM10').onclick = () => setTime(state.simMs - 600000); $('bP10').onclick = () 
 $('bNow').onclick = () => setTime(Date.now());
 $('bTwi').onclick = () => { const t = astroTwilightEnd(state.simMs); if (t) setTime(t); };
 $('bMid').onclick = () => setTime(solarMidnight(state.simMs).ms);
+$('bDawn').onclick = () => { const t = nightWindow(state.simMs, -18).end; if (t) setTime(t); };
 $('bSol').onclick = () => { let y = new Date(state.simMs).getUTCFullYear(); if (state.simMs > Date.UTC(y, 5, 25)) y++; setTime(solarMidnight(Date.UTC(y, 5, 21, 20)).ms); };
 $('tLocal').onchange = e => {
   const v = e.target.value; if (!v) return; const [d, t] = v.split('T'), [Y, Mo, D] = d.split('-').map(Number), [h, mi] = t.split(':').map(Number);
   const guess = Date.UTC(Y, Mo - 1, D, h, mi); setTime(guess - chileOffsetH(guess) * 3600000);
 };
 ['onS0', 'onS1', 'onS2'].forEach((id, i) => $(id).onchange = e => { state.on[i] = e.target.checked; statusLast = 0; if (i === 0) updateTLEPositions(true); });
-$('deploy').oninput = e => { state.deploy = e.target.value / 100; $('deployLab').textContent = `${e.target.value} %`; statusLast = 0; if (state.deploy === 1) $('liteBanner').classList.remove('on'); };
-$('bLiteFull').onclick = () => { state.deploy = 1; syncInputs(); statusLast = 0; $('liteBanner').classList.remove('on'); };
-$('brillo').onchange = e => { const v = e.target.value; $('Mcustom').style.display = v === 'custom' ? '' : 'none'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; };
+$('deploy').oninput = e => { state.deploy = e.target.value / 100; $('deployLab').textContent = `${e.target.value} %`; statusLast = 0; };
+$('bLiteFull').onclick = () => { state.renderFrac = 1; $('liteBanner').hidden = true; };
+$('brillo').onchange = e => { const v = e.target.value; $('Mcustom').hidden = v !== 'custom'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; };
 $('Mcustom').onchange = e => state.Mstar = +e.target.value;
 $('phase').onchange = e => state.phaseOn = e.target.checked;
 $('shadow').onchange = e => { state.conical = e.target.value === '1'; statusLast = 0; };
@@ -768,8 +768,12 @@ $('skyShadow').onchange = e => state.skyShadow = e.target.checked;
 $('magLim').oninput = e => { state.magLim = +e.target.value; $('magLimLab').textContent = e.target.value; };
 $('coneX').onchange = e => state.coneX = e.target.checked;
 $('bCam').onclick = () => { const o = eci2three(F.obs); camGod.position.copy(o.clone().multiplyScalar(2.2)); controls.target.set(0, 0, 0); };
-$('bPointAA').onclick = () => { state.alt = Math.max(15, Math.min(90, +$('pAlt').value)); state.az = mod(+$('pAz').value, 360); statusLast = 0; };
-$('bPointRD').onclick = () => { const v = radecToECI(F.jd, +$('pRA').value, +$('pDec').value), aa = eciToAltAz(F, v);
+let coordRD = false;
+$('cAA').onclick = () => { coordRD = false; $('cAA').classList.add('active'); $('cRD').classList.remove('active'); $('rowAA').hidden = false; $('rowRD').hidden = true; };
+$('cRD').onclick = () => { coordRD = true; $('cRD').classList.add('active'); $('cAA').classList.remove('active'); $('rowRD').hidden = false; $('rowAA').hidden = true; };
+$('bPoint').onclick = () => {
+  if (!coordRD) { state.alt = Math.max(15, Math.min(90, +$('pAlt').value)); state.az = mod(+$('pAz').value, 360); statusLast = 0; return; }
+  const v = radecToECI(F.jd, +$('pRA').value, +$('pDec').value), aa = eciToAltAz(F, v);
   if (aa.alt < 15) { $('skyInfo').textContent = `Ese objeto está a alt ${nf(aa.alt, 1)}° (< 15°, límite del telescopio).`; return; }
   state.alt = aa.alt; state.az = aa.az; $('pAlt').value = aa.alt.toFixed(1); $('pAz').value = aa.az.toFixed(1); statusLast = 0; };
 $('band').onchange = e => state.band = e.target.value;
@@ -790,29 +794,99 @@ $('bTle').onclick = async () => {
     setTLE(parseTLE(txt), 'CelesTrak en vivo'); updateTLEPositions(true);
   } catch (e) { $('tleInfo').textContent = `CelesTrak no entregó datos (${e.message.trim()}). Se mantiene el snapshot del 26-nov-2026.`; }
 };
-document.querySelectorAll('.tabbar button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('.tabbar button').forEach(x => x.classList.toggle('on', x === b));
-  document.querySelectorAll('.tabbody').forEach(x => x.classList.toggle('on', x.id === b.dataset.tab));
-  if (b.dataset.tab === 'tNight') drawChart();
-});
+function showTab(id) {
+  document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x.dataset.tab === id));
+  document.querySelectorAll('.tabbody').forEach(x => x.classList.toggle('on', x.id === id));
+  if (id === 'tNight') drawChart();
+}
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+$('bSkyInfo').onclick = () => { const p = $('skyLegend'); p.hidden = !p.hidden; $('bSkyInfo').setAttribute('aria-expanded', String(!p.hidden)); };
 window.addEventListener('resize', () => drawChart());
+
+// --------------------------------------------------------------- modos simple / científico
+// Las tres vistas (órbita, cielo, cámara) existen una sola vez y se mueven al modo activo.
+function setMode(m) {
+  state.mode = m; document.body.dataset.mode = m;
+  const root = $(m);
+  for (const [slot, id] of [['earth', 'god'], ['sky', 'skyCard'], ['camera', 'camCard']]) {
+    const mk = root.querySelector(`[data-slot="${slot}"]`); mk.parentNode.insertBefore($(id), mk);
+  }
+  $('mSimple').classList.toggle('active', m === 'simple'); $('mExpert').classList.toggle('active', m === 'expert');
+  try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
+  if (m === 'simple') { syncSimpleScenario(); scheduleImpact(); } else { statusLast = 0; drawChart(); }
+}
+$('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
+$('toExpert').onclick = () => { setMode('expert'); scrollTo(0, 0); };
+$('toSimple').onclick = () => { setMode('simple'); scrollTo(0, 0); };
+
+// escenario del modo simple ↔ casillas del modo científico
+const SIMPLE_ON = { starmind: [true, false, true], actual: [true, false, false], gen2: [true, true, false] };
+function syncSimpleScenario() { $('sScen').value = state.on[2] ? 'starmind' : state.on[1] ? 'gen2' : 'actual'; }
+$('sScen').onchange = e => { state.on = [...SIMPLE_ON[e.target.value]]; syncInputs(); updateTLEPositions(true); statusLast = 0; scheduleImpact(true); };
+
+// momentos de la noche (la misma noche que contiene la hora simulada)
+function momentTime(k) {
+  if (k === 'twi') return astroTwilightEnd(state.simMs);
+  if (k === 'mid') return solarMidnight(state.simMs).ms;
+  return nightWindow(state.simMs, -18).end; // inicio del crepúsculo astronómico matutino
+}
+document.querySelectorAll('[data-moment]').forEach(b => b.onclick = () => { const t = momentTime(b.dataset.moment); if (t) { setTime(t, b.dataset.moment); scheduleImpact(true); } });
+// Si la persona no eligió un punto en el cielo, cada exposición apunta a un campo al azar sobre 30°
+// (la misma distribución que la estadística del impacto): el resultado es representativo, no elegido a mano.
+let userPointed = false;
+$('sExpose').onclick = () => {
+  $('camTrails').textContent = '…';
+  setTimeout(() => {
+    if (!userPointed) { const v = randomPointings(frameAt(state.simMs + 15000), 1, 30, Math.random)[0], aa = eciToAltAz(frameAt(state.simMs + 15000), v); state.alt = aa.alt; state.az = aa.az; }
+    runExposure();
+    $('camWhen').textContent = `${userPointed ? 'Campo elegido' : 'Campo al azar'} · alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}° · ${horaChile(state.simMs)}`;
+    if (matchMedia('(max-width: 800px)').matches) $('camCard').scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }, 20);
+};
+skyov.addEventListener('click', () => { if (state.mode === 'simple') { userPointed = true; $('camWhen').textContent = `Campo elegido: alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}°`; } });
+
+// impacto real: apuntados al azar sobre 30° con la constelación completa (no con lo dibujado)
+let impactMs = NaN, impactBusy = false, impactTimer = 0;
+function scheduleImpact(now = false) { clearTimeout(impactTimer); impactTimer = setTimeout(computeImpact, now ? 30 : 400); }
+function computeImpact() {
+  if (impactBusy || !SYN) return;
+  impactBusy = true; impactMs = state.simMs;
+  const t0 = state.simMs, sa = sunAlt(t0), K = 200; // mismo K y semilla en todo dispositivo: la cifra es reproducible
+  $('impWhen').textContent = `${fechaCorta(t0)} · ${horaChile(t0)} hora de Chile · Sol ${nf(sa, 1)}°`;
+  $('impTitle').textContent = 'Calculando…';
+  setTimeout(() => {
+    const st = pointingStats(enabledSources(), t0, K, 30, { twoSnaps: false, conical: state.conical }, 11);
+    const k = Math.round(st.pAny * 10), pct = st.pAny * 100;
+    let title, text;
+    if (sa > -12) { title = 'Todavía no es de noche'; text = `El Sol está a ${nf(sa, 1)}°: el cielo aún es demasiado claro para observar. Elige crepúsculo, medianoche o amanecer.`; }
+    else if (st.pAny < 0.05) { title = 'Casi ninguna imagen tendría trazas a esta hora'; text = `La sombra de la Tierra cubre la constelación: en promedio ${nf(st.mean, 2)} satélites iluminados por exposición. El daño se concentra en las horas que siguen al anochecer y en las que preceden al amanecer.`; }
+    else { title = `${k} de cada 10 imágenes tendrían trazas`; text = `Una exposición de 30 s apuntada al azar sobre 30° de altura cruzaría en promedio ${nf(st.mean, 1)} satélites iluminados; la mitad de las exposiciones tendría ${st.p50} o más, y una de cada diez, ${st.p90} o más.`; }
+    $('impTitle').textContent = title; $('impText').textContent = text;
+    $('impBar').style.width = `${Math.min(100, pct).toFixed(1)}%`; $('impPct').textContent = `${nf(pct, 0)} %`;
+    $('impNote').textContent = `${K} apuntados al azar, escenario «${$('sScen').selectedOptions[0].textContent}». Cuenta satélites iluminados que cruzan el campo de LSSTCam; el brillo supuesto (M₁₀₀₀ ${nf(state.Mstar, 1)}) solo cambia cuántos saturan.`;
+    impactBusy = false;
+  }, 30);
+}
 
 // --------------------------------------------------------------- inicio
 setTLE(parseTLE($('tle-snapshot').textContent), 'Snapshot CelesTrak 26-nov-2026');
 state.simMs = params.has('t') ? Date.parse(params.get('t')) : (astroTwilightEnd(Date.now()) || Date.now());
+if (!params.has('t')) state.moment = 'twi';
 buildSynthetic();
 if (LITE) {
-  let nStar = 0; for (let k = 0; k < SYN.n; k++) if (SYN.misc[2 * k] > 1.5) nStar++;
-  $('liteText').textContent = `Modo celular: Starmind al ${LITE_DEPLOY * 100} % (≈${nf(nStar * LITE_DEPLOY / 1000, 0)} mil satélites, misma distribución) para que fluya. Multiplica los conteos ×${1 / LITE_DEPLOY} para el escenario completo.`;
-  $('liteBanner').classList.add('on');
+  $('liteText').textContent = 'En celular se dibuja 1 de cada 10 satélites de Starmind para que fluya; los números usan la constelación completa.';
+  $('liteBanner').hidden = false;
   $('nStep').value = '30'; $('nPerStep').value = '20'; $('nStat').value = '100';
-  document.querySelector('#god .legend').textContent = 'Vista orbital libre · arrastrar = rotar · pellizcar = zoom · línea amarilla = dirección del Sol · punto rojo = Cerro Pachón';
-  ['Brillo y sombra', 'Vistas', 'Estado (cada ~1 s)'].forEach(t => { const d = [...document.querySelectorAll('#ctl details')].find(x => x.querySelector('summary').textContent === t); if (d) d.open = false; });
 }
+if (MOBILE) $('godHint').textContent = 'Arrastra para rotar · pellizca para acercar';
 fillSources(); syncInputs(); drawChart(); drawCCD({ trails: [], band: state.band, twoSnaps: false });
 updateUniforms(); updateTLEPositions(true);
 { const o = eci2three(F.obs); camGod.position.copy(o.clone().normalize().multiplyScalar(26).add(new THREE.Vector3(0, 6, 0))); }
+let modo0 = params.get('modo') === 'cientifico' ? 'expert' : params.get('modo') === 'simple' ? 'simple' : null;
+if (!modo0) { try { modo0 = localStorage.getItem('modo'); } catch (e) { /* sin almacenamiento */ } }
+if (params.has('diag') || params.has('fps')) modo0 = 'expert';
+setMode(modo0 === 'expert' ? 'expert' : 'simple');
 requestAnimationFrame(loop);
-if (params.has('diag')) setTimeout(runDiagnostics, 800);
+if (params.has('diag')) { showTab('tDiag'); setTimeout(runDiagnostics, 800); }
 if (params.has('fps')) setTimeout(async () => { const fps = await measureFPS(5000); const gl = renderer.getContext(), dbg = gl.getExtension('WEBGL_debug_renderer_info');
   window.__fps = { fps, gpu: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : '?' }; document.title = 'fps ' + fps.toFixed(1); }, 2500);

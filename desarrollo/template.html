@@ -3,81 +3,253 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Starmind × Rubin</title>
+<title>Impacto orbital · Starmind sobre Rubin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0e0e10; --surface-1:#1a1a19; --surface-2:#232322; --surface-3:#2d2d2b; --line:#3a3a37;
-  --text-primary:#f4f3ee; --text-secondary:#c3c2b7; --text-muted:#8d8c84;
-  --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
-  --ok:#3fb27f; --bad:#e66767; --info:#9085e9; --warn:#c98500;
-  --radius:8px; --mono:ui-monospace,SFMono-Regular,Consolas,monospace;
+  color-scheme:dark;
+  --bg:#05090d; --surface:#0a1016; --surface-2:#0e161d; --surface-3:#131d25;
+  --line:#1e2c35; --line-bright:#31434e;
+  --text:#edf3f5; --text-2:#c6d0d4; --muted:#8b9ba4; --muted-2:#60727c;
+  --cyan:#82d7e8; --orange:#e8652f; --blue:#3f8ee8; --green:#1fae77; --red:#e66767; --yellow:#e6ca73; --violet:#b4a9f0;
+  --radius:10px; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text-primary);font:13px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-#gl{position:absolute;left:0;top:0;z-index:0;pointer-events:none;display:block} /* anclado a la página (no fijo): se desplaza con el scroll sin depender de JS */
-#app{position:relative;z-index:1;display:grid;height:100vh;grid-template-columns:310px minmax(0,1fr) 400px;grid-template-rows:auto minmax(0,1fr) 330px;
-  grid-template-areas:"hdr hdr hdr" "ctl god right" "ctl tabs right"}
-header{grid-area:hdr;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;padding:8px 14px;background:var(--surface-1);border-bottom:1px solid var(--line)}
-header h1{font-size:15px;margin:0;font-weight:650;letter-spacing:.2px}
-header .clock{font-family:var(--mono);color:var(--text-secondary)}
-header .fps{margin-left:auto;font-family:var(--mono);color:var(--text-muted)}
-#ctl{grid-area:ctl;overflow:auto;background:var(--surface-1);border-right:1px solid var(--line);padding:6px 10px 40px}
-#god{grid-area:god;position:relative;min-height:300px;touch-action:none}
-#god .legend{position:absolute;left:10px;bottom:8px;color:var(--text-secondary);font-size:12px;background:rgba(14,14,16,.65);padding:4px 8px;border-radius:6px;pointer-events:none}
-#right{grid-area:right;overflow:auto;background:transparent;border-left:1px solid var(--line);padding:8px} /* transparente: el cielo WebGL se dibuja detrás */
-#tabs{grid-area:tabs;background:var(--surface-1);border-top:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
-details{border-bottom:1px solid var(--line);padding:6px 0}
-summary{cursor:pointer;font-weight:600;color:var(--text-primary);padding:2px 0}
-.row{display:flex;gap:6px;align-items:center;margin:5px 0;flex-wrap:wrap}
-.row label{color:var(--text-secondary)}
-.muted{color:var(--text-muted);font-size:12px}
-button,select,input{font:inherit;color:var(--text-primary);background:var(--surface-3);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
-button{cursor:pointer}
-button:hover{border-color:var(--text-muted)}
-button.primary{background:#2c4a6e;border-color:#3d6491}
-input[type=number]{width:72px}
-input[type=range]{padding:0;width:150px}
-input[type=checkbox],input[type=radio]{accent-color:var(--series-1)}
-.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:middle}
-h3{font-size:13px;margin:6px 0 4px;font-weight:650}
-#skywrap{position:relative;width:100%;aspect-ratio:1/1;background:transparent;border-radius:var(--radius);overflow:hidden}
-#sky{position:absolute;inset:0}
-#skyov{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
-#ccd{width:100%;aspect-ratio:1/1;display:block;background:#000;border-radius:var(--radius)}
-.kv{font-family:var(--mono);font-size:12px;color:var(--text-secondary);white-space:pre-wrap}
-.tabbar{display:flex;gap:2px;padding:4px 8px 0;border-bottom:1px solid var(--line)}
-.tabbar button{border-radius:6px 6px 0 0;border-bottom:none;background:var(--surface-2)}
-.tabbar button.on{background:var(--surface-3);border-color:var(--text-muted)}
-.tabbody{flex:1;min-height:0;overflow:auto;padding:8px 10px;display:none}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+button,input,select{font:inherit;color:inherit}
+button,select,input[type=checkbox],input[type=range]{cursor:pointer}
+canvas{display:block}
+a{color:var(--cyan)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+*{scrollbar-width:thin;scrollbar-color:#30404a transparent}
+
+/* barra superior */
+.topbar{height:64px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:330px 1fr auto;align-items:center;padding:0 28px;position:sticky;top:0;z-index:50;background:rgba(5,9,13,.96);backdrop-filter:blur(16px)}
+.brand{display:inline-flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}
+.brand-copy{display:flex;flex-direction:column;gap:1px}
+.brand-copy strong{font-size:14px;line-height:1.2;font-weight:600}
+.brand-copy small{color:var(--muted);font-size:11px;line-height:1.2}
+.brand-mark{position:relative;width:25px;height:25px;flex:0 0 auto;border:1px solid #6c7e87;border-radius:50%;overflow:hidden}
+.brand-mark::before{content:'';position:absolute;width:33px;height:1px;background:var(--orange);left:-4px;top:12px;transform:rotate(-25deg);box-shadow:0 4px 0 rgba(232,101,47,.55),0 -4px 0 rgba(232,101,47,.55)}
+.brand-mark::after{content:'';position:absolute;inset:4px;border:1px solid rgba(130,215,232,.3);border-radius:50%}
+.top-context{justify-self:center;color:var(--muted);font-family:var(--mono);font-size:12px;white-space:nowrap}
+.mode-switch,.coord-switch{border:1px solid var(--line);background:var(--surface);padding:3px;border-radius:8px;display:flex}
+.mode-switch button,.coord-switch button{border:0;background:transparent;color:var(--muted);border-radius:5px;padding:7px 12px;font-size:12px}
+.mode-switch button.active,.coord-switch button.active{background:var(--surface-3);color:var(--text);box-shadow:0 0 0 1px var(--line-bright)}
+.lite-note{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:9px 28px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+
+/* piezas comunes */
+.icon{flex:0 0 auto}
+.icon-button{width:32px;height:32px;border:1px solid transparent;border-radius:7px;background:transparent;display:inline-flex;align-items:center;justify-content:center;color:var(--muted)}
+.icon-button:hover{background:var(--surface-3);color:var(--text);border-color:var(--line)}
+.eyebrow{display:block;color:var(--muted);font-size:12px;line-height:1.45;font-weight:500}
+.eyebrow.accent{color:#d98765;border-left:2px solid var(--orange);padding-left:9px}
+.muted{color:var(--muted);font-size:12px}
+.kv{font-family:var(--mono);font-size:12px;color:var(--text-2);white-space:pre-wrap;margin:0;line-height:1.55}
+.prog{font-family:var(--mono);font-size:12px;color:var(--muted)}
+select,input[type=text],input[type=number],input[type=datetime-local]{border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:7px;padding:9px 10px;min-width:0}
+input[type=datetime-local]::-webkit-calendar-picker-indicator{filter:invert(.7)}
+.primary-button,.secondary-button,.text-button{border-radius:7px;padding:10px 13px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent}
+.primary-button{background:var(--cyan);color:#061116;font-weight:700}
+.primary-button:hover{background:#a0e5f1}
+.primary-button.large{min-height:48px;justify-content:flex-start}
+.primary-button.large .icon:last-child{margin-left:auto}
+.secondary-button{background:var(--surface-3);border-color:var(--line-bright);color:var(--text)}
+.secondary-button:hover{border-color:#567080}
+.secondary-button.compact{padding:8px 10px;font-size:12px}
+.text-button{background:transparent;color:var(--cyan);border:0;padding:4px 0;justify-content:flex-start}
+.text-button:hover{text-decoration:underline}
+.full{width:100%}
+.check-row,.scenario-row{display:flex;align-items:center;gap:8px;color:var(--text-2);font-size:12px;cursor:pointer;position:relative}
+.check-row input,.scenario-row input{position:absolute;opacity:0;pointer-events:none}
+.fake-check{width:15px;height:15px;border:1px solid #41545e;background:var(--surface-2);border-radius:4px;flex:0 0 auto;position:relative}
+input:checked+.fake-check{background:var(--cyan);border-color:var(--cyan)}
+input:checked+.fake-check::after{content:'';position:absolute;width:7px;height:4px;left:3px;top:3px;border-left:1.5px solid #061116;border-bottom:1.5px solid #061116;transform:rotate(-45deg)}
+input:focus-visible+.fake-check{outline:2px solid var(--cyan);outline-offset:2px}
+.scenario-dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.scenario-name{flex:1}
+.scenario-count{color:var(--muted-2);font-family:var(--mono);font-size:11px}
+.legend-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.legend-dot.blue{background:var(--blue)}.legend-dot.green{background:var(--green)}.legend-dot.orange{background:var(--orange)}
+.sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+/* vistas (cada una es un canvas propio) */
+.earth-panel{min-height:390px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#04080c;touch-action:none}
+.scene-canvas{display:block;width:100%;height:100%;position:absolute;inset:0}
+.panel-label{position:absolute;z-index:2;top:26px;left:28px;pointer-events:none}
+.panel-label h2{font-size:18px;line-height:1.25;margin-top:4px;max-width:360px}
+.canvas-legend{position:absolute;z-index:2;bottom:22px;left:28px;display:flex;gap:18px;color:#b9c5ca;font-size:12px;pointer-events:none}
+.canvas-legend span{display:inline-flex;align-items:center;gap:6px}
+.scene-hint{position:absolute;z-index:2;right:16px;bottom:15px;color:var(--muted-2);font-size:11px;pointer-events:none;text-align:right;max-width:46%}
+.visual-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:14px;min-width:0}
+.visual-card header{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;gap:8px}
+.visual-card h3{margin-top:2px;font-size:15px}
+.square-scene{width:100%;aspect-ratio:1;position:relative;border:1px solid var(--line);overflow:hidden;margin-inline:auto;background:#05070b}
+#skyov{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:manipulation}
+#ccd{width:100%;height:100%}
+.helper{color:var(--muted);font-size:12px;margin-top:10px;display:flex;align-items:flex-start;gap:6px}
+.helper .icon{margin-top:2px}
+body[data-mode=simple] .x-only{display:none}
+body[data-mode=expert] .s-only{display:none}
+.camera-stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:12px;padding-top:12px;gap:10px}
+.camera-stats div{display:flex;flex-direction:column}
+.camera-stats strong{font-family:var(--mono);font-size:19px;font-weight:500}
+.camera-stats span{color:var(--muted);font-size:11px}
+
+/* estados de las tablas: texto de color, sin cápsulas */
+.st{font-family:var(--mono);font-size:11px;font-weight:500;white-space:nowrap}
+.st-CONFIRMADO,.st-PASA{color:#62dbaa}.st-SECUNDARIA{color:var(--yellow)}.st-DERIVADO{color:#8fb9f2}
+.st-SUPUESTO{color:#f0a07c}.st-NO{color:#f3a3a3}.st-MODELO,.st-INFO{color:var(--violet)}.st-FALLA{color:var(--red)}
+
+/* modo simple */
+body[data-mode=expert] #simple,body[data-mode=simple] #expert{display:none}
+.simple-layout{width:min(1360px,calc(100% - 64px));margin:0 auto;padding:54px 0 88px;display:grid;grid-template-columns:minmax(0,1.58fr) minmax(310px,.72fr);gap:24px}
+.simple-intro{grid-column:1/-1;display:grid;grid-template-columns:1fr 440px;align-items:end;gap:72px;padding:18px 0 34px}
+.intro-copy h1{font-size:clamp(42px,4.1vw,64px);line-height:1.02;letter-spacing:-.03em;font-weight:500;margin:14px 0 20px}
+.intro-copy h1 em{font-style:normal;color:var(--cyan)}
+.intro-copy p{color:#aebbc1;max-width:700px;font-size:17px;line-height:1.62}
+.simple-controls{border-left:1px solid var(--line);padding-left:36px;display:grid;gap:18px}
+.simple-controls label,.simple-controls .field{display:grid;gap:7px}
+.simple-controls label>span,.simple-controls .field>span,.field-label{color:var(--muted);font-size:12px}
+.simple-controls select{width:100%}
+.shortcut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.shortcut-grid button,.quick-links button{background:var(--surface);border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:8px;font-size:12px}
+.shortcut-grid button:hover,.shortcut-grid button.selected,.quick-links button:hover{border-color:#45616e;color:var(--text);background:var(--surface-3)}
+.moment-time{font-family:var(--mono);font-size:11px;color:var(--muted-2)}
+.simple-layout>.earth-panel{grid-column:1;min-height:590px}
+.impact-banner{grid-column:2;border:1px solid var(--line);border-top:3px solid var(--orange);background:#0d1217;border-radius:var(--radius);padding:30px;display:flex;flex-direction:column}
+.impact-index{color:#d98765;font-size:12px;font-weight:600}
+.impact-banner>div:first-of-type{margin-top:auto}
+.impact-banner h2{font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:8px 0 12px}
+.impact-banner p{color:var(--muted);line-height:1.55}
+.impact-meter{height:7px;border-radius:7px;background:rgba(232,101,47,.13);margin-top:32px;position:relative}
+.impact-meter span{display:block;height:100%;border-radius:inherit;background:var(--orange);transition:width .4s}
+.impact-meter strong{position:absolute;right:0;bottom:13px;color:var(--orange);font-family:var(--mono);font-size:12px;font-weight:500}
+.impact-note{font-size:12px;margin-top:18px;color:var(--muted-2)!important}
+.simple-visuals{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+.simple-visuals .visual-card{padding:18px}
+.simple-visuals .square-scene{width:min(100%,570px)}
+.learn-card{grid-column:1/-1;display:flex;align-items:end;justify-content:space-between;gap:24px;border-top:1px solid var(--line);margin-top:40px;padding:44px 0 0}
+.learn-card h2{font-size:26px;margin:5px 0 8px}
+.learn-card p{color:var(--muted);max-width:620px}
+
+/* modo científico */
+.expert-layout{min-height:calc(100vh - 64px);display:grid;grid-template-columns:286px minmax(520px,1fr) 330px}
+.control-rail{border-right:1px solid var(--line);padding:18px 18px 40px;background:rgba(8,13,18,.7);overflow-y:auto;max-height:calc(100vh - 64px);position:sticky;top:64px}
+.rail-title{font-size:13px;font-weight:600;padding:1px 2px 12px}
+.control-section{border-top:1px solid var(--line)}
+.control-section summary{list-style:none;cursor:pointer;min-height:43px;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:13px}
+.control-section summary::-webkit-details-marker{display:none}
+.control-section summary .icon{transition:transform .2s;color:var(--muted)}
+.control-section[open] summary .icon{transform:rotate(180deg)}
+.section-content{padding:0 0 16px;display:grid;gap:9px}
+.input-with-icon{position:relative}
+.input-with-icon .icon{position:absolute;left:10px;top:11px;color:var(--muted);pointer-events:none}
+.input-with-icon input{width:100%;padding-left:34px}
+.button-row{display:grid;grid-template-columns:1fr 92px;gap:6px}
+.button-row select{width:100%;padding:8px}
+.compact-grid button{padding:7px 3px}
+.quick-links{display:flex;flex-wrap:wrap;gap:5px}
+.quick-links button{padding:6px 8px}
+.range-head{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:3px}
+.range-head strong{color:var(--text);font-family:var(--mono);font-weight:500}
+.range{accent-color:var(--orange);width:100%}
+.coords{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.coords label{color:var(--muted);font-size:11px;display:grid;gap:4px}
+.coords input,.coords select{width:100%;padding:8px}
+.coord-switch button{flex:1}
+.expert-main{min-width:0;display:grid;grid-template-rows:minmax(380px,54vh) auto}
+.expert-main>.earth-panel{border-radius:0;border-width:0 0 1px;min-height:380px}
+.analysis-panel{min-width:0}
+.tabs{min-height:47px;border-bottom:1px solid var(--line);display:flex;align-items:end;padding:0 14px;gap:2px;overflow-x:auto}
+.tabs button{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:14px 12px 12px;font-size:13px;white-space:nowrap}
+.tabs button:hover,.tabs button.on{color:var(--text)}
+.tabs button.on{border-bottom-color:var(--cyan)}
+.tabbody{display:none;padding:14px}
 .tabbody.on{display:block}
+.chart-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.chart-toolbar label:not(.check-row){color:var(--muted);font-size:12px;display:flex;align-items:center;gap:6px}
+.chart-toolbar select,.chart-toolbar input[type=number]{padding:7px 8px;width:84px}
+#chartwrap{position:relative;margin-top:6px}
+#chart{width:100%;height:236px}
+#tip{position:absolute;pointer-events:none;background:var(--surface-3);border:1px solid var(--line-bright);border-radius:7px;padding:7px 9px;font-size:12px;display:none;white-space:nowrap;z-index:5;color:var(--text-2)}
+.right-rail{border-left:1px solid var(--line);padding:12px;display:flex;flex-direction:column;gap:10px;background:rgba(8,13,18,.55);min-width:0}
+.right-rail .visual-card{padding:11px}
+.right-rail .square-scene{width:clamp(170px,calc((100vh - 510px) / 2),280px);max-width:100%} /* cielo + cámara + acciones caben en la altura de la pantalla */
+.right-rail .camera-stats strong{font-size:15px}
+.action-dock{margin-top:auto;border-top:1px solid var(--line);padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.action-dock>div{grid-column:1/-1;display:flex;justify-content:space-between;margin-bottom:3px;font-size:12px;color:var(--muted)}
+.action-dock strong{color:var(--text);font-family:var(--mono);font-weight:400}
+.action-dock button{padding:9px 6px;font-size:12px}
+.table-scroll{overflow:auto;max-width:100%}
 table{border-collapse:collapse;width:100%;font-size:12px}
-th,td{border-bottom:1px solid var(--line);padding:3px 6px;text-align:left;vertical-align:top}
-th{color:var(--text-secondary);font-weight:600;position:sticky;top:0;background:var(--surface-1)}
+th{color:var(--muted);font-weight:500;text-align:left;padding:9px 10px;border-bottom:1px solid var(--line-bright);white-space:nowrap;position:sticky;top:0;background:var(--bg)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--text-2);vertical-align:top}
 td.num{text-align:right;font-family:var(--mono)}
-.badge{display:inline-block;padding:0 6px;border-radius:9px;font-size:11px;font-weight:650;white-space:nowrap}
-.b-CONFIRMADO{background:#173d2c;color:#8fe3bb}.b-SECUNDARIA{background:#3a3417;color:#f0d77c}.b-DERIVADO{background:#1f2c45;color:#a9c6f3}
-.b-SUPUESTO{background:#45261a;color:#f6b18f}.b-NO{background:#3d1d1d;color:#f3a3a3}.b-MODELO{background:#2c2347;color:#c6bcf6}
-.b-PASA{background:#173d2c;color:#8fe3bb}.b-FALLA{background:#3d1d1d;color:#f3a3a3}.b-INFO{background:#2c2347;color:#c6bcf6}
-#chartwrap{position:relative}
-#chart{width:100%;height:236px;display:block}
-#tip{position:absolute;pointer-events:none;background:var(--surface-3);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:12px;display:none;white-space:nowrap;z-index:5}
-dialog{background:var(--surface-1);color:var(--text-primary);border:1px solid var(--line);border-radius:10px;max-width:min(1100px,96vw);width:96vw;max-height:90vh}
-dialog::backdrop{background:rgba(0,0,0,.6)}
-dialog input[type=number]{width:70px}
-dialog td input[type=text]{width:70px}
-.prog{font-family:var(--mono);color:var(--text-secondary)}
-a{color:#8cb8f2}
-#liteBanner{flex-basis:100%;display:none;gap:8px;align-items:center;flex-wrap:wrap;background:#3a3417;color:var(--text-primary);border:1px solid #6b5d22;border-radius:6px;padding:6px 10px;font-size:12px}
-#liteBanner.on{display:flex}
+.diagnostic-summary{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.mobile-simple-link{display:none}
+.rail-foot{margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--muted-2)}
+
+/* diálogo del editor de capas */
+dialog.dialog{width:min(1100px,96vw);max-height:min(760px,calc(100vh - 40px));overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--line-bright);border-radius:12px;padding:24px}
+dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
+.dialog>header{display:flex;align-items:start;justify-content:space-between}
+.dialog h2{font-size:22px;margin-top:5px}
+.dialog h3{font-size:14px;margin:18px 0 8px}
+.dialog-intro{color:var(--muted);margin:12px 0 4px;font-size:13px;max-width:880px}
+.dialog input[type=number],.dialog input[type=text],.dialog select{width:76px;padding:6px 7px;border-radius:5px}
+.dialog footer{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
+.dialog footer .muted{margin-right:auto}
+
 @media (max-width:1100px){
-  /* pantallas angostas: primero las vistas, después los controles */
-  #app{height:auto;grid-template-columns:1fr;grid-template-rows:auto 60vh auto auto auto;grid-template-areas:"hdr" "god" "right" "ctl" "tabs"}
-  #ctl{max-height:none;border-right:none;border-top:1px solid var(--line)}
-  #right{border-left:none}
-  #tabs{min-height:380px}
-  header .fps{margin-left:0}
+  .expert-layout{grid-template-columns:255px minmax(420px,1fr) 295px}
+  .topbar{grid-template-columns:260px 1fr auto}
+  .top-context{display:none}
+  .simple-layout{width:calc(100% - 32px)}
+  .simple-intro{grid-template-columns:1fr 380px;gap:36px}
+}
+@media (max-width:800px){
+  .topbar{height:54px;grid-template-columns:1fr auto;padding:0 15px}
+  .mode-switch{display:none}
+  .lite-note{padding:8px 15px}
+  .simple-layout{width:100%;padding:0 14px 46px;display:flex;flex-direction:column;gap:12px}
+  .simple-intro{display:flex;flex-direction:column;align-items:stretch;padding:28px 2px 12px;gap:25px}
+  .intro-copy h1{font-size:38px;margin:10px 0 14px}
+  .intro-copy p{font-size:15px;line-height:1.5}
+  .simple-controls{border:0;padding:0;gap:12px}
+  .simple-controls label:first-child{display:none}
+  .primary-button.large{position:sticky;bottom:10px;z-index:10;box-shadow:0 12px 40px #000}
+  .simple-layout>.earth-panel{min-height:420px;order:2}
+  .panel-label{top:16px;left:16px}
+  .panel-label h2{font-size:15px;max-width:260px}
+  .canvas-legend{left:15px;right:15px;bottom:15px;justify-content:space-between;gap:3px;font-size:11px}
+  .scene-hint{display:none}
+  .impact-banner{min-height:330px;order:3;padding:22px}
+  .impact-banner h2{font-size:26px}
+  .simple-visuals{order:4;display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:5px;margin-top:0}
+  .simple-visuals .visual-card{flex:0 0 calc(100vw - 42px);scroll-snap-align:start;padding:13px}
+  .learn-card{order:5;display:block;margin-top:18px;padding:28px 4px 5px}
+  .learn-card h2{font-size:23px}
+  .learn-card .secondary-button{margin-top:20px;width:100%}
+  .expert-layout{display:flex;flex-direction:column;min-height:auto}
+  .control-rail{position:static;max-height:none;border-right:0;order:2;padding:14px}
+  .expert-main{display:contents}
+  .expert-main>.earth-panel{order:1;min-height:420px}
+  .analysis-panel{order:4}
+  .right-rail{order:3;border:0;display:grid;grid-template-columns:1fr;padding:14px}
+  .right-rail .square-scene{width:100%}
+  .action-dock{position:sticky;bottom:0;z-index:30;background:rgba(5,9,13,.95);padding:10px 0}
+  .tabs{padding-left:7px}
+  .tabbody{padding:10px}
   #chart{height:300px}
   #tip{white-space:normal;max-width:calc(100% - 8px)}
+  .mobile-simple-link{display:block;order:5;margin:24px 14px;background:transparent;color:var(--cyan);border:0}
+  dialog.dialog{padding:18px 14px}
 }
 </style>
 <script type="importmap">
@@ -88,107 +260,204 @@ a{color:#8cb8f2}
 }}
 </script>
 </head>
-<body>
-<canvas id="gl"></canvas>
-<div id="app">
-  <header>
-    <h1>Starmind × Rubin — mapa orbital</h1>
-    <span class="clock" id="clock">cargando…</span>
-    <span class="fps" id="fps"></span>
-    <div id="liteBanner"><span id="liteText"></span><button id="bLiteFull">Cargar 100 %</button></div>
-  </header>
+<body data-mode="simple">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+  <symbol id="i-shutter" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3l3.5 7.5M21 12l-8 1M16.5 20l-4.5-7M5 18.5l6-6.5M4 8l8 1.5M10 3.2l1.5 8.3"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
+</svg>
 
-  <aside id="ctl">
-    <details open><summary>Tiempo</summary>
-      <div class="row"><input type="datetime-local" id="tLocal" step="60"><span class="muted" id="tzlab">hora de Chile</span></div>
-      <div class="row">
-        <button id="bPlay">▶ Reproducir</button>
-        <select id="speed" title="Velocidad del reloj">
-          <option value="1">×1</option><option value="10">×10</option><option value="60" selected>×60 (1 min/s)</option>
-          <option value="600">×600 (10 min/s)</option><option value="3600">×3600 (1 h/s)</option></select>
-      </div>
-      <div class="row"><button id="bM10">−10 min</button><button id="bP10">+10 min</button><button id="bNow">Ahora</button></div>
-      <div class="row"><button id="bTwi">Fin crepúsculo astronómico</button><button id="bMid">Medianoche solar</button></div>
-      <div class="row"><button id="bSol">Solsticio de invierno (21-jun)</button></div>
-    </details>
+<header class="topbar">
+  <a class="brand" href="./" aria-label="Impacto orbital, inicio">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-copy"><strong>Impacto orbital</strong><small>Starmind 1M sobre Vera C. Rubin</small></span>
+  </a>
+  <div class="top-context" id="clock">cargando…</div>
+  <div class="mode-switch" role="group" aria-label="Modo de interfaz">
+    <button id="mSimple" class="active">Simple</button><button id="mExpert">Científico</button>
+  </div>
+</header>
+<div class="lite-note" id="liteBanner" hidden><span id="liteText"></span><button class="text-button" id="bLiteFull">Mostrar todos</button></div>
 
-    <details open><summary>Escenarios</summary>
-      <div class="row"><label><input type="checkbox" id="onS0" checked> <span class="sw" style="background:var(--series-1)"></span>Starlink actual (TLE reales)</label> <span class="muted" id="nS0"></span></div>
-      <div class="row"><label><input type="checkbox" id="onS1"> <span class="sw" style="background:var(--series-3)"></span>Starlink Gen2 autorizado</label> <span class="muted" id="nS1"></span></div>
-      <div class="row"><label><input type="checkbox" id="onS2" checked> <span class="sw" style="background:var(--series-2)"></span>Starmind 1M</label> <span class="muted" id="nS2"></span></div>
-      <div class="row"><label>Starmind desplegado</label><input type="range" id="deploy" min="0" max="100" step="1" value="100"><span id="deployLab" class="muted">100 %</span></div>
-      <div class="muted">Hitos FCC: 10 % antes de nov-2035 · 50 % antes de nov-2038 · 100 % antes de nov-2040.</div>
-      <div class="row"><button id="bLayers">Editor de capas…</button><button id="bTle" title="Descarga en vivo (CelesTrak permite 1 descarga cada 2 h)">Actualizar TLE (CelesTrak)</button></div>
-      <div class="muted" id="tleInfo"></div>
-    </details>
-
-    <details open><summary>Brillo y sombra</summary>
-      <div class="row"><label>Starmind M₁₀₀₀ (V)</label>
-        <select id="brillo"><option value="optimista">Optimista 6,0</option><option value="central" selected>Central 5,7</option><option value="pesimista">Pesimista 2,7</option><option value="custom">Personalizado</option></select>
-        <input type="number" id="Mcustom" step="0.1" value="5.7" style="display:none"></div>
-      <div class="row"><label><input type="checkbox" id="phase"> Función de fase (Mallama 2023)</label></div>
-      <div class="row"><label>Sombra</label><select id="shadow"><option value="0">Cilíndrica</option><option value="1">Cónica (umbra/penumbra)</option></select></div>
-      <div class="muted">m = M₁₀₀₀ + 5 log₁₀(ρ/1000 km). Starlink: M₁₀₀₀ por generación; Gen2: 7,87.</div>
-    </details>
-
-    <details open><summary>Vistas</summary>
-      <div class="row"><label><input type="checkbox" id="godShadow" checked> Mostrar satélites en sombra (vista global)</label></div>
-      <div class="row"><label><input type="checkbox" id="skyShadow"> Mostrar satélites en sombra (cielo)</label></div>
-      <div class="row"><label>Magnitud límite (cielo)</label><input type="range" id="magLim" min="2" max="14" step="0.5" value="12"><span id="magLimLab" class="muted">12</span></div>
-      <div class="row"><label><input type="checkbox" id="coneX"> Exagerar el cono de LSSTCam ×5 (solo visual)</label></div>
-      <div class="row"><button id="bCam">Centrar en Cerro Pachón</button></div>
-    </details>
-
-    <details open><summary>Rubin / LSSTCam</summary>
-      <div class="row"><label>Alt</label><input type="number" id="pAlt" value="60" step="1" min="15" max="90"><label>Az</label><input type="number" id="pAz" value="180" step="1" min="0" max="360"><button id="bPointAA">Apuntar</button></div>
-      <div class="row"><label>RA</label><input type="number" id="pRA" step="0.1" value="0"><label>Dec</label><input type="number" id="pDec" step="0.1" value="-30"><button id="bPointRD">Apuntar</button></div>
-      <div class="muted">RA/Dec en J2000 (°). Clic en el cielo para apuntar. Seguimiento sidéreo durante la exposición.</div>
-      <div class="row"><label>Banda</label><select id="band"><option>u</option><option>g</option><option selected>r</option><option>i</option><option>z</option><option>y</option></select>
-        <select id="expMode"><option value="1">1 × 30 s</option><option value="2">2 × 15 s</option></select></div>
-      <div class="row"><button class="primary" id="bExpose">Simular exposición</button></div>
-      <div class="row"><label>N apuntados</label><input type="number" id="nStat" value="200" min="10" max="2000" step="10"><label>alt ≥</label><input type="number" id="emin" value="30" min="15" max="80" step="5"><button id="bStats">Estadística</button></div>
-      <div class="kv" id="statOut"></div>
-    </details>
-
-    <details open><summary>Estado (cada ~1 s)</summary>
-      <div class="kv" id="status">—</div>
-    </details>
-  </aside>
-
-  <section id="god"><div class="legend">Vista orbital libre · arrastrar = rotar · rueda = zoom · línea amarilla = dirección del Sol · punto rojo = Cerro Pachón</div></section>
-
-  <aside id="right">
-    <h3>Cielo desde Cerro Pachón (ojo de pez, N arriba, E a la izquierda)</h3>
-    <div id="skywrap"><div id="sky"></div><canvas id="skyov"></canvas></div>
-    <div class="muted" id="skyInfo"></div>
-    <h3 style="margin-top:10px">Imagen sintética LSSTCam (189 CCD, N arriba, E a la izquierda)</h3>
-    <canvas id="ccd" width="760" height="760"></canvas>
-    <div class="kv" id="expOut">Pulsa «Simular exposición».</div>
-  </aside>
-
-  <section id="tabs">
-    <div class="tabbar"><button data-tab="tNight" class="on">Gráfico de la noche</button><button data-tab="tSrc">Fuentes y supuestos</button><button data-tab="tDiag">Diagnóstico</button></div>
-    <div class="tabbody on" id="tNight">
-      <div class="row"><button id="bNight" class="primary">Calcular noche actual</button><label>paso</label><select id="nStep"><option value="10">10 min</option><option value="15" selected>15 min</option><option value="30">30 min</option></select>
-        <label>apuntados/paso</label><input type="number" id="nPerStep" value="40" min="10" max="400" step="10"><label><input type="checkbox" id="logY" checked> escala log</label><button id="bTable">Ver tabla</button><span class="prog" id="nightProg"></span></div>
-      <div id="chartwrap"><canvas id="chart"></canvas><div id="tip"></div></div>
-      <div id="nightTable" style="display:none"></div>
+<!-- ============================== MODO SIMPLE ============================== -->
+<main id="simple" class="simple-layout">
+  <section class="simple-intro">
+    <div class="intro-copy">
+      <span class="eyebrow accent">Estudio de impacto sobre el Observatorio Vera C. Rubin</span>
+      <h1>El cielo de Rubin bajo<br><em>un millón de satélites</em></h1>
+      <p>Una demostración visual del daño que la constelación Starmind causaría en las imágenes científicas tomadas desde Cerro Pachón.</p>
     </div>
-    <div class="tabbody" id="tSrc"></div>
-    <div class="tabbody" id="tDiag">
-      <div class="row"><button id="bDiag" class="primary">Correr diagnóstico</button><span class="prog" id="diagProg"></span></div>
-      <div id="diagOut"></div>
-      <pre id="diag-json" style="display:none"></pre>
+    <div class="simple-controls">
+      <label><span>Escenario</span>
+        <select id="sScen"><option value="starmind">Starmind 1M + Starlink actual</option><option value="actual">Solo Starlink actual</option><option value="gen2">Starlink Gen2 autorizado + actual</option></select>
+      </label>
+      <div class="field"><span>Momento de la noche</span>
+        <div class="shortcut-grid"><button data-moment="twi">Crepúsculo</button><button data-moment="mid">Medianoche</button><button data-moment="dawn">Amanecer</button></div>
+        <span class="moment-time" id="sClock"></span>
+      </div>
+      <button class="primary-button large" id="sExpose"><svg class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shutter"/></svg>Simular una exposición<svg class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></button>
+    </div>
+  </section>
+  <span data-slot="earth" hidden></span>
+  <section class="impact-banner" aria-live="polite">
+    <span class="impact-index">Impacto estimado</span>
+    <div><span class="eyebrow" id="impWhen"></span><h2 id="impTitle">Calculando…</h2><p id="impText"></p></div>
+    <div class="impact-meter"><span id="impBar" style="width:0"></span><strong id="impPct">—</strong></div>
+    <p class="impact-note" id="impNote"></p>
+  </section>
+  <section class="simple-visuals" id="simpleVisuals"><span data-slot="sky" hidden></span><span data-slot="camera" hidden></span></section>
+  <section class="learn-card">
+    <div><span class="eyebrow">Para astrónomos</span><h2>Explora los parámetros científicos</h2><p>Ajusta brillo, sombras, coordenadas y capas orbitales; revisa el gráfico de la noche, las fuentes de cada dato y el diagnóstico de validación.</p></div>
+    <button class="secondary-button" id="toExpert">Abrir modo científico<svg class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></button>
+  </section>
+</main>
+
+<!-- ============================== MODO CIENTÍFICO ============================== -->
+<main id="expert" class="expert-layout">
+  <aside class="control-rail">
+    <div class="rail-title">Parámetros</div>
+    <details class="control-section" open><summary><span>Tiempo</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+      <div class="section-content">
+        <label class="field-label" for="tLocal" id="tzlab">Fecha y hora en Chile</label>
+        <div class="input-with-icon"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-calendar"/></svg><input type="datetime-local" id="tLocal" step="60"></div>
+        <div class="button-row"><button class="secondary-button compact" id="bPlay">Reproducir</button>
+          <select id="speed" title="Velocidad del reloj"><option value="1">×1</option><option value="10">×10</option><option value="60" selected>×60</option><option value="600">×600</option><option value="3600">×3600</option></select></div>
+        <div class="shortcut-grid compact-grid"><button id="bM10">−10 min</button><button id="bNow">Ahora</button><button id="bP10">+10 min</button></div>
+        <div class="quick-links"><button id="bTwi">Fin del crepúsculo</button><button id="bMid">Medianoche solar</button><button id="bDawn">Inicio del alba</button><button id="bSol">Solsticio de invierno</button></div>
+        <div class="kv" id="clockFull"></div>
+      </div>
+    </details>
+    <details class="control-section" open><summary><span>Escenarios</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+      <div class="section-content">
+        <label class="scenario-row"><input type="checkbox" id="onS0" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--blue)"></span><span class="scenario-name">Starlink actual (TLE)</span><span class="scenario-count" id="nS0"></span></label>
+        <label class="scenario-row"><input type="checkbox" id="onS1"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--green)"></span><span class="scenario-name">Starlink Gen2</span><span class="scenario-count" id="nS1"></span></label>
+        <label class="scenario-row"><input type="checkbox" id="onS2" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--orange)"></span><span class="scenario-name">Starmind 1M</span><span class="scenario-count" id="nS2"></span></label>
+        <div class="range-head"><span>Starmind desplegado</span><strong id="deployLab">100 %</strong></div>
+        <input class="range" type="range" id="deploy" min="0" max="100" step="1" value="100">
+        <div class="muted">Hitos FCC: 10 % antes de nov-2035 · 50 % antes de nov-2038 · 100 % antes de nov-2040.</div>
+        <button class="text-button" id="bLayers"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-layers"/></svg>Editor de capas</button>
+        <button class="text-button" id="bTle" title="CelesTrak permite 1 descarga cada 2 h"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-refresh"/></svg>Actualizar TLE (CelesTrak)</button>
+        <div class="muted" id="tleInfo"></div>
+      </div>
+    </details>
+    <details class="control-section"><summary><span>Brillo y sombra</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+      <div class="section-content">
+        <label class="field-label" for="brillo">Brillo de Starmind (M₁₀₀₀, V)</label>
+        <select id="brillo" class="full"><option value="central" selected>Central · 5,7</option><option value="optimista">Optimista · 6,0</option><option value="pesimista">Pesimista · 2,7</option><option value="custom">Personalizado</option></select>
+        <input type="number" id="Mcustom" step="0.1" value="5.7" hidden>
+        <label class="field-label" for="shadow">Sombra terrestre</label>
+        <select id="shadow" class="full"><option value="0">Cilíndrica</option><option value="1">Cónica (umbra y penumbra)</option></select>
+        <label class="check-row"><input type="checkbox" id="phase"><span class="fake-check"></span><span>Función de fase (Mallama 2023)</span></label>
+        <div class="muted">m = M₁₀₀₀ + 5 log₁₀(ρ/1000 km). Starlink: M₁₀₀₀ por generación; Gen2: 7,87.</div>
+      </div>
+    </details>
+    <details class="control-section" open><summary><span>Apuntado LSSTCam</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+      <div class="section-content">
+        <div class="coord-switch"><button class="active" id="cAA">Alt / Az</button><button id="cRD">RA / Dec (J2000)</button></div>
+        <div class="coords" id="rowAA"><label>Alt (°)<input type="number" id="pAlt" value="60" step="1" min="15" max="90"></label><label>Az (°)<input type="number" id="pAz" value="180" step="1" min="0" max="360"></label></div>
+        <div class="coords" id="rowRD" hidden><label>RA (°)<input type="number" id="pRA" step="0.1" value="0"></label><label>Dec (°)<input type="number" id="pDec" step="0.1" value="-30"></label></div>
+        <button class="secondary-button full" id="bPoint"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-target"/></svg>Apuntar</button>
+        <div class="coords"><label>Banda<select id="band"><option>u</option><option>g</option><option selected>r</option><option>i</option><option>z</option><option>y</option></select></label>
+          <label>Exposición<select id="expMode"><option value="1">1 × 30 s</option><option value="2">2 × 15 s</option></select></label></div>
+        <div class="coords"><label>N apuntados (estadística)<input type="number" id="nStat" value="200" min="10" max="2000" step="10"></label><label>Altura mínima (°)<input type="number" id="emin" value="30" min="15" max="80" step="5"></label></div>
+        <label class="check-row"><input type="checkbox" id="skyShadow"><span class="fake-check"></span><span>Mostrar satélites en sombra (cielo)</span></label>
+      </div>
+    </details>
+    <details class="control-section"><summary><span>Vistas</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+      <div class="section-content">
+        <label class="check-row"><input type="checkbox" id="godShadow" checked><span class="fake-check"></span><span>Mostrar satélites en sombra (vista orbital)</span></label>
+        <div class="range-head"><span>Magnitud límite del cielo</span><strong id="magLimLab">12</strong></div>
+        <input class="range" type="range" id="magLim" min="2" max="14" step="0.5" value="12">
+        <label class="check-row"><input type="checkbox" id="coneX"><span class="fake-check"></span><span>Exagerar el cono de LSSTCam ×5 (solo visual)</span></label>
+        <button class="text-button" id="bCam"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-target"/></svg>Centrar en Cerro Pachón</button>
+      </div>
+    </details>
+    <details class="control-section" id="secStatus"><summary><span>Conteo actual</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+      <div class="section-content"><div class="kv" id="status">—</div></div>
+    </details>
+    <div class="rail-foot" id="fps"></div>
+  </aside>
+
+  <div class="expert-main">
+    <span data-slot="earth" hidden></span>
+    <section class="analysis-panel">
+      <div class="tabs" role="tablist">
+        <button data-tab="tNight" class="on">Gráfico de la noche</button><button data-tab="tExp">Exposición</button><button data-tab="tSrc">Fuentes y supuestos</button><button data-tab="tDiag">Diagnóstico</button>
+      </div>
+      <div class="tabbody on" id="tNight">
+        <div class="chart-toolbar">
+          <button class="secondary-button compact" id="bNight">Calcular noche actual</button>
+          <label>Paso<select id="nStep"><option value="10">10 min</option><option value="15" selected>15 min</option><option value="30">30 min</option></select></label>
+          <label>Apuntados/paso<input type="number" id="nPerStep" value="40" min="10" max="400" step="10"></label>
+          <label class="check-row"><input type="checkbox" id="logY" checked><span class="fake-check"></span><span>Escala log</span></label>
+          <button class="text-button" id="bTable">Ver tabla</button>
+        </div>
+        <span class="prog" id="nightProg"></span>
+        <div id="chartwrap"><canvas id="chart"></canvas><div id="tip"></div></div>
+        <div id="nightTable" class="table-scroll" style="display:none"></div>
+      </div>
+      <div class="tabbody" id="tExp">
+        <div class="kv" id="expOut">Pulsa «Simular exposición».</div>
+        <div class="kv" id="statOut" style="margin-top:14px"></div>
+      </div>
+      <div class="tabbody" id="tSrc"></div>
+      <div class="tabbody" id="tDiag">
+        <div class="diagnostic-summary"><button class="secondary-button compact" id="bDiag">Correr diagnóstico</button><span class="prog" id="diagProg"></span></div>
+        <div id="diagOut" class="table-scroll"></div>
+        <pre id="diag-json" hidden></pre>
+      </div>
+    </section>
+  </div>
+
+  <aside class="right-rail">
+    <span data-slot="sky" hidden></span>
+    <span data-slot="camera" hidden></span>
+    <div class="action-dock">
+      <div><span>Apuntado actual</span><strong id="dockPoint">—</strong></div>
+      <button class="primary-button" id="bExpose"><svg class="icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-shutter"/></svg>Simular exposición</button>
+      <button class="secondary-button" id="bStats">Estadística</button>
+    </div>
+  </aside>
+  <button class="mobile-simple-link" id="toSimple">Volver al modo simple</button>
+</main>
+
+<!-- vistas compartidas: se mueven al modo activo -->
+<div id="shared" hidden>
+  <section class="earth-panel" id="god" aria-labelledby="orbital-title">
+    <div class="panel-label"><span class="eyebrow">Vista orbital</span><h2 id="orbital-title">Un millón de satélites alrededor de la Tierra</h2></div>
+    <canvas class="scene-canvas" id="godCv" aria-label="Vista orbital 3D de la Tierra"></canvas>
+    <div class="canvas-legend"><span><i class="legend-dot blue"></i>Starlink actual</span><span><i class="legend-dot green"></i>Gen2</span><span><i class="legend-dot orange"></i>Starmind 1M</span></div>
+    <div class="scene-hint" id="godHint">Arrastra para rotar · rueda para acercar · línea amarilla: dirección del Sol · punto rojo: Cerro Pachón</div>
+  </section>
+  <section class="visual-card sky-card" id="skyCard">
+    <header><div><span class="eyebrow">Desde Cerro Pachón</span><h3>Cielo observable</h3></div>
+      <button class="icon-button" id="bSkyInfo" aria-label="Qué muestra el cielo" aria-expanded="false"><svg class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-info"/></svg></button></header>
+    <div class="square-scene" id="skywrap"><canvas class="scene-canvas" id="skyCv" aria-label="Cielo en ojo de pez desde Cerro Pachón"></canvas><canvas id="skyov"></canvas></div>
+    <p class="helper muted" id="skyLegend" hidden>Proyección de ojo de pez: el centro es el cenit y el borde el horizonte; norte arriba y este a la izquierda. Círculos a 30° y 60° de altura. Cada satélite iluminado se colorea según su magnitud V (blanco = brillante, rojo = débil). El círculo blanco es el campo de LSSTCam.</p>
+    <p class="helper"><svg class="icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-target"/></svg><span class="s-only">Toca el cielo para elegir dónde apunta el telescopio.</span><span class="x-only" id="skyInfo"></span></p>
+  </section>
+  <section class="visual-card camera-card" id="camCard">
+    <header><div><span class="eyebrow" id="camWhen">Exposición de 30 s</span><h3>Imagen LSSTCam</h3></div></header>
+    <div class="square-scene"><canvas id="ccd" width="760" height="760" aria-label="Imagen sintética de LSSTCam"></canvas></div>
+    <div class="camera-stats">
+      <div><strong id="camTrails">—</strong><span>trazas de satélites iluminados</span></div>
+      <div><strong id="camLoss">—</strong><span>de píxeles perdidos (máscaras)</span></div>
     </div>
   </section>
 </div>
 
-<dialog id="dlgLayers">
-  <h3>Editor de capas</h3>
-  <div class="muted">Modo: <b>incl</b> = RAAN equiespaciada · <b>sso</b> = RAAN amarrada al Sol según LTAN (horas, separadas por coma; un plano por valor, cíclico) · <b>fijo</b> = RAAN fija (°). N se reparte por igual entre subcapas; sat/plano = N/(subcapas·planos).</div>
-  <h3>Starmind</h3><div id="layStarmind"></div>
-  <h3>Starlink Gen2 autorizado (sintético)</h3><div id="layGen2"></div>
-  <div class="row" style="margin-top:8px"><button class="primary" id="layApply">Aplicar</button><button id="layReset">Restaurar FCC (escalado a 1M)</button><button id="layJangid">Preset Jangid et al. 2026</button><button id="layClose">Cerrar</button><span class="muted" id="layTot"></span></div>
+<dialog id="dlgLayers" class="dialog">
+  <header><div><span class="eyebrow">Configuración avanzada</span><h2>Editor de capas orbitales</h2></div><button class="icon-button" id="layClose" aria-label="Cerrar"><svg class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-close"/></svg></button></header>
+  <p class="dialog-intro">Modo <b>incl</b>: RAAN equiespaciada · <b>sso</b>: RAAN amarrada al Sol según LTAN (horas separadas por coma; un plano por valor, cíclico) · <b>fijo</b>: RAAN fija (°). N se reparte por igual entre subcapas; sat/plano = N/(subcapas·planos).</p>
+  <h3>Starmind</h3><div id="layStarmind" class="table-scroll"></div>
+  <h3>Starlink Gen2 autorizado (sintético)</h3><div id="layGen2" class="table-scroll"></div>
+  <footer><span class="muted" id="layTot"></span><button class="secondary-button" id="layReset">Restaurar FCC (escalado a 1M)</button><button class="secondary-button" id="layJangid">Preset Jangid et al. 2026</button><button class="primary-button" id="layApply">Aplicar capas</button></footer>
 </dialog>
 
 <script type="text/plain" id="tle-snapshot">%%TLE%%</script>
