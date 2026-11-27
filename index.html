@@ -203,10 +203,14 @@ body[data-mode=expert] #simple,body[data-mode=simple] #expert{display:none}
 #tip{position:absolute;pointer-events:none;background:var(--surface-3);border:1px solid var(--line-bright);border-radius:7px;padding:7px 9px;font-size:12px;display:none;white-space:nowrap;z-index:5;color:var(--text-2)}
 .right-rail{border-left:1px solid var(--line);padding:12px;display:flex;flex-direction:column;gap:10px;background:rgba(8,13,18,.55);min-width:0}
 .right-rail .visual-card{padding:11px}
-.right-rail .square-scene{width:clamp(170px,calc((100vh - 510px) / 2),280px);max-width:100%} /* cielo + cámara + acciones caben en la altura de la pantalla */
+.right-rail .square-scene{width:clamp(160px,calc((100vh - 560px) / 2),280px);max-width:100%} /* cielo + cámara + acciones caben en la altura de la pantalla */
 .right-rail .camera-stats strong{font-size:15px}
-.action-dock{margin-top:auto;border-top:1px solid var(--line);padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.action-dock>div{grid-column:1/-1;display:flex;justify-content:space-between;margin-bottom:3px;font-size:12px;color:var(--muted)}
+.action-dock{margin-top:auto;border-top:1px solid var(--line);padding-top:12px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.action-dock .dock-head{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.action-dock .muted{font-size:11px;line-height:1.45}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.tab-h{font-size:13px;font-weight:600;margin:4px 0 8px}
+.tab-h:not(:first-child){margin-top:22px}
 .action-dock strong{color:var(--text);font-family:var(--mono);font-weight:400}
 .action-dock button{padding:9px 6px;font-size:12px}
 .table-scroll{overflow:auto;max-width:100%}
@@ -268,7 +272,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
   .analysis-panel{order:4}
   .right-rail{order:3;border:0;display:grid;grid-template-columns:1fr;padding:14px}
   .right-rail .square-scene{width:100%}
-  .action-dock{position:sticky;bottom:0;z-index:30;background:rgba(5,9,13,.95);padding:10px 0}
+  .action-dock{padding:12px 0 0}
   .tabs{padding-left:7px}
   .tabbody{padding:10px}
   #chart{height:300px}
@@ -448,15 +452,10 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
         <div class="muted" id="tleInfo"></div>
       </div>
     </details>
-    <details class="control-section"><summary><span>Brillo y sombra</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
+    <details class="control-section"><summary><span>Sombra terrestre</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
       <div class="section-content">
-        <label class="field-label" for="brillo">Brillo de Starmind (M₁₀₀₀, V)</label>
-        <select id="brillo" class="full"><option value="central" selected>Central · 5,7</option><option value="optimista">Optimista · 6,0</option><option value="pesimista">Pesimista · 2,7</option><option value="custom">Personalizado</option></select>
-        <input type="number" id="Mcustom" step="0.1" value="5.7" hidden>
-        <label class="field-label" for="shadow">Sombra terrestre</label>
-        <select id="shadow" class="full"><option value="0">Cilíndrica</option><option value="1">Cónica (umbra y penumbra)</option></select>
-        <label class="check-row"><input type="checkbox" id="phase"><span class="fake-check"></span><span>Función de fase (Mallama 2023)</span></label>
-        <div class="muted">m = M₁₀₀₀ + 5 log₁₀(ρ/1000 km). Starlink: M₁₀₀₀ por generación; Gen2: 7,87.</div>
+        <select id="shadow" class="full" aria-label="Modelo de sombra terrestre"><option value="0">Cilíndrica</option><option value="1">Cónica (umbra y penumbra)</option></select>
+        <div class="muted">Decide qué satélites están iluminados: cambia cuántos cruzan el campo.</div>
       </div>
     </details>
     <details class="control-section" open><summary><span>Apuntado LSSTCam</span><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-chevron"/></svg></summary>
@@ -464,10 +463,8 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
         <div class="coord-switch"><button class="active" id="cAA">Alt / Az</button><button id="cRD">RA / Dec (J2000)</button></div>
         <div class="coords" id="rowAA"><label>Alt (°)<input type="number" id="pAlt" value="60" step="1" min="15" max="90"></label><label>Az (°)<input type="number" id="pAz" value="180" step="1" min="0" max="360"></label></div>
         <div class="coords" id="rowRD" hidden><label>RA (°)<input type="number" id="pRA" step="0.1" value="0"></label><label>Dec (°)<input type="number" id="pDec" step="0.1" value="-30"></label></div>
-        <button class="secondary-button full" id="bPoint"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-target"/></svg>Apuntar</button>
-        <div class="coords"><label>Banda<select id="band"><option>u</option><option>g</option><option selected>r</option><option>i</option><option>z</option><option>y</option></select></label>
-          <label>Exposición<select id="expMode"><option value="1">1 × 30 s</option><option value="2">2 × 15 s</option></select></label></div>
-        <div class="coords"><label>N apuntados (estadística)<input type="number" id="nStat" value="200" min="10" max="2000" step="10"></label><label>Altura mínima (°)<input type="number" id="emin" value="30" min="15" max="80" step="5"></label></div>
+        <button class="secondary-button full" id="bPoint"><svg class="icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-target"/></svg>Apuntar y exponer</button>
+        <div class="muted">También puedes hacer clic directamente en el cielo observable.</div>
         <label class="check-row"><input type="checkbox" id="skyShadow"><span class="fake-check"></span><span>Mostrar satélites en sombra (cielo)</span></label>
       </div>
     </details>
@@ -505,8 +502,15 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
         <div id="nightTable" class="table-scroll" style="display:none"></div>
       </div>
       <div class="tabbody" id="tExp">
-        <div class="kv" id="expOut">Pulsa «Simular exposición».</div>
-        <div class="kv" id="statOut" style="margin-top:14px"></div>
+        <h3 class="tab-h">Última exposición</h3>
+        <div class="kv" id="expOut">Haz clic en el cielo observable para tomar una exposición.</div>
+        <h3 class="tab-h">Estadística en apuntados al azar</h3>
+        <div class="chart-toolbar">
+          <button class="secondary-button compact" id="bStats">Calcular estadística</button>
+          <label>N apuntados<input type="number" id="nStat" value="200" min="10" max="2000" step="10"></label>
+          <label>Altura mínima (°)<input type="number" id="emin" value="30" min="15" max="80" step="5"></label>
+        </div>
+        <div class="kv" id="statOut"></div>
       </div>
       <div class="tabbody" id="tSrc"></div>
       <div class="tabbody" id="tDiag">
@@ -521,9 +525,14 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
     <span data-slot="sky" hidden></span>
     <span data-slot="camera" hidden></span>
     <div class="action-dock">
-      <div><span>Apuntado actual</span><strong id="dockPoint">—</strong></div>
-      <button class="primary-button" id="bExpose"><svg class="icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-shutter"/></svg>Simular exposición</button>
-      <button class="secondary-button" id="bStats">Estadística</button>
+      <div class="dock-head"><span>Apuntado actual</span><strong id="dockPoint">—</strong></div>
+      <div class="coords">
+        <label>Brillo de Starmind (M₁₀₀₀)<select id="brillo"><option value="central" selected>Central · 5,7</option><option value="optimista">Optimista · 6,0</option><option value="pesimista">Pesimista · 2,7</option><option value="custom">Personalizado</option></select></label>
+        <label>Banda · exposición<span class="pair"><select id="band" aria-label="Banda"><option>u</option><option>g</option><option selected>r</option><option>i</option><option>z</option><option>y</option></select><select id="expMode" aria-label="Exposición"><option value="1">1×30 s</option><option value="2">2×15 s</option></select></span></label>
+      </div>
+      <input type="number" id="Mcustom" step="0.1" value="5.7" hidden aria-label="M₁₀₀₀ personalizado">
+      <label class="check-row"><input type="checkbox" id="phase"><span class="fake-check"></span><span>Función de fase (Mallama 2023)</span></label>
+      <p class="muted">Cambian cómo ve LSSTCam a cada satélite (brillo, saturación, máscaras), no cuántos cruzan el campo.</p>
     </div>
   </aside>
   <button class="mobile-simple-link" id="toSimple">Volver al modo simple</button>
@@ -550,7 +559,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
     <div class="square-scene"><canvas id="ccd" width="760" height="760" aria-label="Imagen sintética de LSSTCam"></canvas></div>
     <div class="camera-stats">
       <div><strong id="camTrails">—</strong><span>trazas de satélites iluminados</span></div>
-      <div><strong id="camLoss">—</strong><span class="x-only">de píxeles perdidos (máscaras)</span><span class="s-only">de la imagen perdida (oscurecidos – sin oscurecer)</span></div>
+      <div><strong id="camLoss">—</strong><span class="x-only">de píxeles perdidos (máscaras, brillo elegido)</span><span class="s-only">de la imagen perdida (oscurecidos – sin oscurecer)</span></div>
     </div>
   </section>
 </div>
@@ -35054,7 +35063,7 @@ function tickStatus() {
   if (state.measuring || now - statusLast < (state.playing ? 4000 : 1200) || (state.simMs === statusMs && now - statusLast < 5000)) return;
   statusLast = now; statusMs = state.simMs;
   { const p = pointingECI(F), rd = eciToRadecJ2000(F.jd, p);
-    $('skyInfo').textContent = `Apuntado: alt ${nf(state.alt, 1)}°, az ${nf(state.az, 1)}° → RA ${nf(rd.ra, 2)}°, Dec ${nf(rd.dec, 2)}° (J2000). Clic en el cielo para apuntar.`; }
+    $('skyInfo').textContent = `Apuntado: alt ${nf(state.alt, 1)}°, az ${nf(state.az, 1)}° → RA ${nf(rd.ra, 2)}°, Dec ${nf(rd.dec, 2)}° (J2000). Clic en el cielo para apuntar y exponer.`; }
   if (state.mode !== 'expert' || !$('secStatus').open) return;
   const lines = [];
   const cs = synSrc ? countByScen(synSrc, F, 30, state.conical) : null, ct = (tleSrc && state.on[0]) ? countVisible(tleSrc, F, 30, state.conical) : null;
@@ -35481,9 +35490,11 @@ $('tLocal').onchange = e => {
 ['onS0', 'onS1', 'onS2'].forEach((id, i) => $(id).onchange = e => { state.on[i] = e.target.checked; statusLast = 0; if (i === 0) updateTLEPositions(true); });
 $('deploy').oninput = e => { state.deploy = e.target.value / 100; $('deployLab').textContent = `${e.target.value} %`; statusLast = 0; };
 $('bLiteFull').onclick = () => { state.renderFrac = 1; $('liteBanner').hidden = true; };
-$('brillo').onchange = e => { const v = e.target.value; $('Mcustom').hidden = v !== 'custom'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; };
-$('Mcustom').onchange = e => state.Mstar = +e.target.value;
-$('phase').onchange = e => state.phaseOn = e.target.checked;
+// brillo, banda, modo y fase solo cambian cómo ve LSSTCam: se vuelve a calcular la imagen en el mismo campo
+const reExpose = () => { if (state.lastExp && state.mode === 'expert') setTimeout(runExposure, 10); };
+$('brillo').onchange = e => { const v = e.target.value; $('Mcustom').hidden = v !== 'custom'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; reExpose(); };
+$('Mcustom').onchange = e => { state.Mstar = +e.target.value; reExpose(); };
+$('phase').onchange = e => { state.phaseOn = e.target.checked; reExpose(); };
 $('shadow').onchange = e => { state.conical = e.target.value === '1'; statusLast = 0; };
 $('godShadow').onchange = e => state.godShadow = e.target.checked;
 $('skyShadow').onchange = e => state.skyShadow = e.target.checked;
@@ -35494,13 +35505,12 @@ let coordRD = false;
 $('cAA').onclick = () => { coordRD = false; $('cAA').classList.add('active'); $('cRD').classList.remove('active'); $('rowAA').hidden = false; $('rowRD').hidden = true; };
 $('cRD').onclick = () => { coordRD = true; $('cRD').classList.add('active'); $('cAA').classList.remove('active'); $('rowRD').hidden = false; $('rowAA').hidden = true; };
 $('bPoint').onclick = () => {
-  if (!coordRD) { state.alt = Math.max(15, Math.min(90, +$('pAlt').value)); state.az = mod(+$('pAz').value, 360); statusLast = 0; return; }
+  if (!coordRD) { state.alt = Math.max(15, Math.min(90, +$('pAlt').value)); state.az = mod(+$('pAz').value, 360); statusLast = 0; setTimeout(runExposure, 10); return; }
   const v = radecToECI(F.jd, +$('pRA').value, +$('pDec').value), aa = eciToAltAz(F, v);
   if (aa.alt < 15) { $('skyInfo').textContent = `Ese objeto está a alt ${nf(aa.alt, 1)}° (< 15°, límite del telescopio).`; return; }
-  state.alt = aa.alt; state.az = aa.az; $('pAlt').value = aa.alt.toFixed(1); $('pAz').value = aa.az.toFixed(1); statusLast = 0; };
-$('band').onchange = e => state.band = e.target.value;
-$('expMode').onchange = e => state.twoSnaps = e.target.value === '2';
-$('bExpose').onclick = () => { $('expOut').textContent = 'Calculando…'; setTimeout(runExposure, 20); };
+  state.alt = aa.alt; state.az = aa.az; $('pAlt').value = aa.alt.toFixed(1); $('pAz').value = aa.az.toFixed(1); statusLast = 0; setTimeout(runExposure, 10); };
+$('band').onchange = e => { state.band = e.target.value; reExpose(); };
+$('expMode').onchange = e => { state.twoSnaps = e.target.value === '2'; reExpose(); };
 $('bStats').onclick = () => { $('statOut').textContent = 'Calculando…'; setTimeout(runStats, 20); };
 $('bLayers').onclick = openLayers;
 $('bNight').onclick = () => computeNight();
@@ -35535,7 +35545,7 @@ function setMode(m) {
   }
   $('mSimple').classList.toggle('active', m === 'simple'); $('mExpert').classList.toggle('active', m === 'expert');
   try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
-  if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
+  if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); if (!state.lastExp) setTimeout(runExposure, 300); }
 }
 document.querySelectorAll('[data-layers]').forEach(x => x.onclick = () => setLow600(x.dataset.layers === 'low'));
 $('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
@@ -35584,7 +35594,7 @@ function simpleExpose() {
     (matchMedia('(max-width: 800px)').matches ? '<button class="text-button" id="bSeeCam">Ver imagen ↓</button>' : '');
   const b = $('bSeeCam'); if (b) b.onclick = () => $('camCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-skyov.addEventListener('click', () => { if (state.mode !== 'simple') return; userPointed = true; $('camTrails').textContent = '…'; setTimeout(simpleExpose, 10); });
+skyov.addEventListener('click', () => { if (state.mode !== 'simple') { $('camTrails').textContent = '…'; setTimeout(runExposure, 10); return; } userPointed = true; $('camTrails').textContent = '…'; setTimeout(simpleExpose, 10); });
 skyov.addEventListener('mousemove', ev => { const r = skyov.getBoundingClientRect(); skyHover = [(ev.clientX - r.left) * DPR, (ev.clientY - r.top) * DPR]; });
 skyov.addEventListener('mouseleave', () => { skyHover = null; });
 

@@ -367,7 +367,7 @@ function tickStatus() {
   if (state.measuring || now - statusLast < (state.playing ? 4000 : 1200) || (state.simMs === statusMs && now - statusLast < 5000)) return;
   statusLast = now; statusMs = state.simMs;
   { const p = pointingECI(F), rd = eciToRadecJ2000(F.jd, p);
-    $('skyInfo').textContent = `Apuntado: alt ${nf(state.alt, 1)}°, az ${nf(state.az, 1)}° → RA ${nf(rd.ra, 2)}°, Dec ${nf(rd.dec, 2)}° (J2000). Clic en el cielo para apuntar.`; }
+    $('skyInfo').textContent = `Apuntado: alt ${nf(state.alt, 1)}°, az ${nf(state.az, 1)}° → RA ${nf(rd.ra, 2)}°, Dec ${nf(rd.dec, 2)}° (J2000). Clic en el cielo para apuntar y exponer.`; }
   if (state.mode !== 'expert' || !$('secStatus').open) return;
   const lines = [];
   const cs = synSrc ? countByScen(synSrc, F, 30, state.conical) : null, ct = (tleSrc && state.on[0]) ? countVisible(tleSrc, F, 30, state.conical) : null;
@@ -794,9 +794,11 @@ $('tLocal').onchange = e => {
 ['onS0', 'onS1', 'onS2'].forEach((id, i) => $(id).onchange = e => { state.on[i] = e.target.checked; statusLast = 0; if (i === 0) updateTLEPositions(true); });
 $('deploy').oninput = e => { state.deploy = e.target.value / 100; $('deployLab').textContent = `${e.target.value} %`; statusLast = 0; };
 $('bLiteFull').onclick = () => { state.renderFrac = 1; $('liteBanner').hidden = true; };
-$('brillo').onchange = e => { const v = e.target.value; $('Mcustom').hidden = v !== 'custom'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; };
-$('Mcustom').onchange = e => state.Mstar = +e.target.value;
-$('phase').onchange = e => state.phaseOn = e.target.checked;
+// brillo, banda, modo y fase solo cambian cómo ve LSSTCam: se vuelve a calcular la imagen en el mismo campo
+const reExpose = () => { if (state.lastExp && state.mode === 'expert') setTimeout(runExposure, 10); };
+$('brillo').onchange = e => { const v = e.target.value; $('Mcustom').hidden = v !== 'custom'; state.Mstar = v === 'custom' ? +$('Mcustom').value : BRILLO[v]; reExpose(); };
+$('Mcustom').onchange = e => { state.Mstar = +e.target.value; reExpose(); };
+$('phase').onchange = e => { state.phaseOn = e.target.checked; reExpose(); };
 $('shadow').onchange = e => { state.conical = e.target.value === '1'; statusLast = 0; };
 $('godShadow').onchange = e => state.godShadow = e.target.checked;
 $('skyShadow').onchange = e => state.skyShadow = e.target.checked;
@@ -807,13 +809,12 @@ let coordRD = false;
 $('cAA').onclick = () => { coordRD = false; $('cAA').classList.add('active'); $('cRD').classList.remove('active'); $('rowAA').hidden = false; $('rowRD').hidden = true; };
 $('cRD').onclick = () => { coordRD = true; $('cRD').classList.add('active'); $('cAA').classList.remove('active'); $('rowRD').hidden = false; $('rowAA').hidden = true; };
 $('bPoint').onclick = () => {
-  if (!coordRD) { state.alt = Math.max(15, Math.min(90, +$('pAlt').value)); state.az = mod(+$('pAz').value, 360); statusLast = 0; return; }
+  if (!coordRD) { state.alt = Math.max(15, Math.min(90, +$('pAlt').value)); state.az = mod(+$('pAz').value, 360); statusLast = 0; setTimeout(runExposure, 10); return; }
   const v = radecToECI(F.jd, +$('pRA').value, +$('pDec').value), aa = eciToAltAz(F, v);
   if (aa.alt < 15) { $('skyInfo').textContent = `Ese objeto está a alt ${nf(aa.alt, 1)}° (< 15°, límite del telescopio).`; return; }
-  state.alt = aa.alt; state.az = aa.az; $('pAlt').value = aa.alt.toFixed(1); $('pAz').value = aa.az.toFixed(1); statusLast = 0; };
-$('band').onchange = e => state.band = e.target.value;
-$('expMode').onchange = e => state.twoSnaps = e.target.value === '2';
-$('bExpose').onclick = () => { $('expOut').textContent = 'Calculando…'; setTimeout(runExposure, 20); };
+  state.alt = aa.alt; state.az = aa.az; $('pAlt').value = aa.alt.toFixed(1); $('pAz').value = aa.az.toFixed(1); statusLast = 0; setTimeout(runExposure, 10); };
+$('band').onchange = e => { state.band = e.target.value; reExpose(); };
+$('expMode').onchange = e => { state.twoSnaps = e.target.value === '2'; reExpose(); };
 $('bStats').onclick = () => { $('statOut').textContent = 'Calculando…'; setTimeout(runStats, 20); };
 $('bLayers').onclick = openLayers;
 $('bNight').onclick = () => computeNight();
@@ -848,7 +849,7 @@ function setMode(m) {
   }
   $('mSimple').classList.toggle('active', m === 'simple'); $('mExpert').classList.toggle('active', m === 'expert');
   try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
-  if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
+  if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); if (!state.lastExp) setTimeout(runExposure, 300); }
 }
 document.querySelectorAll('[data-layers]').forEach(x => x.onclick = () => setLow600(x.dataset.layers === 'low'));
 $('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
@@ -897,7 +898,7 @@ function simpleExpose() {
     (matchMedia('(max-width: 800px)').matches ? '<button class="text-button" id="bSeeCam">Ver imagen ↓</button>' : '');
   const b = $('bSeeCam'); if (b) b.onclick = () => $('camCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-skyov.addEventListener('click', () => { if (state.mode !== 'simple') return; userPointed = true; $('camTrails').textContent = '…'; setTimeout(simpleExpose, 10); });
+skyov.addEventListener('click', () => { if (state.mode !== 'simple') { $('camTrails').textContent = '…'; setTimeout(runExposure, 10); return; } userPointed = true; $('camTrails').textContent = '…'; setTimeout(simpleExpose, 10); });
 skyov.addEventListener('mousemove', ev => { const r = skyov.getBoundingClientRect(); skyHover = [(ev.clientX - r.left) * DPR, (ev.clientY - r.top) * DPR]; });
 skyov.addEventListener('mouseleave', () => { skyHover = null; });
 
