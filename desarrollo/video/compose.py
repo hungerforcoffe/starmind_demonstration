@@ -33,6 +33,7 @@ T = {
    c_dark='La sombra de la Tierra los oculta: el cielo queda limpio',
    s3t='Una foto de 30 segundos de LSSTCam a las 22:04', s3a='{n} trazas en este campo (55° de altura, hacia el noroeste)',
    s3b='Promedio al anochecer: ~28 por imagen', s3c='Se pierde entre el {a} y el {b} de la imagen, según qué tan brillantes sean',
+   s4pre='Escenario con el despliegue completo (2040)', s4m='Plazos de la FCC: 10 % en 2035, 50 % en 2038 y el millón completo en 2040',
    s4a='7 de cada 10 imágenes al anochecer', s4b='tendrían trazas de satélites',
    s4c='La FCC solo aprobó el plan de desechos de las capas bajo 600 km', s4d='No impuso condiciones para la astronomía óptica',
    s4e='Simulación con supuestos declarados · código abierto', url='hungerforcoffe.github.io/starmind_demonstration'),
@@ -45,6 +46,7 @@ T = {
    c_dark="The Earth's shadow hides them: the sky is clean",
    s3t='A 30-second LSSTCam photo at 22:04', s3a='{n} streaks in this field (55° altitude, toward the northwest)',
    s3b='Average at dusk: ~28 per image', s3c='{a} to {b} of the image is lost, depending on how bright they are',
+   s4pre='Full deployment scenario (2040)', s4m='FCC deadlines: 10 % by 2035, 50 % by 2038 and the full million by 2040',
    s4a='7 out of 10 images at dusk', s4b='would show satellite streaks',
    s4c='The FCC approved the debris plan only for the shells below 600 km', s4d='It set no conditions for optical astronomy',
    s4e='Simulation with declared assumptions · open source', url='hungerforcoffe.github.io/starmind_demonstration/en'),
@@ -153,6 +155,7 @@ def scene4(i, n):
     d = ImageDraw.Draw(img); brand(d)
     t = i / FPS
     fa = fit(d, max(T['s4a'], T['s4b'], key=len), 600, 968, 62)
+    alpha_text(img, (56, 196), T['s4pre'], font(26, 500), (217, 135, 101), ease(t / 0.5))
     alpha_text(img, (56, 250), T['s4a'], fa, TXT, ease(t / 0.5))
     alpha_text(img, (56, 326), T['s4b'], fa, CYAN, ease((t - 0.2) / 0.5))
     ad = ease((t - 0.5) / 0.6)
@@ -163,20 +166,21 @@ def scene4(i, n):
         else: ld.rounded_rectangle([x0, 430, x0 + 50, 466], 5, outline=LINE + (int(255 * ad),), width=2)
     img.alpha_composite(lay)
     y = 540
-    for k, s in enumerate((T['s4c'], T['s4d'])):
+    for k, s in enumerate((T['s4m'], T['s4c'], T['s4d'])):
         a = ease((t - 1.2 - 0.4 * k) / 0.6)
-        for line in wrap(d, s, font(28, 500), 900):
-            lay = Image.new('RGBA', img.size, (0, 0, 0, 0)); ld = ImageDraw.Draw(lay)
-            ld.rectangle([56, y + 6, 60, y + 34], fill=ORANGE + (int(255 * a),))
-            img.alpha_composite(lay)
+        for j, line in enumerate(wrap(d, s, font(28, 500), 900)):
+            if j == 0:  # una sola barra por viñeta
+                lay = Image.new('RGBA', img.size, (0, 0, 0, 0)); ld = ImageDraw.Draw(lay)
+                ld.rectangle([56, y + 6, 60, y + 34], fill=ORANGE + (int(255 * a),))
+                img.alpha_composite(lay)
             alpha_text(img, (76, y), line, font(28, 500), TXT, a); y += 40
         y += 22
-    a = ease((t - 2.2) / 0.6)
+    a = ease((t - 2.6) / 0.6)
     alpha_text(img, (56, 900), T['url'], font(30, 500), CYAN, a)
     alpha_text(img, (56, 950), T['s4e'], font(20, 400), MUT, a)
     return img
 
-scenes = [(scene1, 210), (scene2, 300), (scene3, 180), (scene4, 165)]
+scenes = [(scene1, 210), (scene2, 300), (scene3, 180), (scene4, 195)]  # el cierre dura 1 s más por la viñeta de plazos
 XF = 12  # cuadros de fundido entre escenas
 shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 k = 0; prev_tail = None
