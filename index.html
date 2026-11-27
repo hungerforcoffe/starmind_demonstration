@@ -14,7 +14,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text-primary);font:13px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-#gl{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;display:block}
+#gl{position:absolute;left:0;top:0;z-index:0;pointer-events:none;display:block} /* anclado a la página (no fijo): se desplaza con el scroll sin depender de JS */
 #app{position:relative;z-index:1;display:grid;height:100vh;grid-template-columns:310px minmax(0,1fr) 400px;grid-template-rows:auto minmax(0,1fr) 330px;
   grid-template-areas:"hdr hdr hdr" "ctl god right" "ctl tabs right"}
 header{grid-area:hdr;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;padding:8px 14px;background:var(--surface-1);border-bottom:1px solid var(--line)}
@@ -34358,10 +34358,22 @@ const canvas = $('gl');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: !LITE, powerPreference: 'high-performance' });
 const DPR = LITE ? 1 : Math.min(window.devicePixelRatio || 1, 2);
 renderer.setPixelRatio(DPR);
-renderer.setSize(window.innerWidth, window.innerHeight, false);
 renderer.setScissorTest(true);
 renderer.autoClear = false;
-window.addEventListener('resize', () => renderer.setSize(window.innerWidth, window.innerHeight, false));
+// El lienzo cubre solo la unión de la vista global y el panel derecho, en coordenadas de página.
+// Así el navegador lo desplaza junto con el DOM al hacer scroll (en celulares el scroll va antes que JS).
+const glBox = { x: 0, y: 0, w: 0, h: 0 };
+function layoutCanvas() {
+  const a = $('god').getBoundingClientRect(), b = $('right').getBoundingClientRect();
+  const x = Math.min(a.left, b.left) + scrollX, y = Math.min(a.top, b.top) + scrollY;
+  const w = Math.max(a.right, b.right) + scrollX - x, h = Math.max(a.bottom, b.bottom) + scrollY - y;
+  if (Math.abs(x - glBox.x) + Math.abs(y - glBox.y) + Math.abs(w - glBox.w) + Math.abs(h - glBox.h) < 1) return;
+  Object.assign(glBox, { x, y, w, h });
+  canvas.style.left = x + 'px'; canvas.style.top = y + 'px';
+  renderer.setSize(Math.max(1, Math.round(w)), Math.max(1, Math.round(h)), false);
+  canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+}
+layoutCanvas();
 
 const sceneGod = new THREE.Scene(), sceneSky = new THREE.Scene();
 const camGod = new THREE.PerspectiveCamera(45, 1, 0.05, 5000);
@@ -34595,24 +34607,26 @@ function updateUniforms() {
 }
 
 // --------------------------------------------------------------- render
-function viewRect(el) {
-  const r = el.getBoundingClientRect();
-  if (r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > window.innerHeight) return null;
-  return { x: r.left, y: window.innerHeight - r.bottom, w: r.width, h: r.height };
+function viewRect(el, c) { // rectángulo en coordenadas del lienzo (origen abajo a la izquierda)
+  const r = el.getBoundingClientRect(), m = window.innerHeight; // margen de una pantalla para que el scroll no muestre zonas sin dibujar
+  if (r.width < 2 || r.height < 2 || r.bottom < -m || r.top > 2 * m) return null;
+  return { x: r.left - c.left, y: c.bottom - r.bottom, w: r.width, h: r.height };
 }
 function skyBg(alt) {
   if (alt > -6) return 0x24364f; if (alt > -12) return 0x162235; if (alt > -18) return 0x0c1220; return 0x05070b;
 }
 let fpsT0 = performance.now(), fpsN = 0, fpsVal = 0, lastReal = performance.now(), frameTimes = [];
 function render() {
+  layoutCanvas();
+  const c = canvas.getBoundingClientRect();
   renderer.setScissorTest(false); renderer.setClearColor(0x1a1a19, 1); renderer.clear(); renderer.setScissorTest(true);
-  const rg = viewRect($('god'));
+  const rg = viewRect($('god'), c);
   if (rg) {
     camGod.aspect = rg.w / rg.h; camGod.updateProjectionMatrix();
     renderer.setViewport(rg.x, rg.y, rg.w, rg.h); renderer.setScissor(rg.x, rg.y, rg.w, rg.h);
     renderer.setClearColor(0x050608, 1); renderer.clear(); renderer.render(sceneGod, camGod);
   }
-  const rs = viewRect($('sky'));
+  const rs = viewRect($('sky'), c);
   if (rs) {
     const s = Math.min(rs.w, rs.h);
     renderer.setViewport(rs.x, rs.y, s, s); renderer.setScissor(rs.x, rs.y, s, s);
