@@ -141,6 +141,10 @@ body[data-mode=expert] #simple,body[data-mode=simple] #expert{display:none}
 .time-ends{display:flex;justify-content:space-between;color:var(--muted-2);font-size:11px;font-family:var(--mono)}
 #sHour{accent-color:var(--cyan);width:100%;height:28px}
 .simple-scen{display:grid;gap:10px}
+.layer-pick{display:grid;gap:6px;margin:0 0 4px 23px}
+.layer-pick .coord-switch{width:fit-content;max-width:100%}
+.coord-switch button{white-space:nowrap}
+.layer-pick .muted{font-size:11px;line-height:1.45}
 .simple-controls .simple-scen label.scenario-row{display:flex;font-size:13px}
 .intro-hint{color:var(--muted);font-size:13px;line-height:1.5;border-top:1px solid var(--line);padding-top:14px}
 .sky-result{color:var(--text-2);display:block}
@@ -376,6 +380,10 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
       <div class="field"><span>Constelaciones en el cielo</span>
         <div class="simple-scen">
           <label class="scenario-row"><input type="checkbox" id="sOn2" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--orange)"></span><span class="scenario-name">Starmind <span class="muted">· autorizada en nov-2026</span></span><span class="scenario-count" id="sN2"></span></label>
+          <div class="layer-pick">
+            <div class="coord-switch"><button class="active" data-layers="all" type="button">Todas sus capas</button><button data-layers="low" type="button">Solo bajo 600 km</button></div>
+            <p class="muted">Por ahora la FCC solo aprobó el plan de retiro de las capas bajo 600 km; las más altas, que quedan iluminadas hasta más tarde, esperan ese plan.</p>
+          </div>
           <label class="scenario-row"><input type="checkbox" id="sOn0"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--blue)"></span><span class="scenario-name">Starlink actual <span class="muted">· en órbita hoy</span></span><span class="scenario-count" id="sN0"></span></label>
           <label class="scenario-row"><input type="checkbox" id="sOn1"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--green)"></span><span class="scenario-name">Starlink Gen2 <span class="muted">· autorizada</span></span><span class="scenario-count" id="sN1"></span></label>
         </div>
@@ -425,6 +433,8 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
         <label class="scenario-row"><input type="checkbox" id="onS0" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--blue)"></span><span class="scenario-name">Starlink actual (TLE)</span><span class="scenario-count" id="nS0"></span></label>
         <label class="scenario-row"><input type="checkbox" id="onS1"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--green)"></span><span class="scenario-name">Starlink Gen2</span><span class="scenario-count" id="nS1"></span></label>
         <label class="scenario-row"><input type="checkbox" id="onS2" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--orange)"></span><span class="scenario-name">Starmind 1M</span><span class="scenario-count" id="nS2"></span></label>
+        <div class="coord-switch"><button class="active" data-layers="all" type="button">6 capas (hasta 1.002 km)</button><button data-layers="low" type="button">Solo &lt; 600 km</button></div>
+        <div class="muted">Solo las capas bajo 600 km tienen plan de desechos aprobado (DA 26-1273 ¶11, cond. 4).</div>
         <div class="range-head"><span>Starmind desplegado</span><strong id="deployLab">100 %</strong></div>
         <input class="range" type="range" id="deploy" min="0" max="100" step="1" value="100">
         <div class="muted">Hitos FCC: 10 % antes de nov-2035 · 50 % antes de nov-2038 · 100 % antes de nov-2040.</div>
@@ -535,7 +545,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
     <div class="square-scene"><canvas id="ccd" width="760" height="760" aria-label="Imagen sintética de LSSTCam"></canvas></div>
     <div class="camera-stats">
       <div><strong id="camTrails">—</strong><span>trazas de satélites iluminados</span></div>
-      <div><strong id="camLoss">—</strong><span>de píxeles perdidos (máscaras)</span></div>
+      <div><strong id="camLoss">—</strong><span class="x-only">de píxeles perdidos (máscaras)</span><span class="s-only">de la imagen perdida (oscurecidos – sin oscurecer)</span></div>
     </div>
   </section>
 </div>
@@ -34116,7 +34126,7 @@ STARLINK-40125
 1 A1383U 26256AB  26330.58335648 -.00038323  00000+0 -19747-3 0  9993
 2 A1383  30.5003  82.0694 0000301  52.2728 242.2175 15.80262736  3205
 </script>
-<script type="application/json" id="fuentes">[{"id": "S1", "p": "Autorización Starmind", "v": "Hasta 1.000.000 satélites; 25-nov-2026 (granted-in-part / deferred-in-part)", "estado": "CONFIRMADO", "f": "FCC DA 26-1273", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S2", "p": "Envolvente orbital", "v": "Capas de 50 km entre 500 y 1.002 km; 30° y heliosincrónicas", "estado": "CONFIRMADO", "f": "FCC DA 26-1273", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S3", "p": "Solicitud original", "v": "30-ene-2026; 500–2.000 km; waiver del Schedule S para la configuración de planos", "estado": "CONFIRMADO", "f": "FCC DA 26-113", "url": "https://docs.fcc.gov/public/attachments/DA-26-113A1.pdf"}, {"id": "S4", "p": "6 grupos (altitud / inclinación)", "v": "550–568/26–32° · 565–585/97,7° · 686–718/30° · 707–744/97,2° · 946–978/30° · 967–1.002/99,4°", "estado": "CONFIRMADO", "f": "DA 26-1273 (carta SpaceX 29-may-2026, p. 3)", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S5", "p": "Subcapas y N por subcapa", "v": "114 subcapas; total 1.198.120", "estado": "SECUNDARIA", "f": "McDowell, Enormous Constellations", "url": "https://planet4589.org/space/con/conlist.html"}, {"id": "S6", "p": "Planos × sat/plano", "v": "30 × 333 (capas de 30°); 2 planos por subcapa SSO", "estado": "SECUNDARIA", "f": "McDowell (íd.)", "url": "https://planet4589.org/space/con/conlist.html"}, {"id": "S7", "p": "Reparto hasta el tope de 1M", "v": "Escalado proporcional ×0,83464 en las 114 subcapas, con satélites enteros por plano: 999.996 en total (≤ 1.000.000 autorizado)", "estado": "SUPUESTO", "f": "Neutro; decisión aprobada por el usuario", "url": ""}, {"id": "S8", "p": "Fase en el plano / Walker F", "v": "Uniforme con desfase aleatorio por plano", "estado": "SUPUESTO", "f": "No público: SpaceX pidió no declarar en el Schedule S la configuración de planos (DA 26-113) y la FCC concedió ese waiver (DA 26-1273, cond. 7). La condición 5 obliga a desplegar según las fichas ITU, donde estaría ese dato", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S9", "p": "LTAN de las SSO", "v": "18:00 y 06:00 (dawn-dusk), RAAN amarrada al Sol", "estado": "SUPUESTO", "f": "SpaceX: SSO para energía solar continua (spacex.com vía Wikipedia)", "url": "https://en.wikipedia.org/wiki/Starmind_(satellite)"}, {"id": "S10", "p": "Inclinación G4 (707–744 km)", "v": "97,2° registrada (SSO exacta 98,2–98,4°: probable errata); LTAN mantenida", "estado": "DERIVADO", "f": "Cálculo J2 (referencia/reference.py)", "url": ""}, {"id": "S11", "p": "Satélite AI1", "v": "Envergadura 75 m; panel 210 kW; radiador 160 m²; 250 kW pico", "estado": "SECUNDARIA", "f": "spacex.com vía Wikipedia; Spaceflight Now 26-nov-2026", "url": "https://en.wikipedia.org/wiki/Starmind_(satellite)"}, {"id": "S12", "p": "AI1 borrador (jun-2026)", "v": "70 m; 150 kW; radiador 110 m² de canto al Sol; 250 W/m²", "estado": "SECUNDARIA", "f": "DCD, 9-jun-2026", "url": "https://www.datacenterdynamics.com/en/news/spacex-details-ai1-satellite-data-center-claims-150kw-peak-compute/"}, {"id": "S13", "p": "Área de paneles", "v": "840 m² (600 m² el borrador)", "estado": "DERIVADO", "f": "S11/S12 con 250 W/m²", "url": ""}, {"id": "S14", "p": "Masa del satélite", "v": "Desconocida (no se usa)", "estado": "NO PÚBLICO", "f": "Probablemente en el Technical Attachment (ICFS inaccesible)", "url": ""}, {"id": "S15", "p": "Vida útil", "v": "Desconocida (la licencia de 15 años no es la vida útil)", "estado": "NO PÚBLICO", "f": "—", "url": ""}, {"id": "S16", "p": "Hitos de despliegue", "v": "1.º antes de 2033 · 10 % 2035 · 50 % 2038 · 100 % 2040 (deslizador «desplegado»)", "estado": "CONFIRMADO", "f": "DA 26-1273, condición 10", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S17", "p": "Disposición final", "v": "<600 km reingreso; >600 km diferido (heliocéntrica/disposición)", "estado": "CONFIRMADO", "f": "DA 26-1273, condición 4", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S19", "p": "Condiciones de astronomía óptica", "v": "Ninguna; basta el compromiso de coordinar con la NSF. El IR térmico se declara fuera de competencia. Peticiones de la AAS, Amazon Kuiper y Viasat denegadas", "estado": "CONFIRMADO", "f": "DA 26-1273, ¶16–17 y ¶20", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S20", "p": "Despliegue inicial", "v": "SpaceX desplegará primero a menor altitud para probar los satélites antes de subirlos a su capa (población transitoria baja, no modelada)", "estado": "CONFIRMADO", "f": "DA 26-1273, ¶12–13", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "L1", "p": "Starlink actual", "v": "11.189 objetos (TLE/GP del 26-nov-2026), SGP4", "estado": "CONFIRMADO", "f": "CelesTrak GROUP=starlink", "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=json"}, {"id": "L2", "p": "Gen2: capas autorizadas", "v": "340/53 · 345/48 · 350/38 · 355/43 · 360/96,9 · 365/32 · 475/32 · 480/53 · 485/43; 15.000", "estado": "CONFIRMADO", "f": "FCC DA 26-36 (9-ene-2026)", "url": "https://docs.fcc.gov/public/attachments/DA-26-36A1.pdf"}, {"id": "L3", "p": "Gen2: N por capa", "v": "1.667 por capa; RAAN uniforme (72 o 56 planos; 36 en 360 km)", "estado": "SUPUESTO", "f": "La FCC concede despliegue flexible", "url": ""}, {"id": "L4", "p": "M₁₀₀₀ Starlink por generación", "v": "V1.x 6,34 (antes de 2023-026) · DTC 6,47 · resto (V2 Mini) 7,87", "estado": "SUPUESTO", "f": "Mallama et al. 2023 y 2025", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B1", "p": "V2 Mini en mitigación", "v": "M₁₀₀₀ = 7,87 ± 0,09 (σ 0,79); área 116 m²", "estado": "CONFIRMADO", "f": "Mallama et al. 2023", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B2", "p": "V2 Mini sin mitigar", "v": "M₁₀₀₀ = 5,08 (σ 1,70)", "estado": "CONFIRMADO", "f": "Mallama et al. 2023", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B4", "p": "Función de fase (opcional)", "v": "M₁₀₀₀(φ) = 2,630 + 0,1065 φ − 0,0005167 φ², normalizada a φ = 90°", "estado": "CONFIRMADO", "f": "Mallama et al. 2023, Fig. 5", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B8", "p": "Starmind M₁₀₀₀", "v": "Optimista 6,0 · central 5,7 · pesimista 2,7 (escalado por área desde la V2 Mini). El central supone mitigación como la V2 Mini; en el expediente no hay compromiso de reducir la reflectividad (Dark Sky, citado en DA 26-1273 nota 52) y la FCC no impone ninguno", "estado": "SUPUESTO", "f": "Derivación en FASE1_FASE2.md §3", "url": ""}, {"id": "B9", "p": "Contraste con BRDF de Jangid 2026", "v": "Pico difuso ~6 mag AB; destellos 2–4 mag; 2,5 % de trazas < 2 mag", "estado": "CONFIRMADO", "f": "Jangid et al. 2026", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "B10", "p": "V → bandas LSST", "v": "Δu +1,43 · g +0,25 · r −0,21 · i −0,32 · z −0,36 · y −0,37", "estado": "CONFIRMADO", "f": "Jangid et al. 2026, Tabla 2", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "B11", "p": "Destellos especulares", "v": "No modelados (modelo difuso); el caso pesimista sirve de cota", "estado": "MODELO", "f": "Limitación declarada", "url": ""}, {"id": "R1", "p": "Sitio Rubin", "v": "−30,2446°, −70,7494°, 2.663 m", "estado": "CONFIRMADO", "f": "Jangid et al. 2026, §2.4", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "R2", "p": "Campo de LSSTCam", "v": "9,6 deg², radio 1,75°, 189 CCD 4k×4k, 0,2″/px", "estado": "CONFIRMADO", "f": "Tyson et al. 2020; Jangid et al. 2026", "url": "https://arxiv.org/abs/2006.12417"}, {"id": "R3", "p": "Fotometría de trazas", "v": "D = 8,36 m; PSF 0,67″; desenfoque 206265·D/ρ; ZP por banda; pozo lleno 130.000 e⁻", "estado": "CONFIRMADO", "f": "Jangid et al. 2026, §2.6–2.7", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "R3b", "p": "Cielo oscuro (cenit)", "v": "u 22,99 · g 22,26 · r 21,20 · i 20,48 · z 19,60 · y 18,61 mag/arcsec²", "estado": "CONFIRMADO", "f": "Ivezić et al. 2019, Tabla 2", "url": "https://arxiv.org/abs/0805.2366"}, {"id": "R4", "p": "Exposición", "v": "30 s continuos (opción 2 × 15 s con pausa de 2 s)", "estado": "SUPUESTO", "f": "Baselines de rubin_sim; elección operativa no verificada", "url": ""}, {"id": "R5", "p": "Límite de altura", "v": "Telescopio 15°–86,5°; análisis con alt ≥ 30°", "estado": "SUPUESTO", "f": "Hardware vía Jangid 2026; 30° por convención (Hainaut, Bassa)", "url": ""}, {"id": "M1", "p": "Sombra", "v": "Cilíndrica (por defecto) o cónica con penumbra lineal", "estado": "MODELO", "f": "Diferencia en el borde: 6–30 km (diagnóstico T3)", "url": ""}, {"id": "M2", "p": "Posición del Sol", "v": "Almanaque Astronómico, baja precisión (~0,01°)", "estado": "MODELO", "f": "Validado contra astropy (T2)", "url": ""}, {"id": "M3", "p": "Órbitas sintéticas", "v": "Circulares con J2 secular; sin arrastre, maniobras ni despliegue progresivo", "estado": "MODELO", "f": "Equivalente a Jangid 2026 (estado estacionario idealizado)", "url": ""}, {"id": "M4", "p": "Imagen CCD y pérdida de píxeles", "v": "Máscaras de 20″ (normal), 100″ (saturada) y CCD completo si m < 2", "estado": "MODELO", "f": "Convención de Jangid et al. 2026 §2.7", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "V1", "p": "Tyson et al. 2020", "v": "48k sats a 550 km: ~30 % de imágenes con traza; 40–90 % en crepúsculo", "estado": "CONFIRMADO", "f": "AJ 160, 226", "url": "https://arxiv.org/abs/2006.12417"}, {"id": "V2", "p": "Hainaut & Williams 2020", "v": "1.600 sats a 550 km: 63,5 sobre el horizonte y 6,2 sobre 30°", "estado": "CONFIRMADO", "f": "A&A 636, A121", "url": "https://arxiv.org/abs/2003.01992"}, {"id": "V3", "p": "Bassa et al. 2022", "v": "N_trazas = ρ(A + Lωt); densidad de capa inclinada", "estado": "CONFIRMADO", "f": "A&A 657, A75", "url": "https://arxiv.org/abs/2108.12335"}, {"id": "V4", "p": "Jangid et al. 2026", "v": "Hasta 80 % de apuntados por noche con traza; media anual ~20 %; SSO con RAAN fija (Step1.py)", "estado": "CONFIRMADO", "f": "arXiv:2610.31772 y código público", "url": "https://github.com/njangid2/rubin-odc-simulation-pipeline"}]</script>
+<script type="application/json" id="fuentes">[{"id": "S1", "p": "Autorización Starmind", "v": "Hasta 1.000.000 satélites; 25-nov-2026 (granted-in-part / deferred-in-part)", "estado": "CONFIRMADO", "f": "FCC DA 26-1273", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S2", "p": "Envolvente orbital", "v": "Capas de 50 km entre 500 y 1.002 km; 30° y heliosincrónicas", "estado": "CONFIRMADO", "f": "FCC DA 26-1273", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S3", "p": "Solicitud original", "v": "30-ene-2026; 500–2.000 km; waiver del Schedule S para la configuración de planos", "estado": "CONFIRMADO", "f": "FCC DA 26-113", "url": "https://docs.fcc.gov/public/attachments/DA-26-113A1.pdf"}, {"id": "S4", "p": "6 grupos (altitud / inclinación)", "v": "550–568/26–32° · 565–585/97,7° · 686–718/30° · 707–744/97,2° · 946–978/30° · 967–1.002/99,4°", "estado": "CONFIRMADO", "f": "DA 26-1273 (carta SpaceX 29-may-2026, p. 3)", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S5", "p": "Subcapas y N por subcapa", "v": "114 subcapas; total 1.198.120", "estado": "SECUNDARIA", "f": "McDowell, Enormous Constellations", "url": "https://planet4589.org/space/con/conlist.html"}, {"id": "S6", "p": "Planos × sat/plano", "v": "30 × 333 (capas de 30°); 2 planos por subcapa SSO", "estado": "SECUNDARIA", "f": "McDowell (íd.)", "url": "https://planet4589.org/space/con/conlist.html"}, {"id": "S7", "p": "Reparto hasta el tope de 1M", "v": "Escalado proporcional ×0,83464 en las 114 subcapas, con satélites enteros por plano: 999.996 en total (≤ 1.000.000 autorizado)", "estado": "SUPUESTO", "f": "Neutro; decisión aprobada por el usuario", "url": ""}, {"id": "S8", "p": "Fase en el plano / Walker F", "v": "Uniforme con desfase aleatorio por plano", "estado": "SUPUESTO", "f": "No público: SpaceX pidió no declarar en el Schedule S la configuración de planos (DA 26-113) y la FCC concedió ese waiver (DA 26-1273, cond. 7). Las capas salen de la carta de SpaceX del 29-may-2026, p. 3 (nota 2): es el primer documento a conseguir del ICFS para reemplazar este supuesto", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S9", "p": "LTAN de las SSO", "v": "18:00 y 06:00 (dawn-dusk), RAAN amarrada al Sol", "estado": "SUPUESTO", "f": "SpaceX: SSO para energía solar continua (spacex.com vía Wikipedia)", "url": "https://en.wikipedia.org/wiki/Starmind_(satellite)"}, {"id": "S10", "p": "Inclinación G4 (707–744 km)", "v": "97,2° registrada (SSO exacta 98,2–98,4°: probable errata); LTAN mantenida", "estado": "DERIVADO", "f": "Cálculo J2 (referencia/reference.py)", "url": ""}, {"id": "S11", "p": "Satélite AI1", "v": "Envergadura 75 m; panel 210 kW; radiador 160 m²; 250 kW pico", "estado": "SECUNDARIA", "f": "spacex.com vía Wikipedia; Spaceflight Now 26-nov-2026", "url": "https://en.wikipedia.org/wiki/Starmind_(satellite)"}, {"id": "S12", "p": "AI1 borrador (jun-2026)", "v": "70 m; 150 kW; radiador 110 m² de canto al Sol; 250 W/m²", "estado": "SECUNDARIA", "f": "DCD, 9-jun-2026", "url": "https://www.datacenterdynamics.com/en/news/spacex-details-ai1-satellite-data-center-claims-150kw-peak-compute/"}, {"id": "S13", "p": "Área de paneles", "v": "840 m² (600 m² el borrador)", "estado": "DERIVADO", "f": "S11/S12 con 250 W/m²", "url": ""}, {"id": "S14", "p": "Masa del satélite", "v": "Desconocida (no se usa)", "estado": "NO PÚBLICO", "f": "Probablemente en el Technical Attachment (ICFS inaccesible)", "url": ""}, {"id": "S15", "p": "Vida útil", "v": "Desconocida (la licencia de 15 años no es la vida útil)", "estado": "NO PÚBLICO", "f": "—", "url": ""}, {"id": "S16", "p": "Hitos de despliegue", "v": "1.º antes de 2033 · 10 % 2035 · 50 % 2038 · 100 % 2040 (deslizador «desplegado»)", "estado": "CONFIRMADO", "f": "DA 26-1273, condición 10", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S17", "p": "Disposición final", "v": "<600 km reingreso; >600 km diferido (heliocéntrica/disposición)", "estado": "CONFIRMADO", "f": "DA 26-1273, condición 4", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S19", "p": "Condiciones de astronomía óptica", "v": "Ninguna; basta el compromiso de coordinar con la NSF. El IR térmico se declara fuera de competencia. Peticiones de la AAS, Amazon Kuiper y Viasat denegadas", "estado": "CONFIRMADO", "f": "DA 26-1273, ¶16–17 y ¶20", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S20", "p": "Despliegue inicial", "v": "Pruebas a menor altitud, «bajo otros sistemas operativos» (más abajo que Starlink, reingreso rápido), antes de subir a su capa: población transitoria no modelada", "estado": "CONFIRMADO", "f": "DA 26-1273, ¶12–13", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S21", "p": "Escenario «solo bajo 600 km»", "v": "Solo G1 y G2 (550–585 km) tienen plan de desechos aprobado; las 4 capas superiores requieren una modificación con plan definitivo antes de desplegarse. Opción en la interfaz (N proporcional: 166.800)", "estado": "CONFIRMADO", "f": "DA 26-1273, ¶11 y cond. 4", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S22", "p": "Informes semestrales", "v": "SpaceX debe reportar cada 6 meses acercamientos, maniobras y parámetros orbitales de todo lo desplegado: futura fuente de datos reales", "estado": "CONFIRMADO", "f": "DA 26-1273, cond. 6", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S23", "p": "Consulta a agencias", "v": "La FCC da por cumplida la consulta formal pedida por astrónomos con la coordinación vía NTIA con NASA, NOAA y «organizaciones astronómicas federales»", "estado": "CONFIRMADO", "f": "DA 26-1273, nota 51", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "S24", "p": "Radio y reingreso", "v": "Descarta la objeción del SKA sobre reflexión de radio por falta de respaldo técnico (¶5) y califica de «especulativos» los efectos del reingreso en la atmósfera (¶15)", "estado": "CONFIRMADO", "f": "DA 26-1273, ¶5 y ¶15", "url": "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf"}, {"id": "L1", "p": "Starlink actual", "v": "11.189 objetos (TLE/GP del 26-nov-2026), SGP4", "estado": "CONFIRMADO", "f": "CelesTrak GROUP=starlink", "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=json"}, {"id": "L2", "p": "Gen2: capas autorizadas", "v": "340/53 · 345/48 · 350/38 · 355/43 · 360/96,9 · 365/32 · 475/32 · 480/53 · 485/43; 15.000", "estado": "CONFIRMADO", "f": "FCC DA 26-36 (9-ene-2026)", "url": "https://docs.fcc.gov/public/attachments/DA-26-36A1.pdf"}, {"id": "L3", "p": "Gen2: N por capa", "v": "1.667 por capa; RAAN uniforme (72 o 56 planos; 36 en 360 km)", "estado": "SUPUESTO", "f": "La FCC concede despliegue flexible", "url": ""}, {"id": "L4", "p": "M₁₀₀₀ Starlink por generación", "v": "V1.x 6,34 (antes de 2023-026) · DTC 6,47 · resto (V2 Mini) 7,87", "estado": "SUPUESTO", "f": "Mallama et al. 2023 y 2025", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B1", "p": "V2 Mini en mitigación", "v": "M₁₀₀₀ = 7,87 ± 0,09 (σ 0,79); área 116 m²", "estado": "CONFIRMADO", "f": "Mallama et al. 2023", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B2", "p": "V2 Mini sin mitigar", "v": "M₁₀₀₀ = 5,08 (σ 1,70)", "estado": "CONFIRMADO", "f": "Mallama et al. 2023", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B4", "p": "Función de fase (opcional)", "v": "M₁₀₀₀(φ) = 2,630 + 0,1065 φ − 0,0005167 φ², normalizada a φ = 90°", "estado": "CONFIRMADO", "f": "Mallama et al. 2023, Fig. 5", "url": "https://arxiv.org/abs/2306.06657"}, {"id": "B8", "p": "Starmind M₁₀₀₀", "v": "Optimista 6,0 · central 5,7 · pesimista 2,7 (escalado por área desde la V2 Mini). El central supone mitigación como la V2 Mini; en el expediente no hay compromiso de reducir la reflectividad (Dark Sky, citado en DA 26-1273 nota 52) y la FCC no impone ninguno", "estado": "SUPUESTO", "f": "Derivación en FASE1_FASE2.md §3", "url": ""}, {"id": "B9", "p": "Contraste con BRDF de Jangid 2026", "v": "Pico difuso ~6 mag AB; destellos 2–4 mag; 2,5 % de trazas < 2 mag", "estado": "CONFIRMADO", "f": "Jangid et al. 2026", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "B10", "p": "V → bandas LSST", "v": "Δu +1,43 · g +0,25 · r −0,21 · i −0,32 · z −0,36 · y −0,37", "estado": "CONFIRMADO", "f": "Jangid et al. 2026, Tabla 2", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "B11", "p": "Destellos especulares", "v": "No modelados (modelo difuso); el caso pesimista sirve de cota", "estado": "MODELO", "f": "Limitación declarada", "url": ""}, {"id": "R1", "p": "Sitio Rubin", "v": "−30,2446°, −70,7494°, 2.663 m", "estado": "CONFIRMADO", "f": "Jangid et al. 2026, §2.4", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "R2", "p": "Campo de LSSTCam", "v": "9,6 deg², radio 1,75°, 189 CCD 4k×4k, 0,2″/px", "estado": "CONFIRMADO", "f": "Tyson et al. 2020; Jangid et al. 2026", "url": "https://arxiv.org/abs/2006.12417"}, {"id": "R3", "p": "Fotometría de trazas", "v": "D = 8,36 m; PSF 0,67″; desenfoque 206265·D/ρ; ZP por banda; pozo lleno 130.000 e⁻", "estado": "CONFIRMADO", "f": "Jangid et al. 2026, §2.6–2.7", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "R3b", "p": "Cielo oscuro (cenit)", "v": "u 22,99 · g 22,26 · r 21,20 · i 20,48 · z 19,60 · y 18,61 mag/arcsec²", "estado": "CONFIRMADO", "f": "Ivezić et al. 2019, Tabla 2", "url": "https://arxiv.org/abs/0805.2366"}, {"id": "R4", "p": "Exposición", "v": "30 s continuos (opción 2 × 15 s con pausa de 2 s)", "estado": "SUPUESTO", "f": "Baselines de rubin_sim; elección operativa no verificada", "url": ""}, {"id": "R5", "p": "Límite de altura", "v": "Telescopio 15°–86,5°; análisis con alt ≥ 30°", "estado": "SUPUESTO", "f": "Hardware vía Jangid 2026; 30° por convención (Hainaut, Bassa)", "url": ""}, {"id": "M1", "p": "Sombra", "v": "Cilíndrica (por defecto) o cónica con penumbra lineal", "estado": "MODELO", "f": "Diferencia en el borde: 6–30 km (diagnóstico T3)", "url": ""}, {"id": "M2", "p": "Posición del Sol", "v": "Almanaque Astronómico, baja precisión (~0,01°)", "estado": "MODELO", "f": "Validado contra astropy (T2)", "url": ""}, {"id": "M3", "p": "Órbitas sintéticas", "v": "Circulares con J2 secular; sin arrastre, maniobras ni despliegue progresivo", "estado": "MODELO", "f": "Equivalente a Jangid 2026 (estado estacionario idealizado)", "url": ""}, {"id": "M4", "p": "Imagen CCD y pérdida de píxeles", "v": "Máscaras de 20″ (normal), 100″ (saturada) y CCD completo si m < 2", "estado": "MODELO", "f": "Convención de Jangid et al. 2026 §2.7", "url": "https://arxiv.org/abs/2610.31772"}, {"id": "V1", "p": "Tyson et al. 2020", "v": "48k sats a 550 km: ~30 % de imágenes con traza; 40–90 % en crepúsculo", "estado": "CONFIRMADO", "f": "AJ 160, 226", "url": "https://arxiv.org/abs/2006.12417"}, {"id": "V2", "p": "Hainaut & Williams 2020", "v": "1.600 sats a 550 km: 63,5 sobre el horizonte y 6,2 sobre 30°", "estado": "CONFIRMADO", "f": "A&A 636, A121", "url": "https://arxiv.org/abs/2003.01992"}, {"id": "V3", "p": "Bassa et al. 2022", "v": "N_trazas = ρ(A + Lωt); densidad de capa inclinada", "estado": "CONFIRMADO", "f": "A&A 657, A75", "url": "https://arxiv.org/abs/2108.12335"}, {"id": "V4", "p": "Jangid et al. 2026", "v": "Hasta 80 % de apuntados por noche con traza; media anual ~20 %; SSO con RAAN fija (Step1.py)", "estado": "CONFIRMADO", "f": "arXiv:2610.31772 y código público", "url": "https://github.com/njangid2/rubin-odc-simulation-pipeline"}]</script>
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -34324,11 +34334,11 @@ function rebaseSynth(S, dt) {
 
 // ------------------------------------------------------------------- fuentes
 // Una "fuente" expone: n, on(k), pos(k, ms, F, out)→bool, M(k), name, scen
-function synthSource(S, st) { // st: () => {tRef, deploy, on:[s0,s1,s2], M:[m0,m1,m2]}
+function synthSource(S, st) { // st: () => {tRef, deploy, on:[s0,s1,s2], M:[m0,m1,m2], maxA?: km (solo Starmind)}
   return {
     name: 'synth', S, n: S.n,
     begin() { this._s = st(); },
-    on(k) { const sc = S.misc[2 * k]; const s = this._s; return s.on[sc] && (sc !== 2 || S.misc[2 * k + 1] <= s.deploy); },
+    on(k) { const sc = S.misc[2 * k]; const s = this._s; return s.on[sc] && (sc !== 2 || (S.misc[2 * k + 1] <= s.deploy && S.orb[4 * k] <= (s.maxA ?? Infinity))); },
     scen(k) { return S.misc[2 * k]; },
     M(k) { return this._s.M[S.misc[2 * k]]; },
     pos(k, ms, F, out) {
@@ -34685,13 +34695,15 @@ const MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (na
 const LITE = params.has('lite') || (MOBILE && !params.has('full'));
 
 const state = {
-  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [false, false, true], mode: 'simple',
+  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [false, false, true], low600: false, mode: 'simple',
   Mstar: BRILLO.central, phaseOn: false, conical: false, magLim: 12, godShadow: true, skyShadow: false, coneX: false,
   alt: 60, az: 180, band: 'r', twoSnaps: false, emin: 30,
   groupsStarmind: clone(DEFAULT_STARMIND), groupsGen2: clone(DEFAULT_GEN2), starmindPreset: 'FCC',
   lastExp: null, night: null,
 };
 const Mvec = () => [0, M_GEN2, state.Mstar];
+// «solo bajo 600 km»: únicas capas con plan de desechos aprobado (DA 26-1273 ¶11, cond. 4)
+const maxA = () => state.low600 ? RE + 600 : Infinity;
 
 // --------------------------------------------------------------- Starlink TLE
 function starlinkM(name, l1) {
@@ -34798,7 +34810,7 @@ sceneGod.add(cone);
 
 // --------------------------------------------------------------- shaders de satélites
 const U = {
-  uT: { value: 0 }, uSunRA: { value: 0 }, uConical: { value: 0 }, uDeploy: { value: 1 }, uMagLim: { value: 12 }, uPhaseOn: { value: 0 },
+  uT: { value: 0 }, uSunRA: { value: 0 }, uConical: { value: 0 }, uDeploy: { value: 1 }, uMaxA: { value: 1e9 }, uMagLim: { value: 12 }, uPhaseOn: { value: 0 },
   uShowShadowGod: { value: 1 }, uShowShadowSky: { value: 0 }, uPxGod: { value: 1.6 * DPR }, uPxSky: { value: DPR }, uProbeW: { value: 1 },
   uSun: { value: new THREE.Vector3(1, 0, 0) }, uObs: { value: new THREE.Vector3() }, uE: { value: new THREE.Vector3() }, uN: { value: new THREE.Vector3() }, uU: { value: new THREE.Vector3() },
   uOn: { value: new THREE.Vector3(1, 0, 1) }, uM: { value: new THREE.Vector3(0, M_GEN2, BRILLO.central) },
@@ -34809,7 +34821,7 @@ U.uCol0.value.set(SCEN_COLORS[0]).convertLinearToSRGB(); U.uCol1.value.set(SCEN_
 
 const SAT_VS = `
 #define PI 3.141592653589793
-uniform float uT, uSunRA, uConical, uDeploy, uMagLim, uPhaseOn, uShowShadowGod, uShowShadowSky, uPxGod, uPxSky, uProbeW;
+uniform float uT, uSunRA, uConical, uDeploy, uMaxA, uMagLim, uPhaseOn, uShowShadowGod, uShowShadowSky, uPxGod, uPxSky, uProbeW;
 uniform vec3 uSun, uObs, uE, uN, uU, uOn, uM, uCol0, uCol1, uCol2;
 #if ELEMENTS
 attribute vec4 aOrb; attribute vec4 aRate; attribute vec2 aMisc;
@@ -34847,7 +34859,7 @@ vec3 magColor(float m){
 void main(){
 #if ELEMENTS
   float sc = aMisc.x;
-  bool on = sc < 1.5 ? uOn.y > 0.5 : (uOn.z > 0.5 && aMisc.y <= uDeploy);
+  bool on = sc < 1.5 ? uOn.y > 0.5 : (uOn.z > 0.5 && aMisc.y <= uDeploy && aOrb.x <= uMaxA);
   float M = sc < 1.5 ? uM.y : uM.z; vec3 col = sc < 1.5 ? uCol1 : uCol2;
 #else
   bool on = uOn.x > 0.5; float M = aM; vec3 col = uCol0;
@@ -34906,10 +34918,20 @@ function buildSynthetic() {
   synGod = new THREE.Points(synGeo, matGodE); synSky = new THREE.Points(synGeo, matSkyE);
   synGod.frustumCulled = synSky.frustumCulled = false;
   sceneGod.add(synGod); sceneSky.add(synSky);
-  synSrc = synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [state.on[0], state.on[1], state.on[2], false], M: Mvec() }));
+  synSrc = synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [state.on[0], state.on[1], state.on[2], false], M: Mvec() }));
   let n1 = 0, n2 = 0; for (let k = 0; k < SYN.n; k++) (SYN.misc[2 * k] < 1.5 ? n1++ : n2++);
   $('nS1').textContent = nf(n1); $('nS2').textContent = nf(n2) + (state.starmindPreset !== 'FCC' ? ' · ' + state.starmindPreset : '');
-  $('sN2').textContent = nf(n2); $('sN1').textContent = nf(n1);
+  $('sN1').textContent = nf(n1); updateStarmindCount();
+}
+function updateStarmindCount() {
+  let n = 0; const lim = maxA(); for (let k = 0; k < SYN.n; k++) if (SYN.misc[2 * k] > 1.5 && SYN.orb[4 * k] <= lim) n++;
+  $('sN2').textContent = nf(n); $('nS2').textContent = nf(n) + (state.starmindPreset !== 'FCC' ? ' · ' + state.starmindPreset : '');
+}
+function setLow600(v) {
+  state.low600 = v; statusLast = 0;
+  document.querySelectorAll('[data-layers]').forEach(x => x.classList.toggle('active', (x.dataset.layers === 'low') === v));
+  updateStarmindCount();
+  if (state.mode === 'simple') { scheduleImpact(true); setTimeout(simpleExpose, 60); }
 }
 function maybeRebase() {
   const dt = (state.simMs - state.tRef) / 1000;
@@ -34959,7 +34981,7 @@ function updateUniforms() {
   maybeRebase();
   U.uT.value = (state.simMs - state.tRef) / 1000; U.uSunRA.value = F.sunRA;
   U.uSun.value.set(...F.sun); U.uObs.value.set(...F.obs); U.uE.value.set(...F.E); U.uN.value.set(...F.N); U.uU.value.set(...F.U);
-  U.uOn.value.set(+state.on[0], +state.on[1], +state.on[2]); U.uDeploy.value = state.deploy * state.renderFrac;
+  U.uOn.value.set(+state.on[0], +state.on[1], +state.on[2]); U.uDeploy.value = state.deploy * state.renderFrac; U.uMaxA.value = state.low600 ? RE + 600 : 1e9;
   U.uM.value.set(0, M_GEN2, state.Mstar); U.uConical.value = +state.conical; U.uPhaseOn.value = +state.phaseOn;
   U.uMagLim.value = state.magLim; U.uShowShadowGod.value = +state.godShadow; U.uShowShadowSky.value = +state.skyShadow;
   earth.rotation.y = F.theta;
@@ -35099,8 +35121,8 @@ function classifyTrail(tr, band, texp) {
   if (sp.peak > 5 * sig) return { cls: 'normal', ...sp };
   return { cls: 'debil', ...sp };
 }
-function drawCCD(E) {
-  const cv = $('ccd'), c = cv.getContext('2d'), W = cv.width, sc = W / (2 * 1.78), cx = W / 2, cy = W / 2;
+function drawCCD(E, cv = $('ccd')) {
+  const c = cv.getContext('2d'), W = cv.width, sc = W / (2 * 1.78), cx = W / 2, cy = W / 2;
   const toPx = (xd, yd) => [cx - xd * sc, cy - yd * sc];
   c.fillStyle = '#000'; c.fillRect(0, 0, W, W);
   const rng = mulberry32(77);
@@ -35158,7 +35180,10 @@ function runExposure() {
   const t0 = state.simMs, Fm = frameAt(t0 + 15000), p = altAzToECI(Fm, state.alt, state.az);
   const t = performance.now();
   const res = simulateExposures(enabledSources(), t0, [p], { dt: 0.25, twoSnaps: state.twoSnaps, conical: state.conical, phaseOn: state.phaseOn, keepTracks: true, requireLit: false })[0];
-  const E = { t0, p, trails: res.trails, band: state.band, twoSnaps: state.twoSnaps };
+  // m = M₁₀₀₀ + términos geométricos: cambiar el brillo de Starmind solo desplaza su magnitud
+  const shift = (trs, dM) => trs.map(tr => tr.scen === 2 && tr.mMin !== null ? { ...tr, mMin: tr.mMin + dM } : tr);
+  const simple = state.mode === 'simple';
+  const E = { t0, p, trails: simple ? shift(res.trails, BRILLO.central - state.Mstar) : res.trails, band: state.band, twoSnaps: state.twoSnaps };
   state.lastExp = E;
   const out = drawCCD(E);
   const rd = eciToRadecJ2000(Fm.jd, p), sa = Math.asin(dot(Fm.sun, Fm.U)) * RAD;
@@ -35169,7 +35194,13 @@ function runExposure() {
   lines.push(`Trazas en sombra se cuentan pero no se dibujan. Cálculo: ${nf(performance.now() - t, 0)} ms.`);
   $('expOut').textContent = lines.join('\n');
   let nLit = 0; for (const i of [0, 1, 2]) if (state.on[i] && out.counts[i]) nLit += out.counts[i].lit;
-  $('camTrails').textContent = nf(nLit); $('camLoss').textContent = `${nf(out.loss * 100, 1)} %`;
+  $('camTrails').textContent = nf(nLit);
+  if (simple) {
+    const off = drawCCD.off || (drawCCD.off = Object.assign(document.createElement('canvas'), { width: 760, height: 760 }));
+    const lossP = drawCCD({ ...E, trails: shift(res.trails, BRILLO.pesimista - state.Mstar) }, off).loss;
+    state.lossPair = [out.loss, lossP];
+    $('camLoss').textContent = `${nf(out.loss * 100, 1)}–${nf(lossP * 100, 1)} %`;
+  } else { state.lossPair = null; $('camLoss').textContent = `${nf(out.loss * 100, 1)} %`; }
   $('camWhen').textContent = `Exposición de 30 s · ${horaChile(t0)} · banda ${state.band}`;
 }
 function runStats() {
@@ -35177,7 +35208,7 @@ function runStats() {
   const lines = [`${n} apuntados aleatorios (uniformes en ángulo sólido, alt ≥ ${emin}°), 30 s, trazas iluminadas:`];
   const srcs = [];
   if (state.on[0] && tleSrc) srcs.push([0, tleSrc]);
-  for (const i of [1, 2]) if (state.on[i]) srcs.push([i, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [false, i === 1, i === 2, false], M: Mvec() }))]);
+  for (const i of [1, 2]) if (state.on[i]) srcs.push([i, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [false, i === 1, i === 2, false], M: Mvec() }))]);
   for (const [i, s] of srcs) {
     const st = pointingStats([s], t0, n, emin, { twoSnaps: state.twoSnaps, conical: state.conical }, 7);
     lines.push(`${SCEN_NAMES[i].padEnd(24)} media ${nf(st.mean, 2).padStart(6)} · afectadas ${nf(st.pAny * 100, 1).padStart(5)} % · p50 ${st.p50} · p90 ${st.p90}`);
@@ -35194,8 +35225,8 @@ async function computeNight() {
   if (!win.start || !win.end) { $('nightProg').textContent = 'No hay noche (Sol < −12°) en esta fecha.'; return; }
   const times = []; for (let t = win.start; t <= win.end; t += step) times.push(t);
   const srcs = [[0, tleSource(TLE.recs, TLE.Ms, satellite, () => ({ on: true }))],
-    [1, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [false, true, false, false], M: Mvec() }))],
-    [2, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [false, false, true, false], M: Mvec() }))]];
+    [1, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [false, true, false, false], M: Mvec() }))],
+    [2, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [false, false, true, false], M: Mvec() }))]];
   const series = srcs.map(([i]) => ({ i, lit: [], mean: [], pAny: [] }));
   const sun = times.map(t => sunAlt(t));
   const t0 = performance.now();
@@ -35492,6 +35523,7 @@ function setMode(m) {
   try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
   if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
 }
+document.querySelectorAll('[data-layers]').forEach(x => x.onclick = () => setLow600(x.dataset.layers === 'low'));
 $('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
 $('toExpert').onclick = () => { setMode('expert'); scrollTo(0, 0); };
 $('toSimple').onclick = () => { setMode('simple'); scrollTo(0, 0); };
@@ -35533,7 +35565,8 @@ function simpleExpose() {
   runExposure();
   $('camWhen').textContent = `${userPointed ? 'Campo elegido' : 'Campo típico'} · alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}° · ${horaChile(state.simMs)}`;
   const r = $('skyResult'); r.hidden = false;
-  r.innerHTML = `<span>${userPointed ? 'Campo elegido' : 'Ejemplo típico (mediana de 31 campos al azar)'}: <b>${$('camTrails').textContent} ${$('camTrails').textContent === '1' ? 'traza' : 'trazas'}</b> · ${$('camLoss').textContent} de píxeles perdidos.</span>` +
+  const lp = state.lossPair || [0, 0];
+  r.innerHTML = `<span>${userPointed ? 'Campo elegido' : 'Ejemplo típico (mediana de 31 campos al azar)'}: <b>${$('camTrails').textContent} ${$('camTrails').textContent === '1' ? 'traza' : 'trazas'}</b>. Se pierde el ${nf(lp[0] * 100, 1)} % de la imagen si los satélites se oscurecen como los Starlink actuales, y el ${nf(lp[1] * 100, 1)} % si no se oscurecen.</span>` +
     (matchMedia('(max-width: 800px)').matches ? '<button class="text-button" id="bSeeCam">Ver imagen ↓</button>' : '');
   const b = $('bSeeCam'); if (b) b.onclick = () => $('camCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

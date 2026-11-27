@@ -141,6 +141,10 @@ body[data-mode=expert] #simple,body[data-mode=simple] #expert{display:none}
 .time-ends{display:flex;justify-content:space-between;color:var(--muted-2);font-size:11px;font-family:var(--mono)}
 #sHour{accent-color:var(--cyan);width:100%;height:28px}
 .simple-scen{display:grid;gap:10px}
+.layer-pick{display:grid;gap:6px;margin:0 0 4px 23px}
+.layer-pick .coord-switch{width:fit-content;max-width:100%}
+.coord-switch button{white-space:nowrap}
+.layer-pick .muted{font-size:11px;line-height:1.45}
 .simple-controls .simple-scen label.scenario-row{display:flex;font-size:13px}
 .intro-hint{color:var(--muted);font-size:13px;line-height:1.5;border-top:1px solid var(--line);padding-top:14px}
 .sky-result{color:var(--text-2);display:block}
@@ -376,6 +380,10 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
       <div class="field"><span>Constelaciones en el cielo</span>
         <div class="simple-scen">
           <label class="scenario-row"><input type="checkbox" id="sOn2" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--orange)"></span><span class="scenario-name">Starmind <span class="muted">· autorizada en nov-2026</span></span><span class="scenario-count" id="sN2"></span></label>
+          <div class="layer-pick">
+            <div class="coord-switch"><button class="active" data-layers="all" type="button">Todas sus capas</button><button data-layers="low" type="button">Solo bajo 600 km</button></div>
+            <p class="muted">Por ahora la FCC solo aprobó el plan de retiro de las capas bajo 600 km; las más altas, que quedan iluminadas hasta más tarde, esperan ese plan.</p>
+          </div>
           <label class="scenario-row"><input type="checkbox" id="sOn0"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--blue)"></span><span class="scenario-name">Starlink actual <span class="muted">· en órbita hoy</span></span><span class="scenario-count" id="sN0"></span></label>
           <label class="scenario-row"><input type="checkbox" id="sOn1"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--green)"></span><span class="scenario-name">Starlink Gen2 <span class="muted">· autorizada</span></span><span class="scenario-count" id="sN1"></span></label>
         </div>
@@ -425,6 +433,8 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
         <label class="scenario-row"><input type="checkbox" id="onS0" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--blue)"></span><span class="scenario-name">Starlink actual (TLE)</span><span class="scenario-count" id="nS0"></span></label>
         <label class="scenario-row"><input type="checkbox" id="onS1"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--green)"></span><span class="scenario-name">Starlink Gen2</span><span class="scenario-count" id="nS1"></span></label>
         <label class="scenario-row"><input type="checkbox" id="onS2" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--orange)"></span><span class="scenario-name">Starmind 1M</span><span class="scenario-count" id="nS2"></span></label>
+        <div class="coord-switch"><button class="active" data-layers="all" type="button">6 capas (hasta 1.002 km)</button><button data-layers="low" type="button">Solo &lt; 600 km</button></div>
+        <div class="muted">Solo las capas bajo 600 km tienen plan de desechos aprobado (DA 26-1273 ¶11, cond. 4).</div>
         <div class="range-head"><span>Starmind desplegado</span><strong id="deployLab">100 %</strong></div>
         <input class="range" type="range" id="deploy" min="0" max="100" step="1" value="100">
         <div class="muted">Hitos FCC: 10 % antes de nov-2035 · 50 % antes de nov-2038 · 100 % antes de nov-2040.</div>
@@ -535,7 +545,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
     <div class="square-scene"><canvas id="ccd" width="760" height="760" aria-label="Imagen sintética de LSSTCam"></canvas></div>
     <div class="camera-stats">
       <div><strong id="camTrails">—</strong><span>trazas de satélites iluminados</span></div>
-      <div><strong id="camLoss">—</strong><span>de píxeles perdidos (máscaras)</span></div>
+      <div><strong id="camLoss">—</strong><span class="x-only">de píxeles perdidos (máscaras)</span><span class="s-only">de la imagen perdida (oscurecidos – sin oscurecer)</span></div>
     </div>
   </section>
 </div>

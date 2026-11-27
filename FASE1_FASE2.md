@@ -235,12 +235,38 @@ Contrasté cada fila atribuida a la FCC con el texto completo de la autorizació
 | S1, S2, S4 | Correcto | 1.000.000 satélites, capas de 50 km entre 500 y 1.002 km, 30° y SSO; los 6 grupos coinciden con la nota 2 (carta de SpaceX del 29-may-2026, p. 3) |
 | S3 | Correcto | Solicitud del 30-ene-2026 (Grant, nota 1, y DA 26-113). La nota 1 de la *Order* dice "Jan. 20"; es una inconsistencia interna del documento de la FCC |
 | S7 | **Corregido** | Con satélites enteros por plano, el reparto daba 1.000.124, por encima del máximo autorizado de 1.000.000 (las N por grupo sumaban además 1.000.001). Dejé la N de cada grupo igual al número que realmente genera y recorté G2, G4 y G6 en 40, 44 y 44 satélites (menos de 0,05 % cada uno): el total es ahora 999.996. Efecto en T4c-1: 6.420 → 6.422 iluminados sobre 30° |
-| S8 | Precisado | SpaceX pidió no declarar en el Schedule S la configuración de planos (DA 26-113); la FCC concedió el waiver de 25.114(a)(1) "por limitaciones técnicas del software del Schedule S" (condición 7). La condición 5 exige desplegar según las fichas ITU: ahí estaría el dato de planos y LTAN |
+| S8 | Precisado | SpaceX pidió no declarar en el Schedule S la configuración de planos (DA 26-113); la FCC concedió el waiver de 25.114(a)(1) "por limitaciones técnicas del software del Schedule S" (condición 7). La condición 5 exige desplegar según las fichas ITU, pero la orden **no dice** que el dato de planos y LTAN esté ahí (eso fue una inferencia mía, retirada). La fuente directa es la carta de SpaceX del 29-may-2026, p. 3 (nota 2 de la portada), de donde salen las capas: es el primer documento a conseguir del ICFS |
 | S15, S16, S17 | Correcto | Licencia de 15 años (cond. 11); hitos 25-nov-2033 / 2035 / 2038 / 2040 (cond. 10); disposición sobre 600 km diferida (cond. 4 y ¶11) |
 | S18 | Correcto | La carta del 16-sep-2026 trata del TT&C de respaldo; el riesgo de víctimas está en la del 7-oct-2026 (¶13) |
 | S19 | Correcto, ampliado | Sin condiciones de astronomía óptica (¶16); IR térmico fuera de competencia (¶17); peticiones de la AAS, Amazon Kuiper y Viasat denegadas (¶20) |
 
 Datos nuevos que no cambian los cálculos, pero quedan declarados en el panel de fuentes:
 
-- **S20 · Despliegue de prueba (¶12–13):** SpaceX desplegará primero a menor altitud para probar los satélites antes de subirlos a su capa. Es una población transitoria más baja que el modelo de estado estacionario no incluye.
+- **S20 · Despliegue de prueba (¶12–13):** SpaceX desplegará primero a menor altitud, «bajo otros sistemas operativos» (más abajo que Starlink, donde reentran rápido), para probar los satélites antes de subirlos a su capa. Es una población transitoria que el modelo de estado estacionario no incluye.
+- **S22–S24 · Otros puntos de la orden:** informes semestrales con acercamientos, maniobras y parámetros orbitales de todo lo desplegado (cond. 6), futura fuente de datos reales; la coordinación vía NTIA con NASA, NOAA y «organizaciones astronómicas federales» se da por suficiente como consulta formal (nota 51); se descarta la objeción del SKA sobre reflexión de radio (¶5) y se califican de «especulativos» los efectos del reingreso en la atmósfera (¶15).
+
+### Escenario nuevo: solo las capas bajo 600 km (S21)
+
+La FCC solo aprobó el plan de desechos para los satélites bajo 600 km (¶11, cond. 4); las otras 4 capas requieren una modificación con plan definitivo antes de desplegarse. Hoy solo están plenamente habilitadas G1 y G2 (550–585 km). Agregué ese escenario a la interfaz como filtro por altitud, sin reconstruir la constelación, y con el reparto proporcional de esas capas: 166.800 satélites.
+
+Noche del 26/27-nov-2026, Starmind solo, 200 apuntados al azar sobre 30°, misma semilla:
+
+| Hora (Chile) | Sol | Todas las capas: imágenes con trazas de 10 · trazas medias | Solo bajo 600 km: imágenes de 10 · trazas medias |
+|---|---|---|---|
+| 21:30 | −12,7° | 6,9 · 29,9 | 6,7 · 3,9 |
+| 22:00 | −17,9° | 6,8 · 28,8 | 6,0 · 3,2 |
+| 22:30 | −22,8° | 4,3 · 18,9 | 2,5 · 1,1 |
+| 23:00 | −27,2° | 1,4 · 9,8 | 0,1 · 0,1 |
+| 23:30 | −31,1° | 0,5 · 2,9 | 0,0 · 0,0 |
+| 00:00 | −34,2° | 0,1 · 0,5 | 0,0 · 0,0 |
+| 03:30 | −31,1° | 0,4 · 2,2 | 0,0 · 0,0 |
+| 04:00 | −27,3° | 1,7 · 8,8 | 0,1 · 0,0 |
+| 04:30 | −22,9° | 4,5 · 19,1 | 2,5 · 1,3 |
+| 05:00 | −18,1° | 6,7 · 24,0 | 6,3 · 3,3 |
+
+Lectura: en el crepúsculo, la fracción de imágenes afectadas casi no cambia (6–7 de cada 10), pero las trazas por imagen bajan unas 9 veces. Con solo las capas bajas, el período afectado termina ~1 h antes por la tarde (23:00 contra ~00:00) y empieza ~1 h después por la mañana (04:30 contra ~03:30). Las capas altas son las que mantienen satélites iluminados hasta tarde.
+
+### Cómo comunicar el brillo
+
+En el modo simple, los píxeles perdidos se muestran con dos casos al mismo nivel: «si se oscurecen como los Starlink actuales» (M₁₀₀₀ = 5,7) y «si no se oscurecen» (2,7). No hay base escrita para dar por hecha la mitigación, y no es obvio que las técnicas de la V2 Mini sirvan para paneles de ~75 m. El número de trazas no depende del brillo; las máscaras y la saturación sí.
 - **B8 · Reflectividad (nota 52):** Dark Sky señala que SpaceX no se comprometió a reducir la reflectividad, y la FCC no impone condiciones. El caso central (5,7) supone una mitigación como la de la V2 Mini. Sin esa mitigación, el mismo escalado por área da M₁₀₀₀ ≈ 2,9 sin radiador y 2,7 con radiador (el caso pesimista).

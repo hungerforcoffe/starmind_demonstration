@@ -13,13 +13,15 @@ const MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (na
 const LITE = params.has('lite') || (MOBILE && !params.has('full'));
 
 const state = {
-  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [false, false, true], mode: 'simple',
+  simMs: Date.now(), playing: false, speed: 60, tRef: 0, deploy: 1, renderFrac: LITE ? 0.1 : 1, on: [false, false, true], low600: false, mode: 'simple',
   Mstar: BRILLO.central, phaseOn: false, conical: false, magLim: 12, godShadow: true, skyShadow: false, coneX: false,
   alt: 60, az: 180, band: 'r', twoSnaps: false, emin: 30,
   groupsStarmind: clone(DEFAULT_STARMIND), groupsGen2: clone(DEFAULT_GEN2), starmindPreset: 'FCC',
   lastExp: null, night: null,
 };
 const Mvec = () => [0, M_GEN2, state.Mstar];
+// «solo bajo 600 km»: únicas capas con plan de desechos aprobado (DA 26-1273 ¶11, cond. 4)
+const maxA = () => state.low600 ? RE + 600 : Infinity;
 
 // --------------------------------------------------------------- Starlink TLE
 function starlinkM(name, l1) {
@@ -126,7 +128,7 @@ sceneGod.add(cone);
 
 // --------------------------------------------------------------- shaders de satélites
 const U = {
-  uT: { value: 0 }, uSunRA: { value: 0 }, uConical: { value: 0 }, uDeploy: { value: 1 }, uMagLim: { value: 12 }, uPhaseOn: { value: 0 },
+  uT: { value: 0 }, uSunRA: { value: 0 }, uConical: { value: 0 }, uDeploy: { value: 1 }, uMaxA: { value: 1e9 }, uMagLim: { value: 12 }, uPhaseOn: { value: 0 },
   uShowShadowGod: { value: 1 }, uShowShadowSky: { value: 0 }, uPxGod: { value: 1.6 * DPR }, uPxSky: { value: DPR }, uProbeW: { value: 1 },
   uSun: { value: new THREE.Vector3(1, 0, 0) }, uObs: { value: new THREE.Vector3() }, uE: { value: new THREE.Vector3() }, uN: { value: new THREE.Vector3() }, uU: { value: new THREE.Vector3() },
   uOn: { value: new THREE.Vector3(1, 0, 1) }, uM: { value: new THREE.Vector3(0, M_GEN2, BRILLO.central) },
@@ -137,7 +139,7 @@ U.uCol0.value.set(SCEN_COLORS[0]).convertLinearToSRGB(); U.uCol1.value.set(SCEN_
 
 const SAT_VS = `
 #define PI 3.141592653589793
-uniform float uT, uSunRA, uConical, uDeploy, uMagLim, uPhaseOn, uShowShadowGod, uShowShadowSky, uPxGod, uPxSky, uProbeW;
+uniform float uT, uSunRA, uConical, uDeploy, uMaxA, uMagLim, uPhaseOn, uShowShadowGod, uShowShadowSky, uPxGod, uPxSky, uProbeW;
 uniform vec3 uSun, uObs, uE, uN, uU, uOn, uM, uCol0, uCol1, uCol2;
 #if ELEMENTS
 attribute vec4 aOrb; attribute vec4 aRate; attribute vec2 aMisc;
@@ -175,7 +177,7 @@ vec3 magColor(float m){
 void main(){
 #if ELEMENTS
   float sc = aMisc.x;
-  bool on = sc < 1.5 ? uOn.y > 0.5 : (uOn.z > 0.5 && aMisc.y <= uDeploy);
+  bool on = sc < 1.5 ? uOn.y > 0.5 : (uOn.z > 0.5 && aMisc.y <= uDeploy && aOrb.x <= uMaxA);
   float M = sc < 1.5 ? uM.y : uM.z; vec3 col = sc < 1.5 ? uCol1 : uCol2;
 #else
   bool on = uOn.x > 0.5; float M = aM; vec3 col = uCol0;
@@ -234,10 +236,20 @@ function buildSynthetic() {
   synGod = new THREE.Points(synGeo, matGodE); synSky = new THREE.Points(synGeo, matSkyE);
   synGod.frustumCulled = synSky.frustumCulled = false;
   sceneGod.add(synGod); sceneSky.add(synSky);
-  synSrc = synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [state.on[0], state.on[1], state.on[2], false], M: Mvec() }));
+  synSrc = synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [state.on[0], state.on[1], state.on[2], false], M: Mvec() }));
   let n1 = 0, n2 = 0; for (let k = 0; k < SYN.n; k++) (SYN.misc[2 * k] < 1.5 ? n1++ : n2++);
   $('nS1').textContent = nf(n1); $('nS2').textContent = nf(n2) + (state.starmindPreset !== 'FCC' ? ' · ' + state.starmindPreset : '');
-  $('sN2').textContent = nf(n2); $('sN1').textContent = nf(n1);
+  $('sN1').textContent = nf(n1); updateStarmindCount();
+}
+function updateStarmindCount() {
+  let n = 0; const lim = maxA(); for (let k = 0; k < SYN.n; k++) if (SYN.misc[2 * k] > 1.5 && SYN.orb[4 * k] <= lim) n++;
+  $('sN2').textContent = nf(n); $('nS2').textContent = nf(n) + (state.starmindPreset !== 'FCC' ? ' · ' + state.starmindPreset : '');
+}
+function setLow600(v) {
+  state.low600 = v; statusLast = 0;
+  document.querySelectorAll('[data-layers]').forEach(x => x.classList.toggle('active', (x.dataset.layers === 'low') === v));
+  updateStarmindCount();
+  if (state.mode === 'simple') { scheduleImpact(true); setTimeout(simpleExpose, 60); }
 }
 function maybeRebase() {
   const dt = (state.simMs - state.tRef) / 1000;
@@ -287,7 +299,7 @@ function updateUniforms() {
   maybeRebase();
   U.uT.value = (state.simMs - state.tRef) / 1000; U.uSunRA.value = F.sunRA;
   U.uSun.value.set(...F.sun); U.uObs.value.set(...F.obs); U.uE.value.set(...F.E); U.uN.value.set(...F.N); U.uU.value.set(...F.U);
-  U.uOn.value.set(+state.on[0], +state.on[1], +state.on[2]); U.uDeploy.value = state.deploy * state.renderFrac;
+  U.uOn.value.set(+state.on[0], +state.on[1], +state.on[2]); U.uDeploy.value = state.deploy * state.renderFrac; U.uMaxA.value = state.low600 ? RE + 600 : 1e9;
   U.uM.value.set(0, M_GEN2, state.Mstar); U.uConical.value = +state.conical; U.uPhaseOn.value = +state.phaseOn;
   U.uMagLim.value = state.magLim; U.uShowShadowGod.value = +state.godShadow; U.uShowShadowSky.value = +state.skyShadow;
   earth.rotation.y = F.theta;
@@ -427,8 +439,8 @@ function classifyTrail(tr, band, texp) {
   if (sp.peak > 5 * sig) return { cls: 'normal', ...sp };
   return { cls: 'debil', ...sp };
 }
-function drawCCD(E) {
-  const cv = $('ccd'), c = cv.getContext('2d'), W = cv.width, sc = W / (2 * 1.78), cx = W / 2, cy = W / 2;
+function drawCCD(E, cv = $('ccd')) {
+  const c = cv.getContext('2d'), W = cv.width, sc = W / (2 * 1.78), cx = W / 2, cy = W / 2;
   const toPx = (xd, yd) => [cx - xd * sc, cy - yd * sc];
   c.fillStyle = '#000'; c.fillRect(0, 0, W, W);
   const rng = mulberry32(77);
@@ -486,7 +498,10 @@ function runExposure() {
   const t0 = state.simMs, Fm = frameAt(t0 + 15000), p = altAzToECI(Fm, state.alt, state.az);
   const t = performance.now();
   const res = simulateExposures(enabledSources(), t0, [p], { dt: 0.25, twoSnaps: state.twoSnaps, conical: state.conical, phaseOn: state.phaseOn, keepTracks: true, requireLit: false })[0];
-  const E = { t0, p, trails: res.trails, band: state.band, twoSnaps: state.twoSnaps };
+  // m = M₁₀₀₀ + términos geométricos: cambiar el brillo de Starmind solo desplaza su magnitud
+  const shift = (trs, dM) => trs.map(tr => tr.scen === 2 && tr.mMin !== null ? { ...tr, mMin: tr.mMin + dM } : tr);
+  const simple = state.mode === 'simple';
+  const E = { t0, p, trails: simple ? shift(res.trails, BRILLO.central - state.Mstar) : res.trails, band: state.band, twoSnaps: state.twoSnaps };
   state.lastExp = E;
   const out = drawCCD(E);
   const rd = eciToRadecJ2000(Fm.jd, p), sa = Math.asin(dot(Fm.sun, Fm.U)) * RAD;
@@ -497,7 +512,13 @@ function runExposure() {
   lines.push(`Trazas en sombra se cuentan pero no se dibujan. Cálculo: ${nf(performance.now() - t, 0)} ms.`);
   $('expOut').textContent = lines.join('\n');
   let nLit = 0; for (const i of [0, 1, 2]) if (state.on[i] && out.counts[i]) nLit += out.counts[i].lit;
-  $('camTrails').textContent = nf(nLit); $('camLoss').textContent = `${nf(out.loss * 100, 1)} %`;
+  $('camTrails').textContent = nf(nLit);
+  if (simple) {
+    const off = drawCCD.off || (drawCCD.off = Object.assign(document.createElement('canvas'), { width: 760, height: 760 }));
+    const lossP = drawCCD({ ...E, trails: shift(res.trails, BRILLO.pesimista - state.Mstar) }, off).loss;
+    state.lossPair = [out.loss, lossP];
+    $('camLoss').textContent = `${nf(out.loss * 100, 1)}–${nf(lossP * 100, 1)} %`;
+  } else { state.lossPair = null; $('camLoss').textContent = `${nf(out.loss * 100, 1)} %`; }
   $('camWhen').textContent = `Exposición de 30 s · ${horaChile(t0)} · banda ${state.band}`;
 }
 function runStats() {
@@ -505,7 +526,7 @@ function runStats() {
   const lines = [`${n} apuntados aleatorios (uniformes en ángulo sólido, alt ≥ ${emin}°), 30 s, trazas iluminadas:`];
   const srcs = [];
   if (state.on[0] && tleSrc) srcs.push([0, tleSrc]);
-  for (const i of [1, 2]) if (state.on[i]) srcs.push([i, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [false, i === 1, i === 2, false], M: Mvec() }))]);
+  for (const i of [1, 2]) if (state.on[i]) srcs.push([i, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [false, i === 1, i === 2, false], M: Mvec() }))]);
   for (const [i, s] of srcs) {
     const st = pointingStats([s], t0, n, emin, { twoSnaps: state.twoSnaps, conical: state.conical }, 7);
     lines.push(`${SCEN_NAMES[i].padEnd(24)} media ${nf(st.mean, 2).padStart(6)} · afectadas ${nf(st.pAny * 100, 1).padStart(5)} % · p50 ${st.p50} · p90 ${st.p90}`);
@@ -522,8 +543,8 @@ async function computeNight() {
   if (!win.start || !win.end) { $('nightProg').textContent = 'No hay noche (Sol < −12°) en esta fecha.'; return; }
   const times = []; for (let t = win.start; t <= win.end; t += step) times.push(t);
   const srcs = [[0, tleSource(TLE.recs, TLE.Ms, satellite, () => ({ on: true }))],
-    [1, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [false, true, false, false], M: Mvec() }))],
-    [2, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, on: [false, false, true, false], M: Mvec() }))]];
+    [1, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [false, true, false, false], M: Mvec() }))],
+    [2, synthSource(SYN, () => ({ tRef: state.tRef, deploy: state.deploy, maxA: maxA(), on: [false, false, true, false], M: Mvec() }))]];
   const series = srcs.map(([i]) => ({ i, lit: [], mean: [], pAny: [] }));
   const sun = times.map(t => sunAlt(t));
   const t0 = performance.now();
@@ -820,6 +841,7 @@ function setMode(m) {
   try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
   if (m === 'simple') { syncSimpleScenario(); setupHourSlider(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
 }
+document.querySelectorAll('[data-layers]').forEach(x => x.onclick = () => setLow600(x.dataset.layers === 'low'));
 $('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
 $('toExpert').onclick = () => { setMode('expert'); scrollTo(0, 0); };
 $('toSimple').onclick = () => { setMode('simple'); scrollTo(0, 0); };
@@ -861,7 +883,8 @@ function simpleExpose() {
   runExposure();
   $('camWhen').textContent = `${userPointed ? 'Campo elegido' : 'Campo típico'} · alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}° · ${horaChile(state.simMs)}`;
   const r = $('skyResult'); r.hidden = false;
-  r.innerHTML = `<span>${userPointed ? 'Campo elegido' : 'Ejemplo típico (mediana de 31 campos al azar)'}: <b>${$('camTrails').textContent} ${$('camTrails').textContent === '1' ? 'traza' : 'trazas'}</b> · ${$('camLoss').textContent} de píxeles perdidos.</span>` +
+  const lp = state.lossPair || [0, 0];
+  r.innerHTML = `<span>${userPointed ? 'Campo elegido' : 'Ejemplo típico (mediana de 31 campos al azar)'}: <b>${$('camTrails').textContent} ${$('camTrails').textContent === '1' ? 'traza' : 'trazas'}</b>. Se pierde el ${nf(lp[0] * 100, 1)} % de la imagen si los satélites se oscurecen como los Starlink actuales, y el ${nf(lp[1] * 100, 1)} % si no se oscurecen.</span>` +
     (matchMedia('(max-width: 800px)').matches ? '<button class="text-button" id="bSeeCam">Ver imagen ↓</button>' : '');
   const b = $('bSeeCam'); if (b) b.onclick = () => $('camCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

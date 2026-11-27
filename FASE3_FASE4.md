@@ -69,7 +69,7 @@ Notas:
 
 | Dato | Efecto en los resultados |
 |---|---|
-| LTAN real y número de planos por subcapa SSO (Schedule S / ITU) | Reemplaza el supuesto más influyente. Cambia qué zona del cielo y qué estación son las peores. No lo cuantifiqué; se puede explorar en el editor cambiando la LTAN |
+| LTAN real y número de planos por subcapa SSO (carta de SpaceX del 29-may-2026 en el ICFS; fichas ITU) | Reemplaza el supuesto más influyente. Cambia qué zona del cielo y qué estación son las peores. No lo cuantifiqué; se puede explorar en el editor cambiando la LTAN |
 | Reparto real de los 1.000.000 por capa | ±10 % en los conteos; más si se concentran en 946–1.002 km, que permanecen iluminados más tiempo |
 | Fotometría del primer AI1 en órbita (Q3-2027 según Musk), o un BRDF del fabricante | Reduce el rango de M₁₀₀₀ de ~3 mag a ~0,5 mag y define la fracción de trazas saturadas |
 | Política de orientación de paneles (¿se pueden poner de canto cerca del terminador?) | Decide entre los casos central y pesimista: una diferencia de ~3 mag, o un factor ~15 en flujo |

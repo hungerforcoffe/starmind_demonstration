@@ -201,11 +201,11 @@ export function rebaseSynth(S, dt) {
 
 // ------------------------------------------------------------------- fuentes
 // Una "fuente" expone: n, on(k), pos(k, ms, F, out)→bool, M(k), name, scen
-export function synthSource(S, st) { // st: () => {tRef, deploy, on:[s0,s1,s2], M:[m0,m1,m2]}
+export function synthSource(S, st) { // st: () => {tRef, deploy, on:[s0,s1,s2], M:[m0,m1,m2], maxA?: km (solo Starmind)}
   return {
     name: 'synth', S, n: S.n,
     begin() { this._s = st(); },
-    on(k) { const sc = S.misc[2 * k]; const s = this._s; return s.on[sc] && (sc !== 2 || S.misc[2 * k + 1] <= s.deploy); },
+    on(k) { const sc = S.misc[2 * k]; const s = this._s; return s.on[sc] && (sc !== 2 || (S.misc[2 * k + 1] <= s.deploy && S.orb[4 * k] <= (s.maxA ?? Infinity))); },
     scen(k) { return S.misc[2 * k]; },
     M(k) { return this._s.M[S.misc[2 * k]]; },
     pos(k, ms, F, out) {
