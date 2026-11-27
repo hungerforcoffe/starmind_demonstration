@@ -394,6 +394,12 @@ function drawSkyOverlay() {
       c.stroke();
     }
   }
+  if (state.mode === 'simple' && skyHover && Math.hypot(skyHover[0] - cx, skyHover[1] - cy) < R) {
+    const [hx, hy] = skyHover, hr = Math.max(7 * DPR, R * 1.75 / 90);
+    c.save(); c.setLineDash([4 * DPR, 3 * DPR]); c.strokeStyle = 'rgba(130,215,232,0.95)'; c.lineWidth = 1.5 * DPR; c.beginPath(); c.arc(hx, hy, hr, 0, TWO_PI); c.stroke(); c.restore();
+    c.fillStyle = 'rgba(130,215,232,0.95)'; c.font = `500 ${12 * DPR}px 'DM Sans', system-ui`; c.textAlign = hx > W * 0.7 ? 'right' : 'left';
+    c.fillText('Exponer aquí', hx + (hx > W * 0.7 ? -1 : 1) * (hr + 6 * DPR), hy + 4 * DPR); c.textAlign = 'left';
+  }
   // apuntado + campo
   const [px, py] = toXY(state.alt, state.az), rf = Math.max(5 * DPR, R * 1.75 / 90);
   c.strokeStyle = '#ffffff'; c.lineWidth = 1.5 * DPR; c.beginPath(); c.arc(px, py, rf, 0, TWO_PI); c.stroke();
@@ -813,7 +819,7 @@ function setMode(m) {
   }
   $('mSimple').classList.toggle('active', m === 'simple'); $('mExpert').classList.toggle('active', m === 'expert');
   try { localStorage.setItem('modo', m); } catch (e) { /* sin almacenamiento */ }
-  if (m === 'simple') { syncSimpleScenario(); scheduleImpact(); } else { statusLast = 0; drawChart(); }
+  if (m === 'simple') { syncSimpleScenario(); scheduleImpact(); if (!state.lastExp) setTimeout(simpleExpose, 300); } else { statusLast = 0; drawChart(); }
 }
 $('mSimple').onclick = () => setMode('simple'); $('mExpert').onclick = () => setMode('expert');
 $('toExpert').onclick = () => { setMode('expert'); scrollTo(0, 0); };
@@ -822,7 +828,7 @@ $('toSimple').onclick = () => { setMode('simple'); scrollTo(0, 0); };
 // escenario del modo simple ↔ casillas del modo científico
 const SIMPLE_ON = { starmind: [true, false, true], actual: [true, false, false], gen2: [true, true, false] };
 function syncSimpleScenario() { $('sScen').value = state.on[2] ? 'starmind' : state.on[1] ? 'gen2' : 'actual'; }
-$('sScen').onchange = e => { state.on = [...SIMPLE_ON[e.target.value]]; syncInputs(); updateTLEPositions(true); statusLast = 0; scheduleImpact(true); };
+$('sScen').onchange = e => { state.on = [...SIMPLE_ON[e.target.value]]; syncInputs(); updateTLEPositions(true); statusLast = 0; scheduleImpact(true); setTimeout(simpleExpose, 60); };
 
 // momentos de la noche (la misma noche que contiene la hora simulada)
 function momentTime(k) {
@@ -830,20 +836,47 @@ function momentTime(k) {
   if (k === 'mid') return solarMidnight(state.simMs).ms;
   return nightWindow(state.simMs, -18).end; // inicio del crepúsculo astronómico matutino
 }
-document.querySelectorAll('[data-moment]').forEach(b => b.onclick = () => { const t = momentTime(b.dataset.moment); if (t) { setTime(t, b.dataset.moment); scheduleImpact(true); } });
-// Si la persona no eligió un punto en el cielo, cada exposición apunta a un campo al azar sobre 30°
-// (la misma distribución que la estadística del impacto): el resultado es representativo, no elegido a mano.
-let userPointed = false;
-$('sExpose').onclick = () => {
-  $('camTrails').textContent = '…';
-  setTimeout(() => {
-    if (!userPointed) { const v = randomPointings(frameAt(state.simMs + 15000), 1, 30, Math.random)[0], aa = eciToAltAz(frameAt(state.simMs + 15000), v); state.alt = aa.alt; state.az = aa.az; }
-    runExposure();
-    $('camWhen').textContent = `${userPointed ? 'Campo elegido' : 'Campo al azar'} · alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}° · ${horaChile(state.simMs)}`;
-    if (matchMedia('(max-width: 800px)').matches) $('camCard').scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-  }, 20);
-};
-skyov.addEventListener('click', () => { if (state.mode === 'simple') { userPointed = true; $('camWhen').textContent = `Campo elegido: alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}°`; } });
+document.querySelectorAll('[data-moment]').forEach(b => b.onclick = () => { const t = momentTime(b.dataset.moment); if (t) { setTime(t, b.dataset.moment); scheduleImpact(true); setTimeout(() => { updateUniforms(); simpleExpose(); }, 60); } });
+// En el modo simple, tocar el cielo ES la exposición (no hay botón): el resultado aparece en la tarjeta de
+// LSSTCam y se resume bajo el cielo. Al entrar se expone un campo al azar sobre 30° para que la imagen no parta vacía.
+let userPointed = false, skyHover = null;
+function simpleExpose() {
+  if (!userPointed) { // campo típico: de 31 campos al azar sobre 30°, el de la mediana de trazas (ni el peor ni el mejor)
+    const Fx = frameAt(state.simMs + 15000), P = randomPointings(Fx, 31, 30, Math.random);
+    const n = simulateExposures(enabledSources(), state.simMs, P, { dt: 1.0, conical: state.conical }).map((r, i) => [r.trails.filter(t => t.lit).length, i]).sort((x, y) => x[0] - y[0]);
+    const aa = eciToAltAz(Fx, P[n[15][1]]); state.alt = aa.alt; state.az = aa.az;
+  }
+  runExposure();
+  $('camWhen').textContent = `${userPointed ? 'Campo elegido' : 'Campo típico'} · alt ${nf(state.alt, 0)}°, az ${nf(state.az, 0)}° · ${horaChile(state.simMs)}`;
+  const r = $('skyResult'); r.hidden = false;
+  r.innerHTML = `<span>${userPointed ? 'Campo elegido' : 'Ejemplo típico (mediana de 31 campos al azar)'}: <b>${$('camTrails').textContent} ${$('camTrails').textContent === '1' ? 'traza' : 'trazas'}</b> · ${$('camLoss').textContent} de píxeles perdidos.</span>` +
+    (matchMedia('(max-width: 800px)').matches ? '<button class="text-button" id="bSeeCam">Ver imagen ↓</button>' : '');
+  const b = $('bSeeCam'); if (b) b.onclick = () => $('camCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+skyov.addEventListener('click', () => { if (state.mode !== 'simple') return; userPointed = true; $('camTrails').textContent = '…'; setTimeout(simpleExpose, 10); });
+skyov.addEventListener('mousemove', ev => { const r = skyov.getBoundingClientRect(); skyHover = [(ev.clientX - r.left) * DPR, (ev.clientY - r.top) * DPR]; });
+skyov.addEventListener('mouseleave', () => { skyHover = null; });
+
+// perfil de la noche: % de imágenes con trazas en crepúsculo, medianoche y amanecer (misma K y semilla que el impacto)
+const PROF = [['twi', 'Crepúsculo'], ['mid', 'Medianoche'], ['dawn', 'Amanecer']];
+let profKey = '', profVals = {};
+function drawProfile() {
+  $('profRows').innerHTML = PROF.map(([k, lab]) => { const v = profVals[k];
+    return `<div class="prof-row${state.moment === k ? ' cur' : ''}"><span><b>${lab}</b> ${v ? horaChile(v.t) : ''}</span><div class="prof-bar"><span style="width:${v ? Math.min(100, v.p * 100).toFixed(1) : 0}%"></span></div><span class="prof-pct">${v ? nf(v.p * 100, 0) + ' %' : '…'}</span></div>`; }).join('');
+}
+function computeProfile() {
+  const key = [nightWindow(state.simMs, -0.833).start, state.on.join(), state.conical, state.deploy, state.starmindPreset].join('|');
+  if (key === profKey) { drawProfile(); return; }
+  profKey = key; profVals = {}; drawProfile();
+  let i = 0;
+  const step = () => {
+    if (profKey !== key || i >= PROF.length) return;
+    const [k] = PROF[i++], t = momentTime(k);
+    if (t) profVals[k] = { t, p: pointingStats(enabledSources(), t, 200, 30, { twoSnaps: false, conical: state.conical }, 11).pAny };
+    drawProfile(); setTimeout(step, 20);
+  };
+  setTimeout(step, 20);
+}
 
 // impacto real: apuntados al azar sobre 30° con la constelación completa (no con lo dibujado)
 let impactMs = NaN, impactBusy = false, impactTimer = 0;
@@ -865,6 +898,7 @@ function computeImpact() {
     $('impBar').style.width = `${Math.min(100, pct).toFixed(1)}%`; $('impPct').textContent = `${nf(pct, 0)} %`;
     $('impNote').textContent = `${K} apuntados al azar, escenario «${$('sScen').selectedOptions[0].textContent}». Cuenta satélites iluminados que cruzan el campo de LSSTCam; el brillo supuesto (M₁₀₀₀ ${nf(state.Mstar, 1)}) solo cambia cuántos saturan.`;
     impactBusy = false;
+    computeProfile();
   }, 30);
 }
 
