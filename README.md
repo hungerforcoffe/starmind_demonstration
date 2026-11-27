@@ -2,7 +2,7 @@
 
 Prototipo visual para estudiar el impacto de la megaconstelación **Starmind** de SpaceX (hasta 1.000.000 de satélites de cómputo orbital, autorizada por la FCC el 25-nov-2026, DA 26-1273) sobre el **Observatorio Vera C. Rubin** (Cerro Pachón).
 
-**Abrir el simulador:** https://REPO_URL/
+**Abrir el simulador:** https://hungerforcoffe.github.io/starmind_demonstration/
 
 ## Qué hace
 
@@ -32,7 +32,7 @@ Para regenerar el HTML tras editar las fuentes:
 
 ```
 cd desarrollo
-python build.py ../index.html
+python build.py
 node test_core.mjs
 ```
 
