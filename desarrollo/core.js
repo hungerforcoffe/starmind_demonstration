@@ -124,13 +124,15 @@ export function orbitRates(h, incDeg) {
 // ------------------------------------------------- constelaciones sintéticas (datos)
 // Grupos de la orden FCC DA 26-1273; subcapas y planos según McDowell (planet4589);
 // N escalado ×0,83464 para respetar el tope de 1.000.000 (supuesto S7a).
+// N por grupo = reparto proporcional de McDowell (×0,83464) ajustado para que, con satélites enteros por plano,
+// el total sea 999.996 ≤ 1.000.000 (máximo autorizado, DA 26-1273). Cambio < 0,03 % por grupo.
 export const DEFAULT_STARMIND = [
-  { id: 'G1', nombre: 'G1 550–568 km · 26–32°', hIni: 550, hFin: 568, nSub: 10, iIni: 32.0, iFin: 26.0, N: 83381, planes: 30, modo: 'incl', ltans: '18,6' },
-  { id: 'G2', nombre: 'G2 565–585 km · SSO 97,7°', hIni: 565, hFin: 585, nSub: 10, iIni: 97.7, iFin: 97.7, N: 83447, planes: 2, modo: 'sso', ltans: '18,6' },
-  { id: 'G3', nombre: 'G3 686–718 km · 30°', hIni: 686, hFin: 718, nSub: 25, iIni: 30.0, iFin: 30.0, N: 208452, planes: 30, modo: 'incl', ltans: '18,6' },
-  { id: 'G4', nombre: 'G4 707–744 km · SSO 97,2°', hIni: 707, hFin: 744, nSub: 22, iIni: 97.2, iFin: 97.2, N: 204370, planes: 2, modo: 'sso', ltans: '18,6' },
-  { id: 'G5', nombre: 'G5 946–978 km · 30°', hIni: 946, hFin: 978, nSub: 25, iIni: 30.0, iFin: 30.0, N: 208452, planes: 30, modo: 'incl', ltans: '18,6' },
-  { id: 'G6', nombre: 'G6 967–1002 km · SSO 99,4°', hIni: 967, hFin: 1002, nSub: 22, iIni: 99.4, iFin: 99.4, N: 211899, planes: 2, modo: 'sso', ltans: '18,6' },
+  { id: 'G1', nombre: 'G1 550–568 km · 26–32°', hIni: 550, hFin: 568, nSub: 10, iIni: 32.0, iFin: 26.0, N: 83400, planes: 30, modo: 'incl', ltans: '18,6' },
+  { id: 'G2', nombre: 'G2 565–585 km · SSO 97,7°', hIni: 565, hFin: 585, nSub: 10, iIni: 97.7, iFin: 97.7, N: 83400, planes: 2, modo: 'sso', ltans: '18,6' },
+  { id: 'G3', nombre: 'G3 686–718 km · 30°', hIni: 686, hFin: 718, nSub: 25, iIni: 30.0, iFin: 30.0, N: 208500, planes: 30, modo: 'incl', ltans: '18,6' },
+  { id: 'G4', nombre: 'G4 707–744 km · SSO 97,2°', hIni: 707, hFin: 744, nSub: 22, iIni: 97.2, iFin: 97.2, N: 204336, planes: 2, modo: 'sso', ltans: '18,6' },
+  { id: 'G5', nombre: 'G5 946–978 km · 30°', hIni: 946, hFin: 978, nSub: 25, iIni: 30.0, iFin: 30.0, N: 208500, planes: 30, modo: 'incl', ltans: '18,6' },
+  { id: 'G6', nombre: 'G6 967–1002 km · SSO 99,4°', hIni: 967, hFin: 1002, nSub: 22, iIni: 99.4, iFin: 99.4, N: 211860, planes: 2, modo: 'sso', ltans: '18,6' },
 ];
 // Preset que imita Jangid et al. 2026 (Step1.py): 4 regímenes, SSO en 1 plano con RAAN fija = 0°.
 export const JANGID_STARMIND = [

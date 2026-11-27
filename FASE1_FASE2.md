@@ -223,3 +223,24 @@ Lectura física: desde Rubin, **la altura de la sombra sobre el cenit a medianoc
 4. **Starlink actual:** TLE reales con SGP4 (snapshot embebido más actualización en vivo). M₁₀₀₀ por generación según la fecha de lanzamiento y el sufijo [DTC].
 5. **Gen2 autorizado:** 15.000 repartidos en partes iguales entre las 9 capas nuevas (sintético, editable).
 6. **Rubin:** exposición de 30 s continuos, FOV con radio de 1,75° y corte de análisis en alt ≥ 30°.
+
+---
+
+## Revisión con el texto completo de FCC DA 26-1273 (26-nov-2026)
+
+Contrasté cada fila atribuida a la FCC con el texto completo de la autorización y de DA 26-113.
+
+| Fila | Resultado | Detalle |
+|---|---|---|
+| S1, S2, S4 | Correcto | 1.000.000 satélites, capas de 50 km entre 500 y 1.002 km, 30° y SSO; los 6 grupos coinciden con la nota 2 (carta de SpaceX del 29-may-2026, p. 3) |
+| S3 | Correcto | Solicitud del 30-ene-2026 (Grant, nota 1, y DA 26-113). La nota 1 de la *Order* dice "Jan. 20"; es una inconsistencia interna del documento de la FCC |
+| S7 | **Corregido** | Con satélites enteros por plano, el reparto daba 1.000.124, por encima del máximo autorizado de 1.000.000 (las N por grupo sumaban además 1.000.001). Dejé la N de cada grupo igual al número que realmente genera y recorté G2, G4 y G6 en 40, 44 y 44 satélites (menos de 0,05 % cada uno): el total es ahora 999.996. Efecto en T4c-1: 6.420 → 6.422 iluminados sobre 30° |
+| S8 | Precisado | SpaceX pidió no declarar en el Schedule S la configuración de planos (DA 26-113); la FCC concedió el waiver de 25.114(a)(1) "por limitaciones técnicas del software del Schedule S" (condición 7). La condición 5 exige desplegar según las fichas ITU: ahí estaría el dato de planos y LTAN |
+| S15, S16, S17 | Correcto | Licencia de 15 años (cond. 11); hitos 25-nov-2033 / 2035 / 2038 / 2040 (cond. 10); disposición sobre 600 km diferida (cond. 4 y ¶11) |
+| S18 | Correcto | La carta del 16-sep-2026 trata del TT&C de respaldo; el riesgo de víctimas está en la del 7-oct-2026 (¶13) |
+| S19 | Correcto, ampliado | Sin condiciones de astronomía óptica (¶16); IR térmico fuera de competencia (¶17); peticiones de la AAS, Amazon Kuiper y Viasat denegadas (¶20) |
+
+Datos nuevos que no cambian los cálculos, pero quedan declarados en el panel de fuentes:
+
+- **S20 · Despliegue de prueba (¶12–13):** SpaceX desplegará primero a menor altitud para probar los satélites antes de subirlos a su capa. Es una población transitoria más baja que el modelo de estado estacionario no incluye.
+- **B8 · Reflectividad (nota 52):** Dark Sky señala que SpaceX no se comprometió a reducir la reflectividad, y la FCC no impone condiciones. El caso central (5,7) supone una mitigación como la de la V2 Mini. Sin esa mitigación, el mismo escalado por área da M₁₀₀₀ ≈ 2,9 sin radiador y 2,7 con radiador (el caso pesimista).
