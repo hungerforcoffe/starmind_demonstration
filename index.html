@@ -76,6 +76,8 @@ a{color:#8cb8f2}
   #right{border-left:none}
   #tabs{min-height:380px}
   header .fps{margin-left:0}
+  #chart{height:300px}
+  #tip{white-space:normal;max-width:calc(100% - 8px)}
 }
 </style>
 <script type="importmap">
@@ -34856,19 +34858,26 @@ function drawChart(hoverIdx = -1) {
   chart.width = W * DPR; chart.height = H * DPR;
   const c = chart.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0); c.clearRect(0, 0, W, H);
   c.font = '12px system-ui'; c.fillStyle = '#8d8c84';
-  if (!N) { c.fillText('Pulsa «Calcular noche actual» (Sol < −12°): satélites iluminados sobre 30° y trazas por exposición de 30 s para cada escenario.', 10, 24); return; }
-  const L = 64, R = 150, T = 24, gap = 22, ph = (H - T - 26 - gap) / 2, x0 = N.times[0], x1 = N.times[N.times.length - 1];
+  if (!N) { wrapText(c, 'Pulsa «Calcular noche actual» (Sol < −12°): satélites iluminados sobre 30° y trazas por exposición de 30 s para cada escenario.', 10, 24, W - 20, 17); return; }
+  const narrow = W < 600;
+  // leyenda en una o varias filas según el ancho disponible
+  const leg = [...N.series.map(s => ({ name: SCEN_NAMES[s.i], color: SCEN_COLORS[s.i] })), { name: 'crepúsculo (Sol > −18°)', twi: true }];
+  let lx = narrow ? 10 : 64, ly = 9; const lx0 = lx;
+  for (const it of leg) { const w = c.measureText(it.name).width + 18; if (lx + w > W - 6 && lx > lx0) { lx = lx0; ly += 16; } it.x = lx; it.y = ly; lx += w + 16; }
+  const L = narrow ? 44 : 64, R = narrow ? 64 : 150, T = ly + 15, gap = 22, ph = (H - T - 26 - gap) / 2, x0 = N.times[0], x1 = N.times[N.times.length - 1];
   const X = t => L + (t - x0) / (x1 - x0) * (W - L - R);
-  const panels = [{ key: 'lit', title: 'Iluminados sobre 30°', y: T }, { key: 'mean', title: 'Trazas por exposición de 30 s (media)', y: T + ph + gap }];
+  const panels = [{ key: 'lit', title: 'Iluminados sobre 30°', short: 'Iluminados > 30°', y: T }, { key: 'mean', title: 'Trazas por exposición de 30 s (media)', short: 'Trazas / exp. 30 s', y: T + ph + gap }];
   chartGeom = { X, L, R, W, panels, ph };
   // sombreado del crepúsculo (Sol entre −12° y −18°)
   for (const P of panels) {
     for (let j = 0; j + 1 < N.times.length; j++) if (N.sun[j] > -18) { c.fillStyle = 'rgba(144,133,233,0.10)'; c.fillRect(X(N.times[j]), P.y, X(N.times[j + 1]) - X(N.times[j]) + 0.5, ph); }
   }
   // leyenda
-  let lx = L; c.textBaseline = 'middle';
-  for (const s of N.series) { c.fillStyle = SCEN_COLORS[s.i]; c.fillRect(lx, 8, 14, 3); c.fillStyle = '#c3c2b7'; c.fillText(SCEN_NAMES[s.i], lx + 18, 9); lx += c.measureText(SCEN_NAMES[s.i]).width + 34; }
-  c.fillStyle = 'rgba(144,133,233,0.35)'; c.fillRect(lx, 4, 12, 10); c.fillStyle = '#c3c2b7'; c.fillText('crepúsculo (Sol > −18°)', lx + 16, 9);
+  c.textBaseline = 'middle';
+  for (const it of leg) {
+    if (it.twi) { c.fillStyle = 'rgba(144,133,233,0.35)'; c.fillRect(it.x, it.y - 5, 12, 10); } else { c.fillStyle = it.color; c.fillRect(it.x, it.y - 1, 14, 3); }
+    c.fillStyle = '#c3c2b7'; c.fillText(it.name, it.x + 18, it.y);
+  }
   const logY = $('logY').checked;
   for (const P of panels) {
     let ymax = 0, ypos = Infinity; for (const s of N.series) for (const v of s[P.key]) { ymax = Math.max(ymax, v); if (v > 0) ypos = Math.min(ypos, v); }
@@ -34885,7 +34894,7 @@ function drawChart(hoverIdx = -1) {
     P.Y = Y;
     c.strokeStyle = '#2d2d2b'; c.lineWidth = 1; c.fillStyle = '#8d8c84'; c.textAlign = 'right';
     for (const v of ticks) { const y = Y(v); c.beginPath(); c.moveTo(L, y); c.lineTo(W - R, y); c.stroke(); c.fillText(nf(v, v < 0.1 ? 2 : v < 1 ? 1 : 0), L - 6, y); }
-    c.textAlign = 'left'; c.fillStyle = '#c3c2b7'; c.fillText(P.title + (logY ? ' · log (0 se dibuja en el piso)' : ''), L + 4, P.y + 8);
+    c.textAlign = 'left'; c.fillStyle = '#c3c2b7'; c.fillText(narrow ? P.short + (logY ? ' · log' : '') : P.title + (logY ? ' · log (0 se dibuja en el piso)' : ''), L + 4, P.y + 8);
     const labels = [];
     for (const s of N.series) {
       c.strokeStyle = SCEN_COLORS[s.i]; c.lineWidth = 2; c.lineJoin = 'round'; c.beginPath();
@@ -34907,6 +34916,11 @@ function drawChart(hoverIdx = -1) {
     for (const P of panels) for (const s of N.series) { const y = P.Y(s[P.key][hoverIdx]); c.fillStyle = SCEN_COLORS[s.i]; c.strokeStyle = '#1a1a19'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, 4, 0, TWO_PI); c.fill(); c.stroke(); }
   }
 }
+function wrapText(c, text, x, y, maxW, lh) { // texto con saltos de línea dentro de un canvas
+  let line = '';
+  for (const w of text.split(' ')) { const t = line ? line + ' ' + w : w; if (c.measureText(t).width > maxW && line) { c.fillText(line, x, y); line = w; y += lh; } else line = t; }
+  if (line) c.fillText(line, x, y);
+}
 function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v))), f = v / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p; }
 chart.addEventListener('mousemove', ev => {
   const N = state.night; if (!N || !chartGeom) return;
@@ -34917,7 +34931,7 @@ chart.addEventListener('mousemove', ev => {
   tip.innerHTML = `<b>${new Date(N.times[best] + off).toISOString().slice(11, 16)}</b> Chile · Sol ${nf(N.sun[best], 1)}°<br>` +
     N.series.map(s => `<span class="sw" style="background:${SCEN_COLORS[s.i]}"></span>${SCEN_NAMES[s.i]}: ${nf(s.lit[best])} ilum. >30° · ${nf(s.mean[best], 2)} trazas · ${nf(s.pAny[best] * 100, 0)} % afectadas`).join('<br>');
   tip.style.display = 'block';
-  const tx = Math.min(x + 14, r.width - tip.offsetWidth - 4); tip.style.left = tx + 'px'; tip.style.top = '30px';
+  const tx = Math.max(4, Math.min(x + 14, r.width - tip.offsetWidth - 4)); tip.style.left = tx + 'px'; tip.style.top = '30px';
 });
 chart.addEventListener('mouseleave', () => { tip.style.display = 'none'; if (state.night) drawChart(); });
 function fillNightTable() {
