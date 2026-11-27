@@ -1,0 +1,1904 @@
+                           Federal Communications Commission                  DA  26-36
+
+                                       Before the
+                           Federal Communications Commission
+                                 Washington, D.C. 20554
+
+
+ In the Matter of                           )     ICFS File Nos.:
+
+ Space Exploration Holdings, LLC            )     SAT-LOA-20200526-00055
+                                            )     SAT-AMD-20210818-00105
+ Request for Deployment and Operating Authority ) SAT-AMD-2022l216-00175
+ for the SpaceX Gen2 NGSO Satellite System  )     SAT-AMD-2024l017-00228
+                                            )     Call Sign: S2992!3069
+
+
+ Application for Authority for Modification of the ) SAT-MOD-2024101 1-00224
+ SpaceX NGSO  Satellite System              )     Call Sign: S2992/3069
+
+
+                            AUTHORIZATION     AND  ORDER
+
+Adopted: January 9, 2026                                        Released: January 9, 2026
+
+By the Chief, Space Bureau:
+                               Federal Communications   Commission                       DA  26-36
+
+                                             GRANT
+                                  Space Exploration Holdings, LLC
+ ICFS File Nos. SAT-LOA-20200526-00055,    SAT-AMD-202   10818-00105, SAT-AMD-2022    1216-00175,
+                      SAT-AMD-2024    1017-00228, SAT-MOD-2024    1011-00224
+
+  ICFS  File No(s):       SAT-LOA-20200526-00055,    SAT-AMD-202    10818-       GRANTED-IN-PART       /
+                          00105, SAT-AMD-2022    1216-00175, SAT-AMD            DEFERRED-IN-PART        -
+                          20241017-00228, SAT-MOD-2024101     1-00224’              With  ( uiiditioiis
+  Licensee/Grantee:       Space Exploration Holdings, LLC (SpaceX)
+  Call Sign:              S2992/3069
+  Satellite Name:         SpaceX second-generation Starlink Constellation
+                          (Gen2 Starlink)
+  Orbital Location:       Non-Geostationary Satellite Orbit (NGSO)
+                                                                                      Spic
+                          15,000 satellites operating in the following orbital              Bureau
+                          shells:2
+                          340 km, 53 degree inclination
+                          345 krn, 48 degree inclination
+                          350 krn, 38 degree inclination
+                          355 km, 43 degree inclination
+                          360 km, 96.9 degree inclination
+                          365 km, 28 or 32 degree inclination3
+                          475 km, 28 or 32 degree inclination4
+                          480 km, 53 degree inclination
+                          485 krn, 43 degree inclination
+
+                          Continued operations in the following shells:5
+                          525 km, 53 degree inclination
+
+ ‘See Space Exploration Holdings, LLC. Application for Modification of Authorization for the SpaceX Gen2 NGSO
+ Satellite System. ICFS File No. SAT-MOD-2024 101 1-00224 (SpaceX Gen2 Upgrade Modification): Space
+ Exploration Holdings, LLC, Application for Amendment of Application for the SpaceX Gen2 NGSO Satellite
+ System, ICFS File No. SAT-AMD-20241017-00228 (SpaceX Gen2 Upgrade Amendment). SpaceX’s modification
+ and amendment applications, ICFS File Nos. SAT-MOD-20240l 11-00224 and SAT-AMD-202410l7-00228, were
+ placed on Public Notice on February 7, 2025. See Satellite Licensing Division and Satellite Programs and Policy
+ Division Information, Space Station Applications Acceptedfor Filing. Public Notice. Report No. SAT-0 1892 (Feb.
+7. 2025). A number of satellite companies, industry groups, and members of the public filed petitions, comments,
+and letters regarding SpaceX’s modification and amendment applications. See the attached order for a discussion of
+ comments raised on the record and our basis for grant of these operations.
+
+ 2 In the 340 km. 345 km. 350 km. 355 km. and 365 km orbital shells. SpaceX is authorized to operate in up to 72
+planes per shell with up to 144 satellites per plane. In the 480 km and 485 km orbital shells, SpaceX is authorized to
+operate in up to 56 planes per shell with up to 120 satellites per plane.
+
+  SpaceX requests authority to operate satellites in the 365 km shell at 32 degrees inclination to accommodate
+ launches of Starship from its Starbase facilities in Boca Chica. TX, or in the alternative, to operate at 28 degrees
+ inclination if the Federal Aviation Administration (FAA) does not allow for Starship launches at 32 degrees. See
+ SpaceX Gen2 Upgrade Amendment, Legal Narrative at 3.
+
+  SpaceX requests authority to operate satellites in the 475 km shell at 32 degrees inclination to accommodate
+launches of Starship from its Starbase facilities in Boca Chica, TX, or in the alternative, to operate at 28 degrees
+ inclination if the FAA does not allow for Starship launches at 32 degrees. See SpaceX Gen2 Upgrade Modification,
+Legal Narrative at 8.
+
+  SpaceX may continue to operate satellites currently deployed in these shells while it conducts maneuvers to lower
+these satellites into the new orbital shells authorized in this grant, as conditioned below. See infra. para. 13c.
+                           Federal Communications Commission                  DA  26-36
+
+                      530 km, 43 degree inclination
+                      535 km, 33 degree inclination
+ Administration:      United States of America
+ Nature of Service:   Fixed Satellite-Service (FSS); Mobile Satellite-Service
+                      (MSS), Supplemental Coverage from Space (SCS)
+ Scope of Grant:      Modification of authorization to permit SpaceX to modify the previously-authorized
+                      7,500 satellites to: (1) upgrade the form factor of the Gen2 Starlink satellites; (2)
+                      operate the Gen2 Starlink satellites using additional Ku-, Ka-, V-, and W-band
+                      frequencies and to operate in the MSS as well as FSS in certain frequencies; (3) add
+                      orbital shells centered at 355 km with a 43 degree inclination, 365 km with a 28 or 32
+                      degree inclination, 475 km with a 28 or 32 degree inclination, 480 km with a 53 degree
+                      inclination, and 485 km with a 43 degree inclination and lower the satellites currently
+                      operating at 525 km, 530 km, and 535 km to the shells at 480 km, 485 km, and 475 km,
+                      respectively; (4) deploy satellites flexibly across authorized orbital shells to meet
+                      customer demands, including orbital tolerances and inclinations consistent with the ITU
+                      Radio Regulations, Resolution 8 and Resolution 35 (WRC 23); and (5) communicate
+                      with duly authorized gateway earth stations and user terminals in all authorized
+                      frequencies.
+
+                      Authorization for SpaceX to construct, deploy, and operate a second tranche of 7,500
+                      Starlink Gen2 satellites to operate with the same frequencies and orbital parameters
+                      authorized for the first tranche.
+
+                      Authorization for SpaceX to communicate using the 1980-2000 (Earth-to-space), 2000-
+                      2020 MHz (Earth-to-space), and 2 180-2200 MHz (space-to-Earth) frequencies outside
+                      the U.S. with up to 7,500 satellites.
+
+                      Grant of SpaceX’s request to remove the condition requiring SpaceX to operate only
+                      one co-frequency, co-polarization beam simultaneously at any given location and grant
+                      of SpaceX’s request for waiver of the Commission’s equivalent power flux density
+                      (EPFD) limits for operations inside the United States.6
+                      Authority to construct, deploy, and operate up to 7,500 satellites operating in the Ku-
+ Previous Grant(s):   and Ka-bands at altitudes of 525 km, 530 krn, and 535 km (SpaceX Gen2 First Partial
+                      Grant) .
+
+                      Modification of SpaceX’s license to authorize SpaceX to deploy and operate V-band
+                      capabilities on SpaceX’s previously authorized 7,500 Gen2 Starlink satellites, including
+                      modification to reflect that SpaceX will no longer deploy and operate a separate V-band
+                      constellation (SpaceX First V-band Modification Grant).8
+
+
+6
+ We defer action on SpaceX’s request for MSS operations outside the U.S. in additional frequencies in the 1429-
+2690 MHz band and SpaceX’s request to operate in the 20.2-21.2 GHz and 30.0-31.0 GHz bands, as well as
+authorization of additional Gen2 Starlink satellites beyond the total 15,000 authorized satellites (7.500 previously
+authorized satellites and 7,500 authorized in this grant).
+ Space Exploration Holdings, LLC, Request for Orbital Deplovnient and Operating Authority for the SpaceX Gen2
+NGSO Satellite System, Order and Authorization, 37 FCC Rcd 14882 (2022) (SpaceX Gen2 First Partial Grant),
+petitions for reconsideration pending.
+ Space Exploration Holdings, LLC, Application for Modification ofAuthorization of the SpaceX V-band NGSO
+Satellite system, Grant Stamp. ICFS File No. SAT-MOD-20230322-00062 (SB, SPPD, granted-in-part/dismissed-in-
+part Oct. 13, 2023) (SpaceX First V-band Modification Grant).
+
+                                          2
+                           Federal Communications Commission                  DA  26-36
+
+                      Modification of SpaceX’s license for its Gen2 Starlink satellites to: (1) authorize
+                      SpaceX to deploy a modified version of the previously authorized Gen2 Starlink
+                      satellites with the capability to operate in certain frequencies in the 1429-2690 MHz
+                      range; and (2) to operate these satellites on frequencies within the 1910-1915 MHz and
+                       1990-1995 MHz bands for limited on-orbit check out of the antennas immediately
+                      following deployment of each satellite for a period of 10 days or less, to ensure initial
+                      functionality of the satellite antenna (SpaceX SCS Modification Partial Grant).9
+
+                      Authority to communicate using E-band frequencies on the previously authorized 7,500
+                      Gen2 satellites (SpaceX Gen2 E-band Partial Grant).’°
+
+                      Authority to communicate using Very High Frequency (VHF) beacons on up to 450
+                      Gen2 Starlink satellites for backup telemetry, tracking, and command (TT&C) during
+                      orbit-raising and in the event of an anomaly at operational altitude (SpaceX Gen2
+                      Beacon Order).°
+
+                      Authority to deploy the previously authorized 7,500 satellites in orbital shells at 340
+                      km, 345 km, 350 km, and 360 km, in addition to the previously authorized orbital shells
+                      at 525 km, 530 km, and 535 km, and modification of authorization to permit full SCS
+                      operations in the United States and MSS for the purposes of direct-to-cell operations on
+                      certain frequencies in the 1429-2690 MHz bands outside the United States (SpaceX
+                      Gen2 SCS and 300 kin Order).’2
+
+                      Waiver of section 25.202(k)(1) of the Commission’s rules permitting SpaceX to operate
+                      with aggregate out-of-band emissions (OOBE) in the United States at a power flux
+                      density (PFD) level up to -110.6 dBW/m2/MHz. (SpaceX SCS OOBE Waiver Order))3
+ Service Area(s):     Global
+ Frequencies:         Service and Gateway Links:
+
+                      Ku-Bands:’4
+                      10.7-12.7 GHz (space-to-Earth)
+                      12.7-12.75 GHz (Earth-to-space)
+                      12.75-13.25 GHz (Earth-to-space)
+
+ Space Exploration Holdings, LLC, Application for Modification of the Authorization for the SpaceX Gen2 NGSO
+
+Satellite System. Grant Stamp, ICES File No. SAT-MOD-20230207-0002 I (SB, SPPD. granted-in-partldefelTed-in
+part rd. Dec. 1, 2023) (SpaceX SCS Modification Partial Grant).
+
+ Space Exploration Holdings, LLC, Request for Oibital Deployment and Operating Authority for the SpaceX Gen2
+NGSO Satellite System. Order and Authorization. 39 FCC Rcd 2159 (SB rd. Mar. 8, 2024) (SpaceX Gen2 E-Band
+Partial Grant).
+
+ Space Exploration Holdings. LLC, Request for Orbital Deployment and Operating Authority for the SpaceX Gen2
+NGSO Satellite System, Order and Authorization, 39 FCC Rcd 12410 (SB rd. Nov. 20, 2024) (SpaceX Gen2 Beacon
+Order).
+
+12 Space Exploration Holdings. LLC, Request for Deployment and Operating Authority for the SpaceX Gen2 NGSO
+Satellite System. Order and Authorization. 39 FCC Rcd 12550 (SB rd. Nov. 26. 2024) (SpaceX Gen2 SCS and 300
+km Order).
+
+ Space Exploration Holdings, LLC, Application for A uthoriry for Modification of the SpaceX NGSO Satellite
+System to Add a Direct to CellularSysteni, Order, 40 FCC Red 1521 (SB rd. Mar. 7, 2025) (SpaceXSCS OOBE
+Waiver Order).
+
+14 We authorize SpaceX to provide both FSS and MSS in the 14.0-14.5 GHz (Earth-to-space) band.
+
+                                          3
+                               Federal Communications   Commission                       DA  26-36
+
+                          13.75-14.0 GHz (Earth-to-space)
+                          14.0-14.5 0Hz (Earth-to-space)
+                          14.5-14.75 GHz (Earth-to-space)
+                          14.75-14.8 GHz (Earth-to-space)
+                          15.43-15.63 GHz (Earth-to-space)
+
+                          Ka-Bands:’5
+                          17.3-17.8 GHz (space-to-Earth) and (Earth-to-space)
+                          17.8-18.6 GHz (space-to-Earth)
+                          18.6-18.8 0Hz (space-to-Earth)
+                          18.8-19.3 GHz (space-to-Earth)
+                          19.3-19.7 0Hz (space-to-Earth)
+                          19.7-20.2 0Hz (space-to-Earth)
+                          24.75-25.25 GHz (Earth-to-space)
+                          27.5-29.1 0Hz (Earth-to-space)
+                          29.1-29.5 GHz (Earth-to-space)
+                          29.5-30.0 GHz (Earth-to-space)
+
+                          V-Bands:’6
+                          37.5-42.0 GHz (space-to-Earth)
+                          42.0-42.5 0Hz (space-to-Earth) (outside the U.S. only)’7
+                          47.2-50.2 0Hz (Earth-to-space)
+                          50.4-5 1.4 0Hz (Earth-to-space)
+
+                          5 1 .4-52.4 0Hz (Earth-to-space)
+
+                          E-Bands:’8
+                          71.0-76.0 GHz (space-to-Earth)
+                          8 1.0-86.0 0Hz (Earth-to-space)
+
+                         W-Bands:
+                          92.0-94.0 0Hz (Earth-to-space)
+                         94.1-95.0 GHz  (Earth-to-space)
+                         95.0-100.0 0Hz  (Earth-to-space)
+                          102.0-109.5 0Hz (Earth-to-space)
+                          111.8-114.25 0Hz (Earth-to-space)
+
+                         Supplemental  Coverage from Space (SCS) Frequencies (within the U.S.):19
+                          1910-1915 MHz  (Earth-to-space)
+                          1990-1995 MHz  (space-to-Earth)
+
+
+  We  authorize SpaceX to provide both FSS and MSS globally in the 19.7-20.2 GHz (space-to-Earth) and the 29.5-
+30.0 0Hz (Earth-to-space) bands.
+
+ 16 We authorize SpaceX to provide both FSS and MSS globally in the 39.5-40.5 GHz (space-to-Earth) and 50.4-51.4
+GHz  (Earth-to-space) bands, and in ITU Region 2 in the 40.5-41.0 0Hz (space-to-Earth) band.
+
+ 17 See SpaceX Gen2 Upgrade Amendment. Technical Attachment at 4. n. 7.
+ 18 We authorize SpaceX to provide both FSS and MSS globally in the 71.0-74.0 GHz (space-to-Earth) and the 81.0-
+84.0 GHz (Earth-to-space) bands.
+
+  SpaceX is authorized to operate in these frequencies on up to 7,500 Gen2 satellites.
+                                                4
+                           Federal Communications Commission                  DA  26-36
+
+
+                       MSS for Direct-to-Cell Operations (outside the U.S. only):20
+                       1475-15 18 MHz (space-to-Earth)
+                       1805-1880 MHz (space-to-Earth)
+                       1930-2000 MHz (space-to-Earth)
+                      2110-2180 MHz (space-to-Earth)
+                      2180-2200 MHz (space-to-Earth)
+                      2345-2360 MHz (space-to-Earth)
+                      2620-2690 MHz (space-to-Earth)
+                       1429-1470 MHz (Earth-to-space)
+                       1710-1785 MHz (Earth-to-space)
+                       1850-1920 MHz (Earth-to-space)
+                       1920-1980 MHz (Earth-to-space)
+                      2000-2020 MHz (Earth-to-space)
+                      2305-2320 MHz (Earth-to-space)
+                      2500-2570 MHz (Earth-to-space)
+
+                      MSS  (outside of the US.):2’
+                       1980-20 10 MHz (Earth-to-space)
+                      20 10-2025 MHz (Earth-to-space) (Region 2 only)
+                      2 160-2170 MHz (space-to-Earth) (Region 2 only)
+                      2 170-2200 MHz (space-to-Earth)
+
+                      VHF  beacons:22
+                      137.0250-137.1750 MHz (space-to-Earth)
+                      137.3275-137.3750 MHz (space-to-Earth)
+                      137.4725-137.5350 MHz (space-to-Earth)
+                      137.5850-137.6500 MHz (space-to-Earth)
+                      137.8 125-138.0000 MHz (space-to-Earth)
+                      148.2500- 148.5850 MHz (Earth-to-space)
+                      148.6350-148.7500 MHz (Earth-to-space)
+                      149.9000-149.9500 MHz (Earth-to-space)
+
+ Unless otherwise specified herein, operations under this grant must comport with the legal and technical
+ specifications and commitments set forth by the applicant or petitioner and with the Federal
+ Communications Commission’s rules not waived herein. This grant is also subject to the conditions below.
+    1. SpaceX must operate on a non-harmful interference basis during orbit-raising, including launch and early
+       orbit phase operations, and deorbiting of its satellites, including lowering operational satellites in the 500
+       km  shells to the new shells in the 400 km range.
+    2. SpaceX’s operations in Ku-band frequencies are subject to the following condition:
+           a. SpaceX’s request for waiver of the U.S. Table of Frequency Allocations (U.S. Table), section
+              2.106(a) of the Commission’s rules, to receive uplinks in the 14.5-14.8 GHz band is_GRANTED
+
+
+20
+ SpaceX is authorized to operate in these frequencies on up to 7.500 Gen2 satellites.
+2!
+ SpaceX is authorized to operate in these frequencies on up to 7.500 Gen2 satellites.
+22
+ SpaceX is authorized to operate VHF beacons on up to 450 Gen2 satellites.
+
+                                          5
+                               Federal Communications   Commission                      DA  26-36
+
+
+                 on an unprotected and non-interference basis.23
+
+      3. SpaceX’s  operations in Ka-band frequencies are subject to the following conditions:
+             a.  SpaceX’s requests for waiver of the U.S. Table, section 2.106(a) of the Commission’s rules, and
+                 the Commission’s Ka-band plan, to permit NGSO FSS uplink operations in the 17.3-17.8 GHz24
+                 band and NGSO  FSS  downlink operations in the 18.6-18.8 GHz25 band are GRANTED.
+                 SpaceX’s operations in these bands under these waivers must be on an unprotected and non
+                 interference basis.
+
+             b.  Prior to commencing uplink operations in the 17.3-17.8 GHz band, SpaceX must protect: (i) all
+                 operators in the band by completing coordination and providing the Commission a demonstration
+                 that its uplink operations will not cause harmful interference to receiving earth stations in the
+                 band; and (ii) all affected terrestrial operators in the 17.7-17.8 GHz band.
+             c.  In the 17.3-17.8 GHz band, SpaceX must comply with the same ITU EPFD uplink limits in
+
+                 Region 2 as required for NGSO FSS uplink earth stations in Regions 1 and 3. See ITU Radio
+                 Regulations, Article 22.
+             d.  SpaceX’s request for waiver of the U.S. Table, section 2.106(a) of the Commission’s rules, and
+                 the Ka-band plan to permit the use of the 19.4-19.6 GHi (space-to-Earth) and the 29.1-29.5 GHz
+                 (Earth-to-space) bands for FSS operations that are not limited to MSS feeder links is
+                 GRANTED.26   SpaceX’s  operations in this band under this waiver must be on an unprotected and
+                 non-interference basis.
+
+             e.  Operations in the 19.4-19.6 GHz and 29.1-29.5 GHz bands for FSS user links must be on an
+                 unprotected and non-interference basis to MSS feeder link operations.27 SpaceX may not
+                 commence  FSS user link operations in these bands until it completes coordination with
+                 authorized MSS users.
+
+             f. SpaceX’s  request for authority to operate in the 20.2-2 1.2 GHz and 30.0-3 1.0 GHz bands is
+
+
+  SpaceX Gen2 Upgrade Amendment, Waiver Requests at 4-5; see also 47 CFR § 2.106(a). In the U.S. Table, the
+ 14.5-14.8 GHz band is not allocated to the Fixed-satellite Service (FSS) (Earth-to-space) or to the Mobile-satellite
+Service (MSS) (Earth-to-space) for non-Federal use. id.
+
+24
+  SpaceX Gen2 Upgrade Amendment, Waiver Requests at 5-6; see also 47 CFR § 2.106(a). In the U.S. Table, the
+ 17.3-17.8 GHz band is allocated, inter a/ia. to the FSS (Earth-to-space) (space-to-Earth) on a primary basis for non-
+Federal use, for 050 uplink use and 050 and NGSO downlink use. 47 CFR § 2.106(a), (d)(58), (527). SpaceX’s
+request for waiver of the U.S. Table, section 2.106(a) of the Commission’s rules, to allow NGSO FSS downlink in
+the 17.3-17.8 GHz hands is DISMISSED as MOOT after the Commission’s adoption of the 17 GHc Report and
+Order and the effectiveness of those new rules to permit (space-to-Earth) downlink use of the 17.3-17.8 0Hz band
+by NGSO  FSS space stations. See Amendment of Parts 2 and 25 of the Commission’s Rules to Enable NGSO Fixed-
+Satellite Seriice (Space-to-Earth) Operations in the 17.3-17.8 GHc Band, TB Docket No. 22-273, Report and Order.
+39 FCC Rcd 11156 (2024) (17 Gi-.(z Report and Order). The rules became effective on January 6, 2025.
+
+25
+  SpaceX Gen2 Upgrade Amendment, Waiver Requests at 6-8: see also 47 CFR § 2.106(a). In the U.S. Table, the
+ 18.6-18.8 GHz band is allocated, inter alia, to the FSS (space-to-Earth) on a primary basis for non-Federal use,
+limited to GSO networks. 47 CFR § 2.106(a), (d)(164).
+
+26
+  SpaceX Gen2 Upgrade Amendment, Waiver Requests at 8-11; see also 47 CFR § 2.106(a). In the U.S. Table, the
+29. 1-29.5 GHz band is allocated, inter alia, to the FSS (Earth-to-space) on a primary basis for non-Federal use.
+limited in the 29.1-29.25 GHz and 29.25-29.5 0Hz hands to feeder links for NGSO systems in the MSS. and in the
+29.25-29.5 0Hz band for OSO networks. 47 CFR § 2.106(a). (d)(166), (535). The 19.3-19.7 GHz band is
+allocated. inter alia. to the FSS (space-to-Earth) on a primary basis for non-Federal use, with the 19.4-19.6 GHz
+band limited to feeder links for NGSO systems in the MSS. 47 CFR § 2.106(a). (d)(166).
+
+27
+  SpaceX is requirea to protect any future operators of MSS feeder links in these hands operating in accordance
+with the U.S. Table.
+
+                                                6
+                           Federal Communications Commission                  DA 26-36
+
+              DEFERRED.
+    4.  SpaceX’s request for waiver of sections 25.146(a)(2) and (c) of the Commission’s rules to exceed any
+        applicable equivalent power flux density (EPFD) limits within the territories of the United States is
+        GRANTED,  as discussed in the accompanying Order. SpaceX’s request to remove the condition
+        requiring operation with only one co-frequency, co-polarization beam in any given location in the 12.2-
+        12.7 GHz and 19.7-20.2 GHz bands is GRANTED, to the extent set forth below and as discussed in the
+        accompanying Order. SpaceX’s operations are subject to the following conditions:
+           a. In the Ku-band, SpaceX may not use more than eight (8) satellite beams from any of its
+              authorized Gen2 Starlink satellites in the same frequency in the same or overlapping areas at a
+              time.
+
+           b. SpaceX must maintain a minimum GSO arc exclusion zone of at least four (4) degrees with
+              respect to operational GSO satellites.
+           c. Operations outside of the United States must comply with the EPFD limits in the Commission’s
+              rules, except to the extent another country has authorized different operational limits for
+              communications from satellites to earth stations within that country.
+           d. SpaceX’s operations pursuant to this waiver must be conducted on an unprotected and non
+              interference basis. In the event the Space Bureau notifies SpaceX of a determination that it has
+              caused harmful interference, SpaceX must immediately return to operating in accordance with the
+              Commission’s EPFD limits in the affected frequency bands. SpaceX will also be required to
+              communicate to its affected customers how it is rectifying the situation if mediation will affect
+              their service. The Space Bureau will revoke the waiver in the event of unresolved harmful
+              interference.
+
+           e. We  previously granted SpaceX a partial waiver of section 25.146(c) to allow it to begin
+              operations prior to receiving a favorable or qualified favorable finding from the ITU.28 Until
+
+              SpaceX receives a favorable or qualified favorable finding from the ITU pursuant to 47 CFR §
+              25.146 for all authorized Gen2 satellites, SpaceX must make available to any requesting party the
+              data used as input to the ITU-approved validation software to demonstrate compliance with
+              applicable EPFD limits for its operations outside the U.S., including the data that combine the
+              Gen2 Starlink satellites into one consolidated file.
+    5.  SpaceX’s operations in V-band frequencies are subject to the following conditions:
+
+           a. SpaceX’s request for waiver of the U.S. Table, section 2.106(a) of the Commission’s rules, to
+              permit NGSO FSS uplink operations in the 5 1.4-52.4 GHz band is GRANTED.29 SpaceX’s
+              operations under this waiver in this band must be on an unprotected and non-interference basis.
+           b. On our own motion, we grant SpaceX a waiver of the U.S. Table, section 2.106(a) of the
+              Commission’s rules, to allow SpaceX to provide MSS in addition to FSS in the 39.5-40.0 GHz
+              band. SpaceX’s MSS operations in this band must be on an unprotected, non-interference basis.
+    6.  SpaceX’s operations in E-band frequencies are subject to the following conditions:
+
+           a. SpaceX must coordinate its proposed frequency use for operations in the 7 1.0-76.0 GHz (space-
+              to-Earth) and 81.0-86.0 GHz (Earth-to-space) frequency bands with any existing terrestrial or
+              satellite U.S. licensees or U.S. market access grantees in the FSS whose facilities could be
+              affected by SpaceX’s E-band operations, in terms of frequency interference or restricted capacity,
+
+28 See SpaceX Gen2 First Partial Grant. 37 FCC Rcd at 14907-9 10. paras. 37-40.
+
+29
+  See SpaceX Gen2 Upgrade Amendment, Waiver Request at 12-13. In the U.S. Table, the 51.4-52.6 GHz band is
+allocated to the Fixed service and the Mobile service on a primary basis for Federal and non-Federal use. 47 CFR §
+2.106(a).
+
+                                          7
+                               Federal Communications   Commission                       DA 26-36
+
+                 and SpaceX must cooperate fully with other future co-frequency FSS satellites or satellite
+                 systems in these bands.
+
+             b.  SpaceX  must comply with any sharing requirements adopted as part of a future E-band
+                 processing round that includes the 7 1.0-76.0 GHz and 8 1.0-86.0 GHz bands.
+      7. SpaceX’s  request for waiver of the U.S. Table, section 2.106(a) of the Commission’s rules, for NGSO
+         uplink operations in the 92.0-94.0 GHz (Earth-to-space), 94.1-95.0 0Hz (Earth-to-space), 95.0-100.0
+         GHz  (Earth-to-space), 102.0-109.5 GHz (Earth-to-space), and 111.8-114.25 GHz (Earth-to-space) bands
+         (W-band  frequencies), is GRANTED.3°  SpaceX must operate on an unprotected and non-interference
+         basis in these bands.3’
+
+      8. SpaceX’s  Supplemental Coverage from Space (SCS) operations in the United States and direct-to-cell
+         operations outside the United States are subject to the following conditions:
+             a.  When  conducting direct-to-cell operations in the licensed frequencies (space-to-Earth) and
+                 (Earth-to-space) outside the United States, SpaceX shall not cause harmful interference to, and
+                 shall not claim protection from harmful interference caused by, a station operating in accordance
+                 with the provisions of the Constitution, the Convention, and the ITU Radio Regulations.32
+             b.  SpaceX’s SCS  operations in the 1910-1915 MHz and 1990-1995 MHz  bands shall not cause
+                 harmful interference to other countries’ operations and SpaceX must address and eliminate any
+                 harmful interference cases immediately.
+             c.  For SCS operations in the United States and direct-to-cell operations outside the United States,
+                 SpaceX may  only operate on a non-harmful interference basis with respect to cross-border
+                 operations. Accordingly, SpaceX may only exceed PFD limits where it has been authorized
+                 pursuant to an approval from the regulatory authority of the appropriate border country and after
+                 providing documentation of such approval to the Commission. Cross-border coordination and
+                 any negotiated technical parameters must be mutually acceptable to all involved, including U.S.
+                 counterpart agencies who oversee or regulate spectrum use in other countries.
+             d.  As directed by the Commission in paragraph 235 in the SCS Report and Order (FCC 24-28),
+                 prior to conducting any direct-to-cell operations with earth stations outside the United States,
+                 SpaceX must submit a certification to the Space Bureau and Office of International Affairs
+                 (OIA) .°
+
+ °
+  See SpaceX Gen2 Upgrade Amendment. Waiver Requests at 13-16. In the U.S. Table, the 92.0-94.0 GHz and
+ 94.1-95.0 0Hz bands are allocated to the Fixed. Mobile, Radio Astronomy, and Radiolocation services on a primary
+ basis for Federal and non-Federal use: the 95.0-100.0 0Hz band is allocated to the Fixed, Mobile, Radio Astronomy,
+ Radiolocation. Radionavigation, and Radionavigation-Satellite services on a primary basis for Federal and non-
+Federal use: the 102.0-105.0 GHz band is allocated to the Fixed. Mobile, and Radio Astronomy services on a
+primary basis for Federal and non-Federal use; and the 105.0-109.5 0Hz and 111.8-114.25 0Hz bands are allocated
+ to the Fixed. Mobile. Radio Astronomy, and Space Research (passive) services on a primary basis for Federal and
+ non-Federal use. 47 CFR § 2.106(a).
+‘ See ITU Radio Regulations, Article 4.4.
+
+32
+  See itt. (stating that “[ajdministrations of the Member States shall not assign to a station any frequency in
+derogation of either the Table of Frequency Allocations in this Chapter or the other provisions of these Regulations.
+except on the express condition that such a station, when using such a frequency assignment. shall not cause harmful
+ interference to. and shall not claim protection from harmful interference caused by. a station operating in accordance
+ with the provisions of the Constitution, the Convention and these Regulations”); see also Single Ner’,ork Future;
+Supplemental Coverage from Space, Space Innovation, ON Docket No. 23-65, lB Docket 22-271, Report and Order
+and Further Notice of Proposed Rulemaking, 39 FCC Rcd 2622, at 2723-2724, paras. 224-36 (2024) (SCS R&O).
+  SCS R&O  at paras. 235. 39.
+
+                                                8
+                           Federal Communications Commission                  DA  26-36
+
+           e. We  previously granted SpaceX’s request for waiver of section 25.202(k)(1) of the Commission’s
+              rules,33 permitting SpaceX to conduct SCS operations in the United States with an aggregate out-
+              of-band emission PFD level up to -110.6 dBW/m2/MHz.35 SpaceX must operate pursuant to this
+              waiver.
+    9.  SpaceX’s operations in the licensed 137.0-138.0 MHz (space-to-Earth), 148.0-150.05 MHz (Earth-to
+        space), 2345-2360 MHz (space-to-Earth) (outside of the U.S.), 12.7-12.75 GHz (Earth-to-space), 27.5-
+        29.1 GHz (Earth-to-space), 29.1-30.0 0Hz (Earth-to-space), 42.0-42.5 GHz (space-to-Earth), and 102.0-
+        109.5 0Hz (Earth-to-space) bands shall not cause harmful interference to current and future operational
+        U.S. Federal systems operating pursuant to primary Federal allocations. SpaceX shall coordinate through
+        mutual exchange of system information, to the extent possible consistent with national security
+        requirements, in good faith, and on an ongoing basis, with potentially affected U.S. Federal systems to
+        ensure protection of operational U.S. Federal systems. In all cases, SpaceX must provide all necessary
+        system information and technical parameters to the affected Federal entities to allow those entities to
+        conduct their required interference analysis. SpaceX shall maintain sufficient information to timely
+        investigate and resolve documented instances of harmful interference and make available such
+        information to affected Federal entities upon request. SpaceX shall adjust its operations to accommodate
+        future operational U.S. Federal systems and aggregate effects into U.S. Federal systems. Upon receiving
+        a documented report of harmful interference from an affected U.S. Federal system, SpaceX shall
+        immediately cease the operation causing the harmful interference until the issue is resolved and
+        coordination with the affected Federal entity is complete.
+
+     10. SpaceX must complete coordination with potentially affected Federal Agencies and Services engaged in
+        national security or safety-of-life services, through mutual exchange of system information to the extent
+        possible consistent with national security requirements, prior to operating in the 13.75-14.0 0Hz (Earth-
+        to-space), 14.5-14.75 0Hz (Earth-to-space), 14.75-14.80 0Hz (Earth-to-space), 15.43-15.63 0Hz (Earth-
+        to-space), 17.3-17.8 GHz (space-to-Earth), 17.8-18.6 0Hz (space-to-Earth), 18.6-18.8 0Hz (space-to-
+        Earth), 18.8-19.3 0Hz (space-to-Earth), 19.3-19.7 0Hz (space-to-Earth), 19.7-20.2 GHz (space-to-Earth),
+        24.75-25.25 GHz (Earth-to-space), 37.5-41 .0 0Hz (space-to-Earth), 47.2-50.2 0Hz (Earth-to-space),
+
+        50.4-52.4 0Hz (Earth-to-space), 71 .0-76.0 0Hz (space-to-Earth), 8 I .0-86.0 0Hz (Earth-to-space), 92.0-
+        94.0 0Hz (Earth-to-space), 94.1-95.0 0Hz (Earth-to-space), 95.0-100.0 0Hz (Earth-to-space), and 111.8-
+        114.25 0Hz (Earth-to-space) bands, which are allocated on a primary basis to Federal services or are
+        adjacent to primary Federal allocations. SpaceX shall notify the Commission within 30 days after
+        completion of coordination, with a copy to NTIA and the relevant Federal entity. Notification shall be
+        submitted to the FCC’s ICFS. Two weeks prior to the start of any operations in such bands, SpaceX must
+        provide contact information for a 24/7 point of contact for the resolution of any harmful interference to
+        contacts provided by the NTIA.
+
+     11. SpaceX’s MSS operations in the Ku-, Ka-, V-, and E-bands must comply with the same technical
+        parameters as its FSS operations.
+     12. SpaceX’s request for waiver of sections 25.156 and 25.157 of the Commission’s processing round rules
+        for additional frequencies in the Ku-, Ka-, V-, and W-bands is GRANTED.36 SpaceX must coordinate
+        with any and all existing and future FSS operators in these bands and comply with any sharing
+        requirements that may be adopted as part of a future processing round in these bands. Finally, SpaceX’s
+        authorization is subject to any rules adopted as part of the Satellite Spectrum Abundance proceeding.37
+
+
+  47 CFR § 25.202(k)( 1).
+  See generally SpaceX SCS OOBE Waiver Order.
+
+36 See SpaceX Gen2 Upgrade Amendment. Waiver Requests at 19-22; SpaceX January 31. 2025 Letter, at 3-7; 47
+CFR § 25.156, 25.157.
+  See Spectrum Abundance NPRM.
+
+                                           9
+                      Federal Communications Commission                  DA  26-36
+
+
+13. SpaceX must comply with the following conditions:
+
+      a. SpaceX must comply with ITU Resolution 8. For Gen2 satellites that have been used to count
+         towards an ITU Resolution 35 milestone, SpaceX must maintain orbital tolerances of +/-30 km
+         altitude and +/-2 degrees inclination per resolves 11 of Resolution 8. For submission to ITU by
+         the Commission per resolves 14 of Resolution 8, for any satellite that has been used to count
+         towards an ITU milestone and that exceeds the allowed orbital tolerance of +1- 30 km for more
+         than 60 consecutive days between the observed apogee or perigee of a satellite and the apogee
+         and perigee previously declared to the ITU, SpaceX shall provide to the Commission within 15
+         days after the end of that 60-day period, the information in Annex I to Resolution 8 for these
+         satellites for submission to the ITU.
+      b. SpaceX must deploy and operate its Gen2 constellation in a manner consistent with its ITU
+         filings. SpaceX must submit modified ITU filings prior to modifying its deployment or
+         operational configuration of its Gen2 constellation.
+      c. SpaceX is authorized to lower the satellites currently operating in shells at 525 km, 530 km, and
+         535 km to the new orbital shells at 480 km, 485 km, and 475 km, respectively. SpaceX may
+         continue to operate satellites in its previously authorized 525 km, 530 km, and 535 km shells
+         during this process. SpaceX must also notify the Commission within 30 days after orbit lowering
+         has been completed for all satellites in the 500 km shells.
+
+
+      d. SpaceX must provide a semi-annual report, by January 1 and July 1 each year, covering the
+
+         preceding six-month period, respectively, from June 1 to November 30 and December 1 to May
+         31. The report should include the following information:
+
+             i. The number of conjunction events identified for Starlink satellites during the reporting
+                period, and the number of events that resulted in an action (maneuver or coordination
+                with another operator), as well as any difficulties encountered in connection with the
+                collision avoidance process and any measures taken to address those difficulties;
+             ii. Satellites that, for purposes of disposal, were removed from operation or screened from
+                further deployment at any time following initial deployment, and identifying whether this
+                occurred less than five years after the satellite began regular operations or were available
+                for use as an on-orbit replacement satellite;
+            iii. Satellites that re-entered the atmosphere;
+            iv. Satellites for which there was a disposal failure, i.e., a satellite that loses the capability to
+                maneuver effectively after being raised from its injection, including a discussion of any
+                assessed cause of the failure and remedial actions. For each such satellite, SpaceX shall
+                report an estimated orbital lifetime for the satellite following the failure, and for the Gen2
+                Starlink constellation the cumulative number of failed satellite object years; and
+
+             v. Identification of any collision avoidance system outages or unavailability, either on a
+                system-wide basis or for individual satellites. An “outage” would include any individual
+                satellite anomaly that results in a satellite not achieving targeted risk mitigation via
+                maneuver.
+      e. In the event of satellite failures resulting in more than 100 post-failure object years, SpaceX may
+         not deploy any additional satellites until the Commission has approved a license modification that
+         includes an updated orbital debris mitigation plan addressing reduction in the failure rate or
+         mitigation of the risk of satellite failures.
+
+14. This authorization is also subject to the following requirements:
+
+
+                                     10
+                           Federal Communications Commission                   DA 26-36
+
+           a.  Applicable to SpaceX Gen2 satellites:38
+                   i. SpaceX must launch 50 percent of the maximum number of authorized space stations,
+                     place them in the assigned orbits, and operate them in accordance with the station
+                     authorization no later than December 1, 2028, and SpaceX must launch the remaining
+                     space stations necessary to complete its authorized service constellation, place them in
+                     their assigned orbits, and operate. each of them in accordance with the authorization no
+                     later than December 1, 2031
+
+           b. Applicable to SpaceX operations in the V-band on its first tranche of 7,500 satellites:40
+                  i. SpaceX must launch 50 percent of the maximum number of previously-authorized space
+                     stations with V-band capabilities, place them in the assigned orbits, and operate them in
+                     accordance with this grant no later than November 19, 2024, and must launch the
+                     remaining space stations necessary to complete its authorized V-band system, place them
+                     in their assigned orbits, and operate them in accordance with the authorization no later
+                     than November 19, 2027.42
+
+     15. SpaceX’s requests pertaining to waiving part of section 25.114(a)(1) of the Commission’s rules due to
+        various limitations in the Schedule S software are GRANTED.43
+     16. This grant is without prejudice to any future action taken in connection with the SpaceX Gen2 Starlink
+        constellation, call signs S2992 and S3069.
+
+ Licensee/grantee is afforded thirty (30) days from the date of release of this action to decline the grant as
+ conditioned. Failure to respond within this period will constitute formal acceptance of the grant as conditioned.
+ This action is taken pursuant to Section 0.261 of the
+                                            Commission’s rules on delegated authority, 47 CFR § 0.26 1,
+ and is effective upon release.
+
+ Station licenses are subject to the conditions specified in Section 309(h) of the Communications Act of 1934, as
+ amended, 47 U.S.C. § 309(h).
+ Action Date:   January 9, 2026
+
+
+38
+  We note that although we authorize SpaceX to operate in additional frequencies on its Gen2 satellites and with an
+additional 7.500 satellites, we retain the culTent milestones for the Gen2 system. including for V-band space stations
+on the second tranche of 7.500 satellites. See 47 CFR § 25.164(h).
+
+  47 CFR § 25.164(b). SpaceX posted the surety bond for its Gen2 satellites operating in the Ku-, Ka-, and E-hand
+frequencies. See Bond of Space Exploration Holdings LLC, ICFS File Nos. SAT-LOA-20200526-00055 and SAT
+AMD-20210818-00l05 (filed Dec. 30, 2022).
+
+40
+ See SpaceX First V-band Modification Grant. The separate milestones applicable to SpaceX’s V-band operations
+are consistent with SpaceX’s original V-band authorization. SpaceX filed its surety bond in accordance with the
+condition on its original V-band authorization on December 3,2018. See Bond of Space Exploration Holdings.
+LLC. ICFS File No. SAT-LOA-20170301-00027 (filed Dec. 3, 2018).
+°
+ SpaceX has requested modification of its milestone related to its first tranche of V-band satellites. This
+authorization is without prejudice to any action taken in that proceeding. See ICFS File No. SAT-MOD-202408 13-
+00183.
+4247
+    CFR § 25.164(b).
+°
+ SpaceX Gen2 Upgrade Modification. Waiver Requests at 4-7; SpaceX Gen2 Upgrade Amendment. Waiver
+Requests at 22-25.
+
+                                          11
+                               Federal Communications   Commission                       DA  26-36
+
+
+ “
+  SpaceX informed the Commission that the first Gen2 Starlink satellite was placed into its authorized orbit and
+began operating on February 10, 2023. See Letter from David Goldman, Senior Director, Satellite Policy. Space
+Exploration Technologies Corp.. to Marlene H. Dortch, Secretary, FCC, ICFS File No. SAT-LOA-20200526-00055
+(filed Jun. 20, 2023).
+
+                                                12
+                               Federal Communications   Commission                       DA  26-36
+
+                                             ORDER
+                                  Space Exploration Holdings, LLC
+ ICFS File Nos. SAT-LOA-20200526-00055,    SAT-AMD-202   10818-00105, SAT-AMD-2022    1216-00175,
+                      SAT-AMD-2024    1017-00228, SAT-MOD-2024    1011-00224
+
+ I.     INTRODUCTION
+
+        1.  Today, we partially grant the application, as amended, of Space Exploration Holdings, LLC
+ (SpaceX) to deploy and operate a constellation of non-geostationary orbit (NGSO) second-generation
+ Starlink satellites (Gen2 Starlink), as well as partially grant SpaceX’s application to modify the frequency
+ use, orbital parameters, and physical form factors of the previously-authorized Gen2 Starlink satellites
+ (collectively, the Gen2 Upgrade Applications).’ This Order provides the basis for our partial grant of
+ SpaceX’s Gen2  Upgrade Applications.2
+
+        2.  Today’s action will allow SpaceX to dramatically improve services to customers in America
+ and worldwide, while still protecting incumbent services and the orbital environment. SpaceX’s Starlink
+ service has already had a transformative impact on American communities and businesses that are
+ unserved or underserved by terrestrial broadband, allowing for advanced educational and healthcare
+ services and greater participation in civic life.3 The Gen2 Starlink Upgrade satellites, including an
+ increased number of satellites, will allow for higher capacity to serve additional customers and gigabit
+
+
+  See Space Exploration Holdings. LLC, Application for Modification of Authorization for the SpaceX Gen2 NGSO
+ Satellite System. JCFS File No. SAT-MOD-2024 101 1-00224 (SpaceX Gen2 Upgrade Modification); Space
+ Exploration Holdings, LLC, Application for Amendment of Application for the SpaceX Gen2 NGSO Satellite
+ System. ICFS File No. SAT-AMD-202410l7-00228 (SpaceX Gen2 Upgrade Amendment); see also Space
+ Exploration Holdings. LLC, Application for Orbital Deployment and Operating Authority for the SpaceX Gen2
+ NGSO  Satellite System. ICFS File No. SAT-LOA-20200526-00055 (filed May 26. 2020) (SpaceX Gen2
+ Application): Space Exploration Holdings. LLC. Amendment to Pending Application for the SpaceX Gen2 NGSO
+ Satellite System. ICFS File No. SAT-AMD-202l0818-00105 (filed Aug. 18. 2021) (SpaceX Gen2 Amendment):
+ Space Exploration Holdings. LLC. Amendment to Pending Application for the SpaceX Gen2 NGSO Satellite
+ System. ICFS File No. SAT-AMD-20221216-00l75 (filed Dec. 16. 2022) (SpaceX Gen2 Beacon Amendment).
+The original application, as amended, requested up to 29,988 Gen2 Starlink satellites operating in specific orbital
+ shells between 340 km and 614 km and communicating using frequencies in the Ku-, Ka-, and E-hands.
+ 2 See the partial grant. above, for a complete description of the satellites, orbital parameters. frequencies. and
+relevant license conditions.
+
+  See e.g. Letter from Dr. Teresa Tyson. Executive Director, The Health Wagon, to Marlene H. Dortch, Secretary.
+FCC. ICFS File Nos. SAT-MOD-2024 1011-00224 and SAT-AMD-202410l7-00228  (dated Mar. 4, 2025) (Health
+Wagon  March 4, 2025 Letter): Letter from Deza J. Hall. Clerk. Wise County Circuit Court Office, to Marlene H.
+Dortch, Secretary, FCC. ICFS File Nos. SAT-MOD-202410l 1-00224 and SAT-AMD-20241017-00228 (dated Mar.
+4. 2025) (Wise County March 4, 2025 Circuit Court Clerk Letter): Letter from Donald Purdie. President and CEO,
+ Appalachian Broadband Innovators, to Marlene H. Dortch. Secretary. FCC. ICFS File Nos. SAT-MOD-2024l01 I-
+00224 and SAT-AMD-20241017-00228   (dated March 3. 2025) (Appalachian Broadband Innovators March 7,2025
+Letter): Letter from Don M. Green, Executive Director, Napoleon Hill Foundation, to Marlene H. Dortch, Secretary,
+FCC. ICFS File Nos. SAT-MOD-202410l 1-00224 and SAT-AMD-202410l7-00228  (dated Mar. 10, 2025) (NHF
+March  10, 2025 Letter); Letter from Richard J. Peterson, President, Central Counsel of the Tlingit and Haida Indian
+Tribes of Alaska. to Marlene H. Dortch, Secretary, FCC, ICFS File Nos. SAT-MOD-2024101 1-00224 and SAT
+AMD-2024l017-00228   (dated Mar. 10, 2025) (Tlingit and Haida Tribes March 10, 2025 Letter); Letter from Colby
+Hall, Executive Director, Shaping Our Appalachian Region. to Marlene H. Dortch, Secretary. FCC. ICFS File Nos.
+SAT-MOD-2024l0l   1-00224 and SAT-AMD-20241017-00228  (dated Mar. 10. 2025) (SOAR March 10. 2025
+Letter): Letter from Peter Lord, Senior Vice President. Oracle. to Marlene H. Dortch. Secretary. FCC. ICFS File
+Nos. SAT-MOD-2024101  1-00224 and SAT-AMD-20241017-00228  (dated Mar. 10. 2025) (Oracle March 10. 2025
+Letter): Letter from Jon McKeown, Chief Procurement Officer, Carnival Corporation. to Marlene H. Dortch.
+Secretary, FCC, ICFS File Nos. SAT-MOD-2024l01 1-00224 and SAT-AMD-20241017-00228 (dated Mar. 10,
+2025) (Carnival March 10, 2025 Letter).
+                               Federal Communications   Commission                       DA  26-36
+
+ speed service, including symmetrical download and upload speeds.4 Authorizing SpaceX to increase the
+ size of its Gen2 constellation and to communicate using additional spectrum will also support American
+ technological innovation and promote American competitiveness and dominance in space.
+ II.    BACKGROUND
+
+        3.  This grant builds on previous partial grants of SpaceX’s Gen2 Starlink system, as SpaceX
+ iteratively develops, deploys, and operates new satellites.5 In October 2024, SpaceX filed the Gen2
+ Upgrade Applications, collectively requesting to modify the orbital parameters and frequency operations
+ of the previously-authorized and pending Gen2 Starlink satellites.6 SpaceX requests waivers of the U.S.
+ Table of Frequency Allocations (U.S. Table) to operate in additional proposed frequency bands and
+ requests waivers of the Commission’s processing round rules and equivalent power flux density (EPFD)
+ limits. The Gen2 Upgrade Applications were placed on public notice on February 7, 2025]
+ III.   DISCUSSION
+        4.  After review of the record, we find partial grant of SpaceX’s Gen2 Upgrade Applications,
+ with conditions, serves the public interest. Below, we address the various outstanding issues raised by
+ SpaceX’s applications and comments in the record.
+        A.      New  Satellites and Orbital Flexibility
+
+        5.  We  grant SpaceX authority to deploy a second tranche of 7,500 Gen2 Starlink satellites,
+ bringing the total size of the authorized Gen2 Starlink constellation to 15,000 satellites. While SpaceX
+ requests action on its entire proposed 29,988-satellite constellation,8 we proceed incrementally here.9
+
+  Gen2 Upgrade Amendment. Narrative at 8-13; Gen2 Upgrade Modification, Narrative at 11-16.
+
+  For a complete description of the history of SpaceX’s authorizations, see the Previous Grants section of the above
+ grant.
+
+  See generally SpaceX Gen2 Upgrade Modification: SpaceX Gen2 Upgrade Amendment. The Gen2 Upgrade
+ Modification focused on changes to the orbital configuration of the previously-authorized 7.500 Gen2 Starlink
+ satellites, while the amendment requested changes to the orbital configuration of the pending portion of the Gen2
+ application, as amended, and also requested additional frequency bands and associated waiver requests. We note the
+ amendment included the changes to the orbital configuration for the orbital shells below 400 km. which the Space
+ Bureau had not authorized at the time of filing. SpaceX later clarified that the additional frequencies and waiver
+ requests included in its amendment were meant to apply to all 29.988 satellites, including the previously-authorized
+ 7,500 satellites, and that the upgrade modification and amendment applications were meant to be read in tandem.
+ SpaceX therefore incorporated the frequency requests and associated waivers included in the Gen2 Upgrade
+ Amendment into the Gen2 Upgrade Modification. See Letter from Jameson Dempsey, Director of Satellite Policy.
+ Space Exploration Technologies Corp.. to Marlene H. Dortch. Secretary. FCC. ICFS File Nos. SAT-LOA
+ 20200526-00055, SAT-AMD-202 10818-00105. SAT-AMD-2022  1216-00175. SAT-AMD-2024 1017-00228. SAT
+ MOD-2024l01  1-00224 at 1-2 (filed Jan .31, 2025) (SpaceX January 31, 2025 Letter).
+  See Satellite Licensing Division and Satellite Prograins and Policy Division Information, Space Station
+Applications Acceptedfor Filing. Public Notice. Report No. SAT-0 1892 (Feb. 7, 2025). A number of satellite
+ companies, industry groups, and members of the public filed petitions, comments, and letters regarding SpaceX’s
+ modification and amendment. See e.g., ICFS File Nos. SAT-MOD-2024l0l 1-00224 and SAT-AMD-2024l0l7-
+00228. A number of parties also filed petitions and/or comments in response to the initial Gen2 application. We
+ address these comments as they pertain to the second tranche of 7,500 satellites we authorize in this grant. See
+Space Exploratioii Holdings, LLC, Request for Orbital Deployment and Operatimig Authorit for the SpaceX Gen2
+NGSO  Satellite System, Order and Authorization. 37 FCC Rcd 14882, 14887-88. 14889-93, paras. 6, 9, n.35, n.5 1.
+ n.52. n.54, n.55. n.56, n.57. n.58. n.59, n.60, n.6l (2022) (SpaceX Gen2 First Partial Grant) (describing the record
+before the Commission adopted the SpaceX Gen2 First Partial Grant).
+
+8 See Gen2 Upgrade Amendment. Narrative at 2. N.7: Gen2 Upgrade Modification. Narrative at II. N.2.
+9See e.g. Petition of Viasat. Inc. to Deny, ICFS File Nos. SAT-LOA-20200526-00055, SAT-AMD-202108l8-
+                                                                                     (continued....)
+                                                 2
+                              Federal Communications   Commission                       DA  26-36
+
+
+SpaceX  has been launching Gen2 Starlink satellites at a rapid cadence.’° As discussed in more detail
+below, the Space Bureau has evaluated the real-world performance of the Gen2 Starlink satellites
+launched to date,l and we find that authorization for additional satellites is in the public interest, even as
+the Gen2 Starlink Upgrade satellites remain untested on orbit. We defer authorization of the remaining
+14,988 proposed Gen2 Starlink satellites, including satellites proposed for operations above 600 km.’2
+        6. We  also authorize SpaceX to more flexibly distribute its satellites by deploying up to 144
+satellites in up to 72 planes in each of the 340 km, 345 km, 350 km, 355 km, and 365 km orbital shells
+and by deploying up to 120 satellites in up to 56 planes in the 480 km and 485 km orbital shells. SpaceX
+is also authorized to deploy satellites with orbital tolerances for altitude and inclination consistent with
+the updates to the ITU Radio Regulations following the 2023 World Radiocommunication Conference.’3
+We  find the conditions we place on SpaceX’s authorization should resolve commenters’ concerns that
+granting SpaceX the additional flexibility it requested could foreclose access to space or will make it
+more difficult for other operators to evaluate potential interference.’4 Additionally, SpaceX is only
+granted flexibility in the deployment and operation of its Gen2 Starlink system consistent with the ITU
+Radio Regulations, and SpaceX must operate consistent with its ITU filings, which are publicly available.
+Other operators can stay informed of SpaceX’s deployment and coordinate with SpaceX via the ITU
+process. If SpaceX plans to change the orbital parameters of its Gen2 Starlink system within the envelope
+of its authorized parameters, it may do so, without applying for a modification with the Commission, but
+with the appropriate modification of its ITU filing or filings.
+        B.     Radiofrequency  Operations  and Associated Waivers
+
+        7. Below  we discuss the waivers associated with grant of SpaceX’s request to operate in
+
+
+00105, SAT-AMD-2022  1216-00175. SAT-MOD-2024 1011-00224, and SAT-AMD-2024 1017-00228 at 26-28
+(filed Mar. 10, 2025) (Viasat 2025 Petition); Reply Comments of Eutelsat S.A. and WoridVu Satellites Limited.
+ICFS File Nos. SAT-MOD-2024101 1-00224, SAT-AMD-202410l7-00228 at 6 (filed Apr. 4. 2025) (Eutelsat
+Reply).
+‘°                     000th
+  See SpaceX launches JO,  Starlink internet satellite, https://www.theverge.com/news/802509/starlink-
+launches-l0000th-internet-satellite (last accessed Dec. 18, 2025).
+“Report of Space Exploration Holdings LLC, ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+202108 18-00105 (filed Dec. 30, 2022) (SpaceX Gen2 December 30, 2022 Report); Report of Space Exploration
+Holdings LLC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105 (filed Jun. 30, 2023)
+(SpaceX Gen2 June 30. 2023 Report); Report of Space Exploration Holdings LLC. ICFS File Nos. SAT-LOA
+20200526-00055 and SAT-AMD-202l0818-00l05  (filed Dec. 29, 2023) (SpaceX Gen2 December 29, 2023
+Report): Report of Space Exploration Holdings LLC, ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+20210818-00105 (filed Jul. 1,2024) (SpaceX Gen2 July 1,2024 Report); Report of Space Exploration Holdings
+LLC, ICFS File Nos. SAT-LOA-20200526-00055 (filed Dec. 31, 2024) (SpaceX Gen2 December 31, 2024 Report);
+Report of Space Exploration Holdings, LLC, ICFS File Nos. SAT-MOD-202004l7-00037, SAT-20200526-00055,
+and SAT-AMD-202l08l8-00105   (filed Jul. 1, 2025) (SpaceX Genl and Gen2 July 1. 2025 Report).
+
+l2 See above grant for a full description of authorized orbital parameters.
+‘
+  See International Telecommunication Union, Radio Regulations, Resolution 8.
+
+‘‘ See Viasat 2025 Petition at 23-26; Comments of SES Americom, Inc. and O3b Limited, ICFS File Nos. SAT
+MOD-2024l01  1-00224 and SAT-AMD-2024l0l7-00228  at 10 (filed Mar. 10, 2025) (SES/03b Comments); bitt see
+Opposition and Response of Space Exploration Holdings, LLC, ICFS File Nos. SAT-MOD-202410l 1-00224 and
+SAT-AMD-2024l017-00228   at 34, 36, 37 (filed Mar. 25. 2025) (SpaceX Opposition) (arguing the upgraded
+Gen2Starlink constellation will share orbital resources efficiently and responsibly, including by making its satellites’
+orbits available to the public and operating to promote space sustainability); Reply Comments of Telesat Canada.
+ICFS File Nos. SAT-AMD-202410l7-00228 and SAT-MOD-2024101  1-00224 at 2-3 (filed Apr. 4, 2025) (Telesat
+Reply) (supporting SpaceX’s request for flexibility and arguing the multiple possible configurations do not have a
+meaningful impact on the interference environment).
+
+                                                3
+                              Federal Communications   Commission                       DA  26-36
+
+additional frequency bands,’5 waiver of the processing round rules, and waiver of the EPFD limits, and
+address comments filed in response to SpaceX’s request.
+       8.      Waiver standard. As an initial matter, generally, the Commission may waive any rule for
+good cause shown.’6 Waiver is appropriate only if both (1) special circumstances warrant a deviation
+from the general rule, and (2) such deviation better serves the public interest)7 In making this
+determination, we may take into account considerations of hardship, equity, or more effective
+implementation of overall policy on an individual basis.’8
+
+
+5 For a full list of all authorized frequencies. including previously-authorized bands and bands we authorize today,
+as well as specifics on the number of satellites operating in each band and locations where those operations are
+authorized, see the frequencies section of the grant above. Some of the requested frequencies are included in a
+recent Commission notice of proposed rulemaking to make more spectrum available for satellite communications,
+and these frequencies are subject to the outcome of that rulemaking. Satellite Spectrum Abundance, Further Notice
+of Proposed Rulemaking and Notice of Proposed Rulemaking. FCC 25-29 (2025) (Spectrum Abundance NPRM).
+We note Echostar originally objected to SpaceX’s proposed use of the 2000-2020 MHz, 2020-2025 MHz, 2 160-
+2 170 MHz, and 2180-2200 MHz bands. Reply Comments of EchoStar Corporation. ICFS File Nos. SAT-MOD-
+20241011-00224 and SAT-AMD-20241017-00228  at 17-18 (filed Apr. 4,2025) (EchoStar Reply). Given
+Echostar’s pending sale of this spectrum to SpaceX and SpaceX’s parallel application for a separate satellite
+constellation using this spectrum, we find that Echostar’s objection does not warrant denying SpaceX’s request to
+operate in these hands. See Applications of Spectrum Business Trust 2025-1. Space Exploration Technologies
+Corp.. and EchoStar Corporation for Consent to Assign Spectrum and Earth Station Licenses (GN Docket No. 25-
+302): see also, ICFS file no. SAT-LOA-20250916-00282, GN Docket No. 25-340. Except as authorized in this
+grant, we defer consideration of SpaceX’s broader request to operate mobile satellite service (MSS) in the full 1429-
+2690 MHz range. and thus we do not discuss the merits of petitions. comments, and letters received on the record on
+that matter. See e.g., Petition of Globalstar, Inc. to Deny. ICFS File Nos. SAT-MOD-2024l01 1-00224 and SAT
+AMD-20241017-00228  (filed Mar. 10. 2025) (Globalstar Petition): Petition of Iridium Constellation LLC to
+Dismiss or Deny in Part. ICFS File Nos. SAT-MOD-2024l0l 1-00224 and SAT-AMD-202410l7-00228 at 1-2, 3-6
+(filed Mar. 10. 2025) (Iridium Petition): Letter from KaraLeihin Azocar. Vice President Regulatory. Iridium
+Constellation LLC. to Marlene H. Dortch. Secretary. FCC. ICFS File Nos. SAT-MOD-2024 1011-00224 and SAT
+AMD-2024l017-00228  (dated Mar. 10. 2025) (Iridium/IMSO March 10. 2025 Letter): Letter from Michele Lawrie
+Munro, Executive Director. Mobile Satellite Services Association, to Marlene H. Dortch. Secretary. FCC. ICFS File
+Nos. SAT-MOD-2024  1011-00224 and SAT-AMD-2024l017-00228 (dated Mar. 10. 2025) (MSSA March 10. 2025
+Letter): Letter from Steven Doiron. Vice President of Spectrum and Regulatory Affairs. Thuraya
+Telecommunications Company, to Marlene H. Dortch. Secretary, FCC. ICFS File Nos. SAT-MOD-2024 1011-00224
+and SAT-AMD-20241017-00228  (dated Mar. 10, 2025) (Thuraya March 10, 2025 Letter); Comments of the
+Aerospace and Flight Test Radio Coordinating Council, Inc., ICFS File Nos. SAT-MOD-2024 1011-00224 and
+SAT-AMD-202410l7-00228  (filed Mar. 10, 2025) (AFTRCC Comments): Letter from Veronique Blanc, Director
+of Partner Management. SITA. to Marlene H. Dortch. Secretary, FCC, ICFS File Nos. SAT-MOD-202410l 1-00224
+and SAT-AMD-20241017-00228  (dated Mar. 10. 2025) (SITA March 10. 2025 Letter): Comments of GPS
+Innovation Alliance. ICFS File Nos. SAT-MOD-202410l 1-00224 and SAT-AMD-202410l7-00228 (filed Mar. 10.
+2025) (GPSIA Comments); Comments of Aviation Spectrum Resources, Inc. and International Air Transport
+Association. ICFS File Nos. SAT-MOD-2024101 1-00224 and SAT-AMD-20241017-00228 (filed Mar. 10. 2025)
+(ASRI/IATA Comments). In light of the extensive federal use of 20.2-21 .2 GHz and 30.0-31.0 GHz bands, we also
+defer any action on these bands. In the event circumstances change and we re-open consideration of these bands, we
+will coordinate any applications with NTIA.
+
+‘647CFR   1.3.
+‘
+ NetworklP, LLC v. FCC, 548 F.3d 116, 125-128 (D.C. Cir. 2008) (citing Northeast Cellular Telephone Co. v.
+FCC, 897 F.2d 1164, 1166 (D.C. Cir. 1990)).
+
+8 Northeast Cellular. 897 F.2d at 1166 (“[Al waiver is appropriate only if special circumstances warrant a deviation
+from the general rule and such deviation will serve the public interest. The agency must explain why deviation better
+serves the public interest and articulate the nature of the special circumstances to prevent discriminatory application
+and to put future parties on notice as to its operation”): WAlT Radio i’. FCC. 418 F.2d 1153. 1159 (D.C. Cir. 1969)
+                                                                                    (continued....)
+                                               4
+                              Federal Communications    Commission                      DA  26-36
+
+               1.      Waivers of the U.S. Table of Allocations for Additional Frequency Bands
+        9.  As part of this authorization, we grant SpaceX’s request for waiver of the U.S. Table of
+Frequency  Allocations’9 to conduct global uplink communications in the 14.5-14.8 GHz, 17.3-17.8
+GHz,2° 5 1.4-52.4 0Hz, 92.0-94.0 GHz, 94.1-95.0 0Hz, 95.0-100.0 0Hz, 102.0-109.5 0Hz, and 111.8-
+ 114.25 0Hz (Earth-to-space) bands and global FSS downlink communications in the 18.6-18.8 0Hz
+(space-to-Earth) band on an unprotected and non-interference basis.2’ For the Ku-, Ka-, and V-band
+frequencies included in this waiver, SpaceX seeks to operate in additional, contiguous spectrum in order
+to achieve symmetrical download and upload speeds, thus enabling fiber-like service for American
+consumers  and bandwidth-intensive applications for American businesses in rural areas.22 SpaceX
+commits  to operating on an unprotected and non-interference basis and has designed its satellite system to
+permit sharing with other present and future operators of these bands.23 We note that Kuiper24 supports
+SpaceX’s  request for waiver of the Table of Frequency Allocations to permit operations outside the U.S.
+which  will allow SpaceX to compete with Europe and China.25
+
+        10. To address concerns that SpaceX has not provided sufficient technical information to
+demonstrate that its uplink operations in the 17.3-17.8 0Hz band will not cause interference to either
+geostationary orbit (GSO) FSS or Broadcast Satellite-Service (BSS) operators or NOSO downlink
+operators in this band,26 SpaceX has committed to complying with the ITU EPFD uplink limits to protect
+
+
+(“The agency’s discretion to proceed in difficult areas through general rules is intimately linked to the existence of a
+safety valve procedure for consideration of an application for exemption based on special circumstances.”).
+ 947
+     CFR § 2.106(a).
+
+20
+  SpaceX Gen2 Upgrade Amendment. Waiver Requests at 5-6: see also 47 CFR § 2.106(a). SpaceXs request for
+waiver of the U.S. Table, section 2.106(a) of the Commission’s rules, to allow NGSO FSS downlink in the 17.3-
+ 17.8 GHz bands is DISMISSED as MOOT after the Commission’s adoption of the 17 GHz Report and Order and
+the effectiveness of those new rules to permit space-to-Earth (downlink) use of the 17.3-17.8 GHz band by NGSO
+FSS space stations. See Anieiidnient of Parts 2 and 25 of the Com,nissio,, ‘s Rules to Enable NGSO Fixed-Satellite
+Seri’ice (Space-to-Earth) Operations in the 17.3-17.8 GH Band. lB Docket No. 22-273. Report and Order, 39 FCC
+Red 11156 (2024) (17 GH: Report and Order). The rules became effective on January 6. 2025.
+21 SpaceX’s operations in the W-hand (92.0-94.0 GHz. 94.1-95.0 GHz, 95.0-100.0 GHz, 102.0-109.5 GHz, and
+ 111.8-114.25 GHz bands) are non-conforming with the International Table of Frequency Allocations. SpaceX’s
+operations in these bands are on an unprotected, non-interference basis. See ITU Radio Regulations. Article 4.4.
+
+22 Gen2 Upgrade Amendment. Waiver Requests at 3.
+
+
+24
+  We  note that Kuiper has recently changed its name to Amazon Leo. See Project Kuiper is now Anaoii Leo,
+https://www.aboutamazon.com/news/amazon-leo/proiect-kuiper-becomes-amazon-Ieo, last visited Nov. 25, 2025.
+This Order will continue to refer to Kuiper.
+25 Comments of Kuiper Systems LLC. ICFS File Nos. SAT-MOD-2024101 1-00224 and SAT-AMD-20241017-
+00228 at 2 (filed Mar. 10. 2025) (Kuiper Comments) (stating that some bands that are allocated for FSS use outside
+of the United States are not allocated in the United States and that denying a waiver to American licensees could put
+them at a disadvantage with respect to satellite constellations licensed outside the United States).
+
+26 SES/03b Comments at 2. 8-9. Uplinks in the 17.3-17.8 GHz band are limited to BSS feeder links by the U.S.
+Table of Frequency Allocations, and SES!03b argues that without a technical demonstration of non-interference, the
+waiver would place the burden on primary users of the band to seek protection from a nonconforming user. We
+reject this argument because we find that, as stated above, the conditions we have adopted will ensure that SpaceX
+protects incumbents by first coordinating with them prior to commencing uplink operations and abiding by the ITU
+uplink EPFD limits to protect GSO satellites operating in the hand.
+
+                                                5
+                              Federal Communications    Commission                      DA  26-36
+
+these GSO  satellites from its transmitting earth stations in the Earth-to-space direction.27 Further, we
+condition this authorization such that prior to commencing uplink operations in the 17.3-17.8 GHz band,
+SpaceX  must protect existing operators in the band by completing coordination with existing earth station
+and terrestrial operators and providing the Commission with a demonstration that its uplink operations
+will not cause harmful interference to receiving earth stations and terrestrial operations in the band.
+Furthermore, SpaceX’s operations in these bands must be on an unprotected and non-interference basis,
+and SpaceX  must cease any operations immediately in the event of any harmful interference.
+
+        11. SpaceX requests authority for NGSO uplink operations in the W-band to enhance its
+parabolic earth station operations, particularly for backhaul use cases.28 The 92.0-94.0 GHz and 94.1-95.0
+GHz  bands are allocated domestically for Fixed, Mobile, Radio Astronomy, and Radiolocation services.29
+The 95.0-100.0 GHz  band is allocated domestically for Fixed, Mobile, Radio Astronomy, Radiolocation,
+Radionavigation, and Radionavigation-Satellite services.30 The 102.0-105.0 GHz band is allocated
+domestically for Fixed, Mobile, and Radio Astronomy services.3’ The 105.0-109.5 GHz and 111.8-
+ 114.25 GHz bands are allocated domestically for Fixed, Mobile, Radio Astronomy, and Space Research
+(passive) services.32 SpaceX states that using high-gain, narrow beam antennas will allow it to coexist
+with terrestrial fixed and mobile deployments, similar to its operations in the E-band.33 SpaceX seeks to
+use the W-band frequencies on a receive-only basis and its W-band earth stations will have a minimum
+elevation angle of 10 degrees for satellites operating below 400 km, 20 degrees for those operating
+between 400  km and 500 km, and 25 degrees for those operating above 500 km. We find that granting
+this waiver and allowing SpaceX to operate on a non-conforming basis in the W-band is in the public
+interest because it will allow SpaceX to make use of higher frequency bands that are lightly used to
+deliver additional capacity and faster broadband speeds to customers in unserved and underserved areas
+of the United States and around the world. As with all communications operating under waiver of the
+Commission’s  rules, SpaceX’s operations in these bands must be on an unprotected, non-interference
+basis.
+
+        12. Finally, we grant SpaceX’s request to conduct MSS as well as FSS operations in the 14.0-
+ 14.5 GHz (Earth-to-space), 19.7-20.2 GHz (space-to-Earth), 29.5-30.0 GHz (Earth-to-space), 39.5-40.5
+GHz  (space-to-Earth),34 50.4-51.4 GHz (Earth-to-space), 71.0-74.0 GHz (space-to-Earth), and 81.0-84.0
+GHz  (Earth-to-space) bands. We also grant SpaceX’s request for waiver of the U.S. Table and the
+Commission’s  Ka-band  Plan to permit SpaceX to use the 19.4-19.6 GHz (space-to-Earth) and 29.1-29.5
+GHz  (Earth-to-space) bands for FSS operations not limited to MSS feeder links. Consistent with
+SpaceX’s  commitments  in its application, we find good cause to grant the requested waiver and require
+SpaceX  to operate its MSS communications with the same technical characteristics as its FSS operations
+
+
+27 Gen2 Upgrade Amendment, Waiver Requests at 6. See also ITU Radio Regulations, Article 22. Although the
+
+ITU limits only apply to NGSO FSS transmitting earth stations in Regions 1 and 3, we also require SpaceX to
+comply with these limits for its transmitting earth stations in Region 2.
+
+28 See SpaceX Gen2 Upgrade Amendment, Waiver Requests at 14.
+2947
+     CFR § 2.106(a). The 94.0-94.1 GHz band is also allocated for Federal Earth Exploration Satellite (passive)
+and Space Research (active). Id.
+3047
+     CFR § 2.106(a); (c)(161). (342).
+‘
+  47 CFR § 2.106(a).
+32 Id.
+
+  See SpaceX Gen2 Upgrade Amendment, Waiver Requests at 14-15.
+‘
+  The 39.5-40.0 GHz band is allocated on a primary basis for Federal MSS and non-Federal FSS, and there is no
+non-federal MSS allocation. 47 CFR § 2.106(a). For SpaceX’s MSS operations in the 39.5-40.5 MHz band, we
+grant SpaceX, on our own motion, a waiver of the U.S. Table. 47 CFR § 2.106(a).
+                                                6
+                              Federal Communications   Commission                       DA  26-36
+
+to minimize risk of interference to other systems.35 Given SpaceX’s commitments and the Commission’s
+waiver of the EPFD limits discussed below, we find it is unnecessary to condition SpaceX’s MSS
+operations, as some commenters suggest, on compliance with the EPFD limits and the separate power
+flux density (PFD) limits.36 We also decline to dismiss or deny SpaceX’s waiver based on Iridium’s
+concern that grant of SpaceX’s request to operate “general FSS traffic”37 in the 19.4-19.6 GHz and 29.1-
+29.5 GHz  bands would effectively rewrite the Commission’s Ka-band plan without a rulemaking and that
+granting SpaceX’s waiver would require the Commission to grant comparable waiver requests from other
+FSS  operators.38 We disagree. SpaceX’s operations in these bands under this waiver must be on an
+unprotected and non-interference basis. Further, as noted in the grant, we condition SpaceX’s operations
+to require coordination of its FSS operations not limited to MSS feeder links with MSS operators prior to
+commencement   of operations, including Iridium, to protect MSS feeder link operations in these bands,
+which we  believe will sufficiently allay Iridium’s concerns.
+               2.      Processing Round  Considerations
+
+        13. We grant SpaceX’s request for waiver of the Commission’s processing round rules for the
+additional frequency bands authorized in this Order.39 This waiver also includes the previously-
+authorized V-band frequencies, which we authorize SpaceX to use on all 15,000 Gen2 Starlink
+satellites.40 The Commission’s rules set forth procedures for consideration of applications for NGSO
+
+
+  See e.g., SpaceX January 31, 2025 Letter at 7. For these reasons, we disagree with Iridiums argument that
+SpaceX has not demonstrated sufficient grounds for waiver to justify FSS operations in the 19.4-19.6 0Hz and 29.1-
+29.3 GHz bands.
+
+36 Petition of EchoStar Corporation to Dismiss or Deny, ICFS File Nos. SAT-MOD-2024 1011-00224 and SAT
+AMD-20241017-00228  at 21-22 (filed Mar. 10, 2025) (Echostar Petition): Comments of Eutelsat S.A. and WoridVu
+Satellites Limited, ICFS File Nos. SAT-MOD-2024 1011-00224 and SAT-AMD-20241017-00228 at 5-6 (filed Mar.
+10, 2025) (Eutelsat Comments).
+
+  See Iridium Petition at 7, n. 12; see SpaceX January 31. 2025 Letter at 5 (“SpaceX seeks authority to use these
+bands both as feeder links to support its MSS operations and excess capacity for general FSS traffic.”); SpaceX June
+5, 2025 Letter at 12 (defining “general FSS traffic” as “non-MSS-feeder-link traffic”).
+
+38 Iridium Petition at 2, 6-8. Iridium argues that grant of SpaceX’s waiver request will allow FSS to proliferate in
+the 19.4-19.6 GHz and 29.1-29.3 0Hz MSS feeder link bands where Iridium operates.
+  See 47 CFR § 25.156 and 25.157. Specifically, we waive the processing round rules for the 12.7-13.25 0Hz
+(Earth-to-space). 13.75-14.0 0Hz (Earth-to-space), 14.5-14.75 0Hz (Earth-to-space), 14.75-14.80 GHz (Earth-to-
+space). 15.43-15.63 0Hz (Earth-to-space), 17.3-17.8 0Hz (space-to-Earth and Earth-to-space), 18.6-18.8 GHz
+(space-to-Earth). 19.3-19.7 0Hz (space-to-Earth). 24.75-25.25 0Hz (Earth-to-space), 29.1-29.5 0Hz (Earth-to-
+space), 42.0-42.5 GHz (space-to-Earth). 5 1.4-52.4 0Hz (Earth-to-space), 92.0-94.0 0Hz (Earth-to-space), 94.1-95.0
+0Hz  (Earth-to-space), 95.0-100.0 0Hz (Earth-to-space). 102.0-109.5 0Hz (Earth-to-space), and 111.8-114.25 0Hz
+(Earth-to-space) bands. The licensee is required to complete coordination with federal users pursuant to US 334
+prior to operation in the bands between 17.8 0Hz and 20.2 0Hz.
+°
+  SpaceX’s initial V-band authorization, as modified to include the V-band communications on the Gen2 Starlink
+satellites, was originally only for 7,500 satellites. See generally Space Exploration Holdings, LLC, Application for
+ModifIcation ofAuthoriation of the SpaceX V-band NGSO Satellite System, Grant Stamp, ICFS File No. SAT
+MOD-20230322-00062   (SB, SPPD. granted-in-part/dismissed-in-part Oct. 13, 2023) (SpaceX First V-band
+Modification Grant); See also SpaceX Gen2 First Partial Grant. 37 FCC Rcd at 14883, 14896, paras. 2, 19. These
+frequencies include 37.5-40.0 0Hz (space-to-Earth). 40.0-42.0 0Hz (space-to-Earth), 47.2-50.2 0Hz (Earth-to-
+space), and 50.4-5 1.4 0Hz (Earth-to-space) bands. We note that SpaceX has submitted a further modification
+application related to its V-band capabilities, requesting modification of the bond and milestone conditions
+applicable to its V-band operations with the first tranche of 7,500 satellites. See ICFS File No. SAT-MOD-
+20240813-00183. This modification request remains pending, and partial grant of SpaceX’s Gen2 Upgrade
+Applications is without prejudice to any action in that proceeding.
+
+                                                7
+                           Federal Communications Commission                  DA  26-36
+
+
+satellite authorizations.4’ In most cases,42 applications not filed in response to a public notice initiating a
+processing round will be considered lead applications, and the Commission will initiate a new processing
+round and establish a cut-off date for the filing of competing applications.43 The Space Bureau has
+previously waived the processing round rules for SpaceX’s E-band frequencies, finding that SpaceX’s
+operations could coexist with existing users of the band and would not preclude other operators’ use of
+the band in the future, and conditioning waiver on SpaceX’s participation in any future processing round
+that includes the E-band frequencies.44 We find the same factors underlying that decision apply to these
+additional frequency bands.
+
+       14. SpaceX explains that its operations will not preclude future market entry in these bands.35
+Particularly in bands where it proposes to operate on a non-interference basis, only outside the United
+States, or in bands that are allocated only for Federal use, SpaceX argues that these operations would not
+preclude future market entry because the operations are not mutually exclusive.46 SpaceX also states that
+including these additional frequencies in processing rounds would delay SpaceX’s operations for years
+with no public interest benefit, when SpaceX is ready to put the spectrum to use for the benefit of
+American consumers and to promote American competition abroad.47 We find that it is more efficient
+and in the public interest to authorize SpaceX’s requested operations in the Ku-, Ka-, V-, and W-band
+frequencies, which will benefit consumers by expanding the capacity of SpaceX’s Gen2 Starlink system,
+than it would be to initiate additional processing rounds at this time. To commenters’ objections that
+SpaceX’s operations should not be authorized outside of a processing round, particularly regarding
+additional satellites authorized to communicate in the V-band,48 we note that SpaceX must participate in
+any future processing round the Commission may open in any of these bands. We emphasize that
+granting this portion of SpaceX’s application outside of a processing round does not confer on SpaceX
+higher priority with respect to later-authorized systems, either in a processing round or not. SpaceX must
+coordinate with any existing or future users of these bands, and the second tranche of SpaceX’s 7,500
+satellites must protect participants in the 2016 and 2021 V-band processing rounds.
+       15. Regarding frequencies previously authorized as part of the 2020 Ku/Ka-band Processing
+
+
+° See 47 CFR 25.156(d)(1), 25.157.
+
+42
+  See, e.g., 47 CFR § 25.157(b). (i) (applications for replacement satellites and applications filed under the
+streamlined process for small satellites or small spacecraft under sections 25.122 and 25.123 of the Commission’s
+rules are not subject to the Commission’s processing round framework).
+
+  See 47 CFR § 25.l57(c)(2).
+  Space Exploration Holdings, LLC, Request for Orbital Deployment and Operating Authority for the SpaceX Gen2
+NGSO Satellite Svste,n. Order and Authorization. 39 FCC Rcd 2159. 2 164-66. paras. 10-13 (SB rd. Mar. 8. 2024)
+(SpaceX Gen2 E-Band Partial Grant).
+
+  See SpaceX January 3 1. 2025 Letter at 3.
+46 Id.
+r
+  Id. at 3-4. 6-7; SpaceX Opposition at 10-1 1.
+48 See e.g., Opposition of Anuvu Licensing Holdings. LLC, ICFS File Nos. SAT-MOD-2024 1011-00224 and SAT
+AMD-20241017-00228 (filed Mar. 10, 2025) (Anuvu Opposition); Viasat 2025 Petition at 20-23; Echostar Petition
+at 22-24.
+
+                                           8
+                              Federal  Communications   Commission                      DA  26-36
+
+ Round49 and 2016 V-band Processing Round,5° we find that SpaceX has demonstrated that the
+ reconfiguration of the orbital parameters of its previously-authorized 7,500 Gen2 satellites will not result
+ in a significant increase to the interference environment from the original constellation as proposed,5’ and
+therefore under Commission precedent,52 we need not alter the processing round status for SpaceX’s
+previously-authorized Ku- and Ka-band operations as SESIO3b requests.53 As we have found in prior
+SpaceX  authorizations,54 SpaceX’s modified orbital parameters will allow it to better serve customers
+without significantly increasing interference into other systems authorized as part of earlier processing
+rounds. While  SES/03b  argues that SpaceX’s NGSO/NGSO   interference demonstration is deficient,55
+after review of the technical showings, we find that SpaceX has provided sufficient information to
+demonstrate that its modification will not significantly impact the overall interference environment of the
+
+
+  SpaceX filed its original application as part of the processing round initiated in 2020 for the 10.7-12.7 GHz,
+ 12.75-13.25 GHz, 13.85-14.5 GHz. 17.7-18.6 GHz, 18.8-20.2 0Hz, and 27.5-30.0 GHz bands (2020 Ku/Ka-Band
+Processing Round). See Cut-Off Establishedfor Additional NGSO FSS Applications or Petitions for Operations in
+the 10.7-12.7 GHz, 12.75-13.25 GH, 13.8-14.5 GH, 17.7-18.6 GH, 18.8-20.2 GHz, and 27.5-30 GHz Bands.
+Satellite Policy Branch Information. Report No. SPB-279. DA 20-325 (rd. Mar. 24, 2020) (2020 Ku/Ka-band
+Processing Round Public Notice).
+
+5°
+  Cut-off Establishedfor Additional NGSO-Like Satellite Applications or Petitions for Operations in the 37.5-40.0
+GH:, 40.0-42.0 GH, 47.2 -50.2 GH:. and 50.4-51.4 GH Bands, Public Notice. 31 FCC Red 11957 (lB 2016) (2016
+ V-band Processing Round Public Notice). We note that SpaceX is the only operator remaining in the 2016 V-band
+Processing Round.
+
+  Regarding the impact of modifications to systems licensed as part of a processing round, the Commission has
+stated that for applications to modify authorized NGSO systems that were originally subject to modified processing
+round procedures. “‘[ilf the proposed modification does not present any significant interference problems and is
+otherwise consistent with Commission policies, it is generally granted[.j’ hut if the modification ‘presents
+significant interference problems. [the Bureaul would treat the modification as a newly filed application and would
+
+consider the modification application in a subsequent satellite processing round.” See 47 CFR § 25,1 17(d)(2)(ii):
+Space Exploration Holdings. LLC, Request for Modification of the Au!horization for the SpaceX NGSO Satellite
+System. Order and Authorization and Order on Reconsideration, 36 FCC Rcd 7995. 8006-07. para. 16(2021)
+(SpaceX Ge,,! Third Modification Order) (quoting Teledesic LLC, Order and Authorization. 14 FCC Rcd 2261,
+2264, para. 5 (lB 1999)).
+
+52 Id.
+
+  See SES/03b Comments at 13.
+‘
+  See Space Exploration Holdings, LLC, Request for Deployment and Operating Authority for the SpaceX Gen2
+NGSO  Satellite System, Order and Authorization. 39 FCC Rcd 12550. 12584-85. paras. 58-59 (SB rd. Nov. 26,
+2024) (SpaceX Gen2 SCS and 300 kin Order).
+
+  SES!03b specifically argues that SpaceX used a degraded throughput analysis to measure interference into
+participants in the 2020 Ku/Ka-band Processing Round. when it should have analyzed interference to noise ratios
+before and after the proposed modifications to the system. The degraded throughput analysis. SES/O3b argues.
+should be used only for analyzing interference into participants in earlier processing rounds, not participants in the
+same processing round. SESIO3b conducted its own analysis and argues that SpaceX’s system. as upgraded. will
+cause increased interference into other NGSO systems in the 2020 Ku/Ka-band Processing Round. thus requiring the
+Commission to move SpaceX’s system to a new Ku/Ka-band processing round. SES/O3b Comments at 2-3. 10-16.
+Annex  2 and 3: see also Viasat 2025 Petition at 18-19. On the contrary. SpaceX argues that there is no single
+required method to analyze interference into participants in the same processing round, but since the Commission
+recently codified the degraded throughput analysis for demonstrating protection of participants in earlier processing
+rounds, it is the most appropriate approach and demonstrates no interference into the systems in the 2020 Ku/Ka
+band Processing Round. SpaceX Opposition at 4-6. 8-9. We find that SpaceX’s technical showings are sufficient to
+demonstrate that its modification will not significantly impact the overall interference environment of the 2020
+ Ku/Ka-band Processing Round.
+
+                                                9
+                              Federal Communications   Commission                       DA  26-36
+
+
+prior Ku/Ka-band processing round.56 SpaceX’s changes to its system’s parameters will not result in
+increased long term interference, but will likely increase the short-term interference into other NGSO
+systems.57 However, after reviewing the competing analyses, we find that SES/03b overestimates the
+short-term interference SpaceX’s modified operations will cause58 and the actual increase in short-term
+interference into other NGSO systems in the 2020 Ku/Ka-band Processing Round is not significant. We
+expect SpaceX to take additional interference mitigation measures with respect to other NGSO systems in
+the 2020 Ku/Ka-band Processing Round and to remedy any actual interference. Consequently, we see no
+reason to move SpaceX’s Ku- and Ka-band operations to a later processing round.
+               3.     Waiver  of EPFD  limits
+
+       16. Under the Commission’s rules, an applicant proposing operations in the 10.7-30 GHz range
+must certify that it will comply with applicable EPFD limits in Article 22, Section 2, and Resolution 76 of
+the ITU Radio Regulations, which have been incorporated by reference into the Commission’s rules.59
+Additionally, prior to beginning service, an NGSO operator licensed to operate in the 10.7-30 GHz range
+must obtain a favorable or qualified favorable finding from the ITU regarding its compliance with
+applicable EPFD limits, in accordance with Resolution 85 of the ITU Radio Regulations.6° The operator
+must then communicate the ITU finding to the Commission and submit the input data files used for the
+ITU validation software for public disclosure.61 The Commission previously partially waived the EPFD
+rules, allowing SpaceX to begin operations prior to receiving a favorable or qualified-favorable finding
+
+56 We also agree with SpaceX that the concerns raised by Eutelsat. namely that 29.988 Gen2 satellites will create in
+line events with co-frequency systems 100% of the time, are moot. See Eutelsat Comments at 2-3, 4-5 (requesting
+we resolve prior concerns raised on the record on this matter). SpaceX and Eutelsat have previously agreed to a
+coordination agreement. and Eutelsat’s subsidiary, WoridVu Satellites LTD (OneWeb). withdrew the comments in
+question that Eutelsat is now citing. Eutelsat does not explain any changed circumstances that would justify
+reviving its subsidiarys withdrawn comments or why the coordination agreement between SpaceX and Eutelsat
+does not address these concerns as WoridVu previously stated. See SpaceX Opposition at 7; Letter from David
+Goldman. Director. Satellite Policy, Space Exploration Technologies Corp.. and Kimberly M. Baum. VP. Spectrum
+Engineering and Policy, WorldVu Satellites Limited, to Marlene H. Dortch, Secretary, FCC. ICFS File Nos. SAT
+LOA-20200526-00055 and SAT-AMD-202  10818-00105. SAT-MPL-20200526-00062. SAT-APL-202  10112-00007
+(dated Jul. 21. 2022). Eutelsat also cites Viasat’s comments from its 2022 petition: “SpaceXs system would block
+smaller NGSO constellations almost 100% of the time, causing harmful interference and significantly reducing
+capacity, while SpaceX suffers no ill-effects because of the size of its system. Because NGSO systems need to split
+spectrum in the event of an in-line interference event, SpaceX and other operators would need to split spectrum
+100% of the time, greatly reducing capacity on the smaller system while SpaceX can use other satellites.” See
+Petition of Viasat. Inc., ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105 at I-Il, 4-9
+(filed Feb. 8, 2022) (Viasat 2022 Petition). But as discussed above, we have reviewed SpaceX’s updated technical
+showings and found that the upgraded Gen2 Starlink constellation will not increase interference into other NGSO
+systems. and certainly not to the degree these operators predict.
+
+ See SES/03b Comments. Annex 2 and 3. We observe that SpaceX underestimated the interference its system
+would cause by using a low receiver noise temperature in its analysis. as well as by applying adjusted antenna gain
+modelling for the antenna radiation pattern. Gen2 Upgrade Modification, Technical Attachment. Annex A; Gen2
+Upgrade Amendment, Technical Attachment, Annex A. We note that adjusted antenna gain modelling is still being
+studied at the ITU and has not been adopted.
+
+58 SES/03b conducted its analysis using a much higher number of co-frequency beams transmitting to the same
+location simultaneously (NCo) than SpaceX used in its analysis. SES/03b Comments, Annex 2 and 3; Gen2
+Upgrade Modification, Technical Attachment, Annex A: Gen2 Upgrade Amendment. Technical Attachment, Annex
+A.
+
+ See 47 CFR § 25.146(a)(2).
+
+60See 47 CFR § 25.146(c).
+61 Id.
+
+                                               10
+                           Federal Communications Commission                  DA  26-36
+
+
+from the ITU, conditioned on the requirements that it modify its operations should it receive an
+unfavorable finding and also that it provide the data files used as input to the ITU’s validation software to
+any interested party so as to confirm compliance with the limits.62
+       17. We grant SpaceX a time-limited waiver of the Commission’s single-entry EPFD downlink
+rules, with conditions. SpaceX argues that by exceeding the EPFD limits, it can provide better service to
+American consumers and businesses while not impacting GSO operators.63 SpaceX has also tested
+operations with higher power levels and a greater number of overlapping, co-frequency beams (higher
+NCo) in certain countries and reported the results to the Commission.64 The Commission is currently
+engaged in a rulemaking proceeding to review the current EPFD rules.65 We believe that while this
+rulemaking is ongoing, it is in the public interest to grant SpaceX’s request for waiver to allow it to
+exceed the EPFD limits, given the benefits to SpaceX’s service and thus American consumers and the
+continued protection of GSO operators.66 We grant this waiver subject to the completion of and rules
+adopted in the pending rulemaking.67 SpaceX must bring its operations into compliance with any new
+rules upon the effective date of those rules. To address claims that SpaceX’s operations in exceedance of
+the EPFD limits could cause interference to GSO networks,68 we condition SpaceX’s operations to ensure
+GSO  operators are protected. Specifically, this waiver is limited in application to SpaceX’s operations
+inside the United States. Outside the United States, SpaceX must continue to comply with the
+Commission’s and ITU’s EPFD rules and limits.69 In addition, we condition SpaceX’s operations under
+the waiver to address concerns about potential interference. Specifically, for operations in the Ku-band,
+SpaceX may not exceed an NCo of 8. SpaceX must also maintain a minimum GSO arc exclusion zone of
+4 degrees with respect to operational GSO satellites. These operational limits are within the envelope of
+
+
+62
+  See SpaceX Gen2 First Partial Grant. 37 FCC Rcd at 14907-9 10, paras. 37-40.
+
+63
+  Gen2 Upgrade Amendment, Waiver Requests at 18- 19: Gen2 Upgrade Amendment, Technical Attachment.
+Annex B: Gen2 Upgrade Modification. Technical Attachment. Annex B: SpaceX January 31. 2025 Letter at 10.
+
+64
+  See Letter from Cecilia Tenge-Rietberg. Sr. Satellite Policy Manager. SpaceX. to Marlene H. Dortch. Secretary.
+FCC. ICFS File Nos. SAT-MOD-202410l 1-00224 and SAT-AMD-20241017-00228 (filed Sept. 22. 2025) (SpaceX
+September 22, 2025 Letter).
+
+65 See Modernizing Spectrum Sharing for Satellite Broadband. Notice of Proposed Rulemaking, FCC 25-23 (Apr.
+28. 2025) (Modernizing Spectrum Sharing NPRM).
+
+66 Commenters argue that SpaceX’s waiver request falls short of the Commission’s waiver standard, arguing SpaceX
+has not demonstrated good cause and waiver would undermine the purpose of the rule. See e.g., Viasat 2025
+Petition at 6-8. 11-12; Echostar Petition at 13-20. On the contrary. we find the benefits to American consumers and
+American leadership and innovation in space demonstrate good cause for granting the waiver, and SpaceX’s
+demonstrations that its operations will not cause harmful interference to GSO operators. including the results of its
+real-world testing in other countries, coupled with the conditions we place on this waiver, indicate that waiver will
+not undermine the purpose of the rule.
+67 See Modernizing Spectriun Sharing NPRM.
+
+68
+ See e.g. SES/03b Comments at 2. 4-7: Viasat 2025 Petition at 12. 16-17, 19: Echostar Petition at 6-13. But see
+Kuiper Comments at 2-3: Telesat Reply at 4-5.
+
+69
+  SpaceX may exceed the EPFD limits outside the United States to the extent that it receives authorization from the
+relevant administration. See SpaceX Gen2 First Partial Grant, 37 FCC Rcd at 14907-9 10. paras. 37-40, For its
+operations outside the United States, and consistent with conditions on the prior partial waiver of section 25.146(c),
+SpaceX must submit modified ITU filings reflecting its upgraded system, obtain a favorable or qualified-favorable
+finding from the ITU that includes evaluation of the joint effect of SpaceX’s multiple ITU filings that comprise its
+Oen2 Starlink constellation, and provide its input data files to the ITU validation software to interested parties.
+These conditions are subject to the outcome of the Modernizing Spectru,n Sharing NPRM.
+
+                                          11
+                           Federal Communications Commission                  DA 26-36
+
+the testing that SpaceX has conducted in other countries.70 We believe that these operational limits will
+allow SpaceX to provide better service to consumers and operate at higher power levels while also
+alleviating concerns of harmful interference into GSO systems while the rulemaking proceeding is
+ongoing.7’ Finally, SpaceX’s operations under this waiver must be conducted on an unprotected, non
+interference basis. Specifically, in the event the Space Bureau notifies SpaceX of a determination that it
+has caused harmful interference, SpaceX must immediately return to operating in accordance with the
+Commission’s EPFD limits in the affected frequency bands. SpaceX will also be required to
+communicate to the Commission and to its affected customers how it is rectifying the situation if
+mediation will affect their services. The Space Bureau may revoke the waiver in the event of unresolved
+harmful interference.
+       18. Some commenters express concerns that waiving the single-entry EPFD limits would allow
+SpaceX to consume the entire budget for, or exceed, the aggregate EPFD limits on its own.72 At this time
+we do not prescribe how SpaceX, or any operator, must operate so as to meet the aggregate EPFD limits,
+beyond the conditions discussed above, but we note that SpaceX is still required to comply with the
+aggregate EPFD limits. SpaceX is also required to cooperate and coordinate in good faith with other
+NGSO  operators to allow multiple users to operate in the band while meeting the aggregate EPFD limits
+under our rules.73 We find that the requirement to cooperate and coordinate in good faith with other users,
+coupled with the conditions imposed on SpaceX’s operations pursuant to the waiver, should address
+concerns that the aggregate limits will be exceeded.
+       19. As part of this waiver, we also grant SpaceX’s request to remove the condition requiring
+operations using only one co-frequency, co-polarization beam in any given location (NCo of 1) in the
+12.2-12.7 GHz and 19.7-20.2 GHz bands. Since SpaceX’s operations exceeding the EPFD limits in the
+United States are limited to the technical parameters outlined above and must be conducted on a non
+interference basis, and SpaceX must continue to comply with the EPFD limits outside the United States,
+we find this condition to be redundant and unnecessary. We instead are requiring SpaceX to operate with
+no more than eight (8) co-frequency, co-polarization beams in any given location, an NCo of 8, in the Ku-
+band consistent with its testing.74 The “NCo of 1” condition was originally placed on SpaceX’s
+
+70 See SpaceX September 22, 2025 Letter (incorporating by reference comments of Space Exploration Holdings,
+LLC, SB Docket No. 25-157, at 3-4 & n.9 (July 28. 2025) (describing and citing test report from Romania): Reply
+Comments of Space Exploration Holdings. LLC. SB Docket No. 25-157, Technical Supplements (Aug. 27. 2025)
+(attaching test reports from Colombia and Nigeria); Jordan Info Document to ASMG-33. Inreiference !neasurenient
+campaign on EPFD limits in Jordan (Sept. 8, 2025); Botswana Info Document 14 to APM27-2, Botswana
+inte.’ference measurement campaign on EPFD limits (Aug. 1, 2025). For example, in the testing. SpaceX operates
+with a maximum NCo=8 and a minimum 4 degree GSO avoidance angle.
+‘
+ See e.g. SES/03b Comments at 2, 4-7; Viasat 2025 Petition at 12. 16-17, 19; Echostar Petition at 6-13. Since we
+have found that SpaceX’s operations, as conditioned, will protect GSO operations, we decline to reconsider analyses
+submitted on the record in 2022, as Viasat requests. Viasat 2025 Petition at 12, 19; see also Petition to Dismiss or
+Deny in Part of DISH Network Corporation. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+20210818-00105 (filed Feb. 8. 2022) {DISH 2022 Petition): Reply of DISH Network Corporation. ICFS File Nos.
+SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105 at 1-2. 7-8. 12. 17-18 (filed Mar. 8.2022) (DISH
+2022 Reply): Reply of Kuiper Systems LLC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+20210818-00105 at 18-19 (filed Mar. 3. 2022) (Kuiper 2022 Reply): Letter from Jarrett S. Taubman. Vice President
+and Deputy Chief. Government Affairs. Viasat. Inc., to Marlene H. Dortch, Secretary. FCC, ICFS File Nos. SAT
+LOA-20200526-00055 and SAT-AMD-202l0818-00105 at 3. Technical Annex (filed Jul. 18. 2022) (Viasat July 18.
+2022 Letter).
+
+72 See e.g. Eutelsat Comments at 2-3: SES!03b Comments at 7-8: Viasat 2025 Petition at 19-20.
+
+ See 47 CFR § 25.146:47 CFR § 25.108(c)(3) and (8) (incorporating by reference Article 22 of the ITU Radio
+Regulations and Resolution 76 of WRC-15).
+‘ See SpaceX September 22, 2025 Letter.
+
+                                          12
+                              Federal Communications   Commission                       DA  26-36
+
+authorization for its first generation constellation to address concerns raised on the record that SpaceX
+would not operate with an NCo of I as it claimed and would thus violate the EPFD limits.75 It was
+similarly extended to SpaceX’s second generation constellation after SpaceX made commitments on the
+record that it intended to operate with an NCo of 176 SpaceX now requests that we remove this
+condition, in line with its request to waive the EPFD limits.77 EchoStar and Viasat object to this request,
+arguing that this condition is necessary to protect GSO operators, because SpaceX will violate the EPFD
+limits without this condition.78 As discussed above, we waive the EPFD limits and condition this
+authorization to protect GSO operations. If EchoStar is correct that SpaceX cannot operate with more
+than one frequency beam at a time in these bands without causing harmful interference, then SpaceX must
+operate with only one frequency beam at a time to comply with the conditions on this authorization. As
+discussed in prior authorizations,79 operators may bring concerns of actual interference to the FCC and the
+FCC  will take appropriate action.
+       C.      Orbital Debris Mitigation
+       20. Modification offirst tranche of 7,500 satellites. We find that this modification does not
+materially alter the already approved mitigation plan and offers additional mitigation protections. The
+Commission  previously approved SpaceX’s orbital debris mitigation plan for its first tranche of 7,500
+satellites.80 Consistent with the Commission’s rules, SpaceX has also confirmed that there are no changes
+to its satellite design that would cause satellite components to survive atmospheric reentry and strike the
+ground with a force greater than 15 joules.8’ SpaceX initially provided the Commission with an envelope
+of physical dimensions,82 which the Commission considered in approving its orbital debris mitigation
+plan.83 While the upgraded Gen2 satellites will be larger than the original, SpaceX has confirmed that the
+physical dimensions are still within the previously approved parameters.84 SpaceX’s proposed changes to
+
+
+ See SpaceX Geni Third Modflcation Order, 36 FCC Rcd at 8019-8022. paras. 37-39. 43.
+76 SpaceX Gen2 First Partial Grant. 37 FCC Rcd at 14911-12, 14915, paras. 46. 55.
+
+  See SpaceX Gen2 Upgrade Modification. Technical Attachment at 5.
+
+78
+ See e.g. EchoStar Petition at 3-6. But see Kuiper Comments at 3-4 (supporting SpaceXs request to remove the
+condition): Reply of Telesat Canada. ICFS File Nos. SAT-AMD-20241017-00228 and SAT-MOD-2024101 I-
+00224, at 4 (filed Apr. 4, 2025) (Telesat Reply) (supporting SpaceX’s request to remove the condition).
+°
+  See e.g. SpaceX Gen2 First Partial Grant, 37 FCC Rcd at 14906-07, 14912, 14915, paras. 34, 46, 55.
+80 Gen2 First Partial Grant, 37 FCC Rcd at 14920-27. para. 70-86. The Space Bureau later addressed concerns
+specific to the altitudes below 400 km. See SpaceX Gen2 SCS and 300 km Order, 39 FCC Rcd at 12586-90, paras.
+62-72.
+
+81
+  SpaceX January 31. 2025 Letter at 12:47 CFR § 25.1 14(d)(l4)(vii)(d)(2)(ii).
+
+82
+ See Letter from David Goldman. Director. Space Exploration Technologies Corp.. to Marlene H. Dortch.
+Secretary. FCC. ICFS file Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105. at 2-4 (filed Aug. 19,
+2022) (SpaceX August 19. 2022 Letter): Letter from David Goldman, Senior Director. Satellite Policy. Space
+Exploration Technologies Corp.. to Marlene H. Dortch, Secretary. FCC, ICFS File Nos. SAT-LOA-20200526-
+00055 and SAT-AMD-20210818-00105, Exhibit B (dated Oct. 4. 2022) (SpaceX October 4, 2022 Letter).
+83 Gen2 First Partial Grant, 37 FCC Rcd at 14920-27, paras. 70-86. Prior Commission approval of SpaceX’s
+orbital debris mitigation plan was premised on the information SpaceX provided to the Commission, including logs
+from NASA’s Debris Assessment Software (DAS) and SpaceX’s inputs to those files. SpaceX clarified that it used
+conservative values for the physical dimensions of its satellites, larger than the satellites SpaceX intended to launch.
+to allow for changes in satellite design in the future. SpaceX August 19. 2022 Letter at 2-4’. SpaceX October 4.
+2022 Letter. Exhibit B.
+
+84
+ Gen2 Upgrade Amendment, Technical Attachment at 32: Gen2 Upgrade Modification. Technical Attachment at
+22. SpaceX also provided updated DAS inputs and results to confirm the Gen2 Starlink satellites will comply with
+                                                                                    (continued....)
+                                               13
+                              Federal  Communications   Commission                      DA  26-36
+
+the orbital parameters, especially the decrease in operational altitude, demonstrate that any satellites that
+experience a failure on orbit preventing SpaceX from using propulsion to lower the satellites at the end of
+their operational life will have a lower collision risk than if the satellites were operated at higher
+altitudes.85 For these reasons, we approve SpaceX’s orbital debris mitigation plan for the first tranche of
+7,500 satellites, as modified.
+        21. Second tranche of 7,500 satellites. We also approve the orbital debris mitigation plan for the
+second tranche of 7,500 satellites. In doing so, we address comments filed in 2022 that were deferred in
+prior orders, specifically concerns regarding collision risk and satellite failure rates.86 We note that
+SpaceX  continues to coordinate with NASA to protect inhabitable space stations, as well as launch
+windows  for resupply missions to the International Space Station and NASA’s science missions.87
+SpaceX  also continues to operate in accordance with its Space Act agreement with NASA, including
+limiting satellite deployment at altitudes below 400 km as coordinated with NASA.88 We find that these
+actions alleviate commenters’ concerns.
+        22. At this time, we also find that concerns regarding SpaceX’s collision risk and failure rates
+have been resolved. Comments  on this matter were submitted in 2022 and largely based on the
+performance  of SpaceX’s first generation constellation. While commenters have incorporated these
+concerns into the record for the Gen2 Upgrade Applications, they have not provided additional or updated
+
+
+the Commission’s collision risk rule. 47 CFR § 25.1 14(d)(14)(iv)(A). Gen2 Upgrade Amendment. Technical
+Attachment. Annex C: Gen2 Upgrade Modification. Technical Attachment. Annex C.
+85 Gen2 Upgrade Modification, Technical Attachment. Annex C. Satellites that can effectively maneuver are
+deemed to pose zero risk of collision under the Commission’s rules, in the absence of evidence to the contrary. 47
+CFR  § 25.1 14(d)( l4)(iv)(a)( I). See also SpaceX Gen2 SCS and 300 kin Order. 39 FCC Rcd at 12586. para. 63
+(“The operations of satellites in these lower orbits [below 400 kmj will result in a lower collision risk in the event of
+an anomaly during normal operations and will shorten the time required for post-mission disposal maneuvers”):
+SpaceX Geni Third Modification Order. 36 FCC Rcd at 8027, para. 54 (“we agree with SpaceX that specification of
+a lower altitude provides for operations that present considerably lower risk than at the higher altitude”).
+
+86 We will continue to monitor and evaluate orbital debris mitigation concerns as part of any potential authorization
+of additional satellites that we defer in this order, including discussion of the record regarding SpaceX’s orbital
+debris mitigation plans. which resolves Eutelsat’s request that we address concerns raised on the prior record. See
+Eutelsat Comments at 2-3 (requesting we resolve concerns raised in 2022 by its subsidiary WorldVu which
+WorldVu  subsequently withdrew).
+
+87 SpaceX January 31, 2025 Letter at 11. SpaceX notes that it coordinates closely with NASA and communicates
+with the Chinese manned space agency to protect all inhabitable space stations and visiting vehicles, and SpaceX
+commits to continuing to use its automated collision avoidance system to avoid conjunctions with inhabitable space
+stations. We again find this coordination resolves concerns raised by NASA on the original Gen2 application, as
+amended, including the additional satellites we authorize in this Order. See NTIA February 8, 2022 Letter, NASA
+Letter at 1-2,4; see also SpaceX Gen2 SCS and 300 kin Order, 39 FCC Rcd at 12586-87, para. 63.
+
+88
+  See e.g. SpaceX Gen2 SCS and 300 km Order. 39 FCC Rcd at 12551-52. 12561. 12587-88. paras. 2. 18. 65: Letter
+from Lauren E. Morgan. NASA Representative to the Commercial Transportation Interagency Group Space
+Operation Mission Directorate. Launch Services Office, to Marlene H. Dortch. Secretary. FCC. ICFS File Nos.
+SAT-LOA-20200526-00055.  SAT-AMD-202   10818-00105. SAT-AMD-2022 1216-00175. SAT-MOD-20230207-
+00021. SAT-AMD-20240322-0006  1, SAT-MOD-20240423-00089, SAT-STA-20240522-00  108. GN Docket No.
+23-135 (filed Nov. 19, 2024) (NASA November 19. 2024 Letter); Letter from David Goldman, Vice President
+Satellite Policy. Space Exploration Technologies Corp.. to Marlene H. Dortch. Secretary. FCC, ICFS File Nos.
+SAT-  LOA-20200526-00055, SAT-AMD-202  10818-00105. SAT-AMD-20240322-0006  1. SAT-MOD-20230207-
+00021, and SAT-MOD-20240423-00089  (filed Dec. 23, 2024) (SpaceX December 23, 2024 Letter); Letter from
+David Goldman, Vice President Satellite Policy, Space Exploration Technologies Corp. to Marlene H. Dortch.
+Secretary. FCC, ICFS File Nos. SAT-MOD-20230207-00021, SAT-AMD-20240322-00061, and SAT-MOD
+20240423-00089  (filed Dec. 18, 2025) (SpaceX December 18, 2025 Letter).
+
+                                                14
+                               Federal Communications   Commission                       DA  26-36
+
+
+ comments, even though SpaceX  has been operating its Gen2 Starlink satellites for nearly three years.89
+ Under the Commission’s rules, satellites that can maneuver effectively, including through use of
+ propulsion, are deemed to have zero collision risk.90 SpaceX’s Gen2 Starlink satellites include propulsion
+ and thus are deemed to have a collision risk of zero. SpaceX provided collision risk values for all
+ satellites in the event of an anomaly that would cause the satellite to lose maneuverability, and at all
+ authorized orbital altitudes SpaceX’s satellites comply with the Commission’s collision risk limits.9’
+ Commenters  who  filed in 2022 focused on the rates of disposal failure that SpaceX’s first-generation
+ satellites experienced, extrapolating that failure rate to a constellation of 29,988 satellites and arguing the
+ Commission  should consider the aggregate collision risk of the constellation, the residual risk posed by
+ maneuvering after conjunction warnings, and the risk of collision with lethal nontrackable debris.92 But
+ SpaceX has made  vast improvements between its first- and second-generation satellites. For example, in
+ the first year after SpaceX began reporting to the Commission for the first-generation system, SpaceX
+ reported 6 disposal failures,93 but in the first year operating the Gen2 Starlink satellites, SpaceX reported
+ 2 disposal failures.94 We acknowledge this is not a perfect comparison, as at the time SpaceX began
+ reporting to the Commission on its first-generation constellation, it had been operating satellites for
+ roughly two years and had already made improvements, while it reported on its second-generation
+ constellation from the beginning. However, the difference is still stark and illustrates that commenters’
+ concerns that hundreds to thousands of failed, non-maneuverable Gen2 Starlink satellites are unlikely to
+ come to pass. We will continue to monitor the failure rate of the Gen2 Starlink satellites through the
+ semiannual reports SpaceX is required to submit,95 and will have this data available for consideration of
+ any future Gen2 satellite authorization.96 SpaceX also deploys its satellites at low insertion altitudes to
+
+ 89 See e.g. Viasat 2025 Petition at 2; Eutelsat Comments at 2-3: Viasat 2022 Petition at III, 39, 44-46: Comments of
+ Kepler Communications, Inc., ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105 (filed
+ Jan. 24. 2021) (Kepler 2022 Comments).
+ 9047
+     CFR § 25.1 14(d)(14)(iv)(a)(1).
+  Id.
+
+ 92 See e.g.. Viasat 2022 Petition at lIt. 38-40. 44-50. We have previously addressed concerns regarding aggregate
+collision risk, residual risk, and lethal nontrackable debris. Gen2 First Partial Grant. 37 FCC Rcd at 14920-27.
+ para. 70-86: SpaceX Gen2 SCS and 300 kin Order. 39 FCC Rcd at 12586-90. paras. 62-72.
+  See general/v Report of Space Exploration Holdings, LLC. ICFS File No. SAT-MOD-20200417-00037 (filed Jul.
+ 1.2021) (SpaceX Geni July 1,2021 Report): Report of Space Exploration Holdings. LLC. ICFS File No. SAT
+ MOD-20200417-00037  (filed Dec. 13, 2021) (SpaceX Genl December 13, 2021 Report); Report of Space
+ Exploration Holdings, LLC, ICFS File No. SAT-MOD-202004l7-00037 (filed Dec. 31, 2021) (SpaceX Genl
+ December 31, 2021 Report); Report of Space Exploration Holdings. LLC, ICFS File No. SAT-MOD-20200417-
+00037 (filed Apr. 2.2022) (SpaceX GenI April 2.2022 Report): Report of Space Exploration Holdings, LLC. ICFS
+ File No. SAT-MOD-20200417-00037 (filed Jul. 1, 2022) (SpaceX Genl July 1, 2022 Report).
+  See generally SpaceX Gen2 June 30, 2023 Report: SpaceX Gen2 December 29. 2023 Report.
+
+  We  note that proposed reporting requirements for satellite systems are included in an ongoing rulemaking. See
+Space Modernization for the 2I’ Ce,iturv, Notice of Proposed Rulemaking. FCC 25-69, SB Docket No. 25-306 (rd.
+Oct. 29, 2025) (Space Modernization NPRM). This condition is subject to the outcome of that rulemaking.
+96 Kuiper and Telesat both request we remove the condition on SpaceX’s authorization that automatically requires
+ SpaceX to cease deploying satellites should the number of failed satellites at operational orbits exceed 100 object
+years (i.e. the number of years each failed satellite remains in orbit, summed across all failed satellites). See Kuiper
+Comments  at 3; Telesat Reply at 3-4. SpaceX did not request removal of this condition, and in fact has supported
+adding ii to other NGSO authorizations. Ex pane letter of Space Exploration Holdings, LLC. lB Docket No. 18-313
+(filed Jan. 17. 2023) (SpaceX January 17, 2023 Letter). We decline to remove the object years condition at this
+time. First, the object years condition is the subject of petitions for reconsideration before the full Commission. See
+Petition for Reconsideration of LeoLabs, Inc., ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+20210818-00105 (filed Dec. 30, 2022); Petition for Clarification of Viasat. Inc., ICFS File Nos. SAT-LOA
+                                                                                     (continued....)
+                                                15
+                               Federal Communications   Commission                       DA  26-36
+
+
+ conduct initial testing so any satellites that fail during the testing process will deorbit in a matter of days.97
+        23. We  also take this opportunity to address concerns related to specific orbital altitudes that
+ SpaceX  requests. Kepler expresses concerns that SpaceX’s first amendment significantly densified its
+ proposed 360 km orbital shell, posing a collision risk for satellites de-orbiting from higher, sun
+ synchronous orbits through SpaceX’s constellation, often without propulsion, like Kepler’s satellites.98
+ With respect to Kepler’s concerns, SpaceX has previously committed to taking responsibility for
+ conducting collision avoidance maneuvers, unless the other operator involved communicates that it
+ prefers to conduct the maneuver.99 Furthermore, as part of its approach to collision avoidance, SpaceX
+ now maneuvers  whenever a risk of conjunction is at least one in one million, which is two orders of
+ magnitude more cautious than the risk threshold utilized by a number of operators.’°° These practices and
+ commitments  together resolve concerns about increased collision risk in the 360 km shell, and we see no
+ need to impose additional conditions on SpaceX to address Kepler’s concerns.
+        24. We  do not adopt Kuiper’s proposed condition that would require SpaceX to operate satellites
+ only at nominal altitudes below 580 km, finding that the proposed condition is not necessary given the
+ other conditions on the license.°’ With this authorization, SpaceX is not authorized to deploy satellites
+ into nominal operational altitudes above 580 km)°2 Although we authorize SpaceX to operate satellites
+ with orbital tolerances in line with Resolution 8 of WRC-23, the highest operational altitude authorized is
+ 485 km, meaning that the highest a satellite could be located under this authorization is 585 km.i03
+ Kuiper does not request a condition to entirely restrict operations above 580 km, but rather only to restrict
+
+ 20200526-00055 and SAT-AMD-20210818-00105  (filed Jan. 3.2023). Second. because SpaceXs disposal failure
+ rate is so low, it is far below the 100 object years and thus nowhere close to triggering the requirement to cease
+ deployment, so this condition does not impede SpaceX’s operations while it is considered by the full Commission.
+  See SpaceX Gen2 First Partial Grant, 37 FCC Rcd at 14927-28. paras. 90-91. We note that the number of Gen2
+ Starlink satellites that SpaceX has proactively deorhited after initial testing is considerably higher than satellites that
+ have experienced a disposal failure. For example. in 2023, SpaceX reported that it screened 20 Gen2 Starlink
+ satellites from further deployment, as opposed to the 2 Gen2 Starlink satellites which experienced disposal failures
+ during the same time frame. See SpaceX Gen2 June 30. 2023 Report: SpaceX Gen2 December 29. 2023 Report.
+ Without testing at low altitudes, these satellites may have failed on orbit, increasing the overall collision risk posed
+ by the Gen2 Starlink constellation.
+
+   Kepler Comments at 2. The Commission deferred consideration of this concern in 2022. as it did not authorize
+ SpaceX to deploy satellites into its proposed 360 km shell. See SpaceX Gen2 First Partial Grant. 37 FCC Rcd at
+ 14923, para. 79. We further deferred consideration of this concern in 2024, given the limited deployment of
+ satellites authorized below 400 km. See SpaceX Gen2 SCS and 300 kni Order, 39 FCC Rcd at 12589-90, paras. 69-
+ 70.
+
+  Opposition of Space Exploration Holdings. LLC. JCFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+ 20210818-00105 at 10-11,20 ((filed Feb. 24, 2022) (SpaceX 2022 Consolidated Opposition): SpaceX August 19,
+ 2022 Letter at 4: see also SpaceX Gen2 First Partial Grant. 37 FCC Rcd at 14923. para 78 (noting SpaceX’s
+ commitment to conduct physical coordination when the other operator involved in a conjunction warning lacks
+ propulsion, but also noting that collision avoidance is the responsibility of all operators, including operators whose
+ satellites lack propulsion, and thus opposing a condition on SpaceX’s authorization that would require SpaceX to
+ take° complete responsibility for collision avoidance maneuvers).
+   See e.g. SpaceX Gen2 July 1, 2024 Report.
+
+ iOi Kuiper Comments at 4.
+
+ 102 We continue to defer SpaceX’s request to operate satellites in shells centered at 604 km and 614 km.
+
+ 03 Satellites currently located between 525 km and 535 km that SpaceX is authorized to lower to altitudes between
+475 km and 485 km may be located at altitudes higher than 585 km given the orbital tolerances authorized in this
+ grant. but these satellites will be moved to lower altitudes because SpaceX must relocate all ot’ its 500 km orbital
+ shells to lower altitudes pursuant to this grant.
+
+                                                16Ù
+                               Federal Communications   Commission                       DA  26-36
+
+
+ operations with nominal altitudes above 580 km.’°4
+        D.      Protection of Optical Astronomy
+        25. The Commission  and the Space Bureau have previously examined the impacts of SpaceX’s
+ Gen2 Starlink constellation on optical astronomy. The Commission has required SpaceX to work with
+ NASA,  the National Science Foundation (NSF), and the astronomy community to mitigate the impacts
+ caused by its satellites reflecting sunlight. Further, the Commission continues to monitor the optical
+ astronomy impacts as SpaceX deploys its satellites as part of the Commission’s obligation to ensure that
+ its actions benefit the public interest, convenience, and necessity.’°5 NASA, NSF, and a number of
+ individual astronomers, amateur astronomy groups, professional societies, and universities previously
+ filed letters and comments on the Gen2 application, as amended, expressing concerns that the Gen2
+ Starlink satellites would result in severe negative impacts on astronomy, particularly because of the vast
+ number of satellites SpaceX plans to deploy and the lower operational altitudes of its satellites (meaning
+ that the satellites would increase brightness, though they reflect sunlight for a shorter period of time).’°6
+ SpaceX coordinates with NSF on an ongoing basis and has committed to working with the astronomy
+
+
+ 04 Kuiper Comments at 3.
+
+ 05
+   See SpaceX Gen2 First Partial Grant. 37 FCC Red at 14930-3 1, paras. 96-97: SpaceX Gen2 SCS and 300 k,n
+ Order. 39 FCC Red at 12593, para. 80.
+ °
+   NTIA  February 8, 2022 Letter, NASA Letter at 2-3. NSF Letter at 1; Viasat 2022 Petition at IV, 2. 6 1-67:
+ Comments of the Natural Resources Defense Counsel and International Dark Sky Association, ICFS File Nos. SAT
+ LOA-20200526-00055 and SAT-AMD-20210818-00105   at 9-10 (filed Sept. 7. 2022) (NRDC/IDA Comments):
+ Letter from Professor Andy Lawrence. Institute for Astronomy. University of Edinburgh. to Marlene H. Dortch,
+ Secretary, FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00l05 (dated Sept. 18,
+ 2022) (Andy Lawrence September 18, 2022 Letter): Letter from Mark Phillips. President, the Astronomical Society
+ of Edinburgh, to Marlene H. Dortch, Secretary, FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+ 20210818-00105 (dated Sept. 23, 2022) (The Astronomical Society of Edinburgh September 23, 2022 Letter); Letter
+ from Sierra Solter Hunt. PhD Candidate in Plasma Physics, University of Iceland, to Marlene H. Dortch. Secretary.
+ FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105 (dated Sept. 23. 2022) (Sierra
+ Solter Hunt September 23. 2022 Letter): Letter from Tyler Kokjohn. to Marlene H. Dortch. Secretary. FCC, ICFS
+ File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00105 (dated Sept. 26. 2022) (Tyler Kekjohn
+ September 26. 2022 Letter): Letter from Samantha Lawler, Assistant Professor for Astronomy, University of
+ Regina. to Marlene H. Dortch. Secretary. FCC, ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD
+ 20210818-00105 (dated Sept. 30. 2022) (Samantha Lawler September 30. 2022 Letter); Letter from Carrie Nugent.
+Associate Professor of Computational Physics and Planetary Science, Olin College of Engineering, to Marlene H.
+ Dortch, Secretary. FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00l05 (dated Sept.
+ 30. 2022) (Carrie Nugent September 30. 2022 Letter): Letter from Meredith Rawis. University of Washington
+ Department of Astronomy. to Marlene H. Dortch. Secretary. FCC, ICFS File Nos. SAT-LOA-20200526-00055 and
+SAT-AMD-202l08l8-00105   (dated Oct. 5. 2022) (Meredith Rawls October 5, 2022 Letter): Letter from Roberto
+Trotta, Imperial College London and International School for Advanced Study, Trieste, Italy, to Marlene H. Dortch.
+ Secretary. FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-202108l8-00055 (dated Oct. 6. 2022)
+ (Roberto Trotta October 6, 2022 Letter); Letter from Cameron Nelson, Tenzing Startup Consultants, to Marlene H.
+ Dortch, Secretary. FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-202108l8-00105 (dated Oct.
+ 10. 2022) (Cameron Nelson October 10. 2022 Letter); Letter from Graeme Cuffy to Marlene H. Dortch, Secretary,
+FCC.  ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-202108l8-00105 (dated Oct. 11, 2022) (Graeme
+Cuffy October 11, 2022 Letter): Letter from Melissa Shipp. to Marlene H. Dortch. Secretary. FCC. ICFS File Nos.
+ SAT-LOA-20200526-00055  and SAT-AMD-20210818-00105  (dated Oct. 26. 2022) (Melissa Shipp October 26.
+2022 Letter): Letter from Professor Mike Edmunds, President. Royal Astronomical Society, to Marlene H. Dortch,
+Secretary, FCC, ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-202l08l8-00105 (dated Nov. 10.
+ 2022) (RAS November 10, 2022 Letter). While none of these parties (except Viasat) have reiterated their concerns
+ in the proceeding for the Gen2 Upgrade Applications, we consider their comments again given the increase in
+satellites we authorize in this Order and the Commission’s previous commitments to reevaluate and continue to
+monitor the effects of the system.
+
+                                                17
+                               Federal Communications   Commission                       DA 26-36
+
+ community  to mitigate impacts of its satellites on optical astronomy.’07 SpaceX has also made critical
+ strides in mitigating the brightness of its satellites through darkening and light deflection away from the
+ Earth, along with making detailed satellite tracking information available to astronomers.108 While we
+ authorize SpaceX to deploy additional satellites, we find that the SpaceX’s commitments and actions
+ taken to work with Federal agencies and the astronomy community to coordinate and mitigate the impacts
+ of its Gen2 Starlink constellation continue to be sufficient to resolve concerns raised on the prior
+ record.’°9 SpaceX continues to work with the astronomy community in good faith to minimize the
+ impacts of its satellites’ reflectivity on optical astronomy, so that Americans can continue to benefit from
+ both the Starlink service and the scientific and cultural importance of the night sky.
+        E.      Protection of the Human Environment
+        26.     Based on the orbital debris mitigation plan and efforts to protect optical astronomy
+ discussed above, and review by the Federal Aviation Administration (FAA) discussed below, we find
+ that, at this juncture, environmental review under the National Environmental Policy Act (NEPA) is
+unnecessary.°° In the SpaceX Gen2 First Partial Grant, the Commission evaluated environmental
+concerns raised on the record in the context of SpaceX’s first and second-generation satellites combined,
+which, prior to this authorization, totaled 11,908 satellites.11’ We follow the same approach the
+Commission   took in the SpaceX Gen2 First Partial Grant, which was upheld by the D.C. Circuit, where
+the Commission  assumed that the National Environmental Policy Act (NEPA) applies to authorization of
+SpaceX’s  Gen2 Starlink constellation and evaluated whether environmental review under NEPA was
+ required, without deciding on whether NEPA applies to activities that take place entirely in outer space in
+
+
+ ‘°
+   See SpaceX Gen2 First Partial Giant, 37 FCC Rcd at 14930-31, para. 96: SpaceX Gen2 SCS and 300 km Order.
+39 FCC Rcd at 12592-93. para. 79; SpaceX Gen2 December 29. 2023 Report. Attachment 2 at 1-2: see Letter from
+David Goldman. Vice President of Satellite Policy. Space Exploration Technologies Corp.. to Merissa L. Velez.
+Chief. Satellite Programs and Policy Division. FCC. ICFS File Nos. SAT-LOA-20200526-00055, SAT-AMD
+20210818-00105, SAT-AMD-2022  1216-00175. SAT-MOD-20240423-00089, SAT-MOD-20230207-0002l,   SAT
+AMD-20240322-00061,  and GN Docket No. 23-135 at 7-8 (dated June 20. 2024) (SpaceX June 20, 2024 Letter).
+We  also note specifically that since SpaceX is lowering the altitude of the satellites previously operating between
+525 and 535 km, SpaceX will no longer he operating Gen2 Starlink satellites at nominal altitudes above the Hubble
+Space Telescope, greatly minimizing NASA’s concerns about impacts to Rubble’s operations. See NTIA February
+ 8. 2022 Letter. NASA Letter at 2-3, NSF Letter at 1.
+
+ 108 As discussed in prior SpaceX orders, SpaceX has taken a number of measures to mitigate reflected sunlight from
+its satellites, including incorporating brightness mitigation into the design of its satellites and making changes to
+ material specifications, satellite geometries, and maneuver operations to reduce brightness. While SpaceX has
+explained that its satellites will be bright enough to be visible to the naked eye immediately after launch and during
+orbit-raising and deorbit phases. as well as during collision avoidance burns, as during these times SpaceX cannot
+maneuver to mitigate reflected sunlight while also meeting mission objectives, SpaceX is continuing to refine its
+mitigation practices to resolve this problem. SpaceX has continued to coordinate with NSF. NASA. and the
+astronomy community to minimize the impact of its satellites on science missions, including to ensure any increased
+brightness of lower altitude satellites is offset by benefits such as transiting more quickly through the field of view.
+being visible to fewer observers, and passing into Earths shadow more quickly after sunset. SpaceX Gen2 First
+Partial Grant. 37 FCC Rcd at 14930-31, para. 96: SpaceX Gen2 SCS and 300 km Order. 39 FCC Rcd at 12592-93.
+para. 79.
+
+ 109 We note that the Commission and Space Bureau have previously found that these actions and commitments are
+also sufficient to mitigate concerns that satellite reflectivity will increase diffuse sky glow. See SpaceX Gen2 First
+Partial Grant. 37 FCC Rcd at 14944-45. para. 122-123: SpaceX Gen2 SCS and 300 km Order. 39 FCC Rcd at
+ 12593-94. para. 81. We continue to find this to be the case.
+ °°
+   See SpaceX Gen2 First Partial Grant, 37 FCC Rcd at 14933-46. paras. 103-125.
+
+ ‘‘Id. at 14937, 14942. paras. 112, 117.
+
+                                                18
+                              Federal Communications   Commission                       DA  26-36
+
+general.’  Viasat, the Natural Resources Defense Counsel and International Dark Sky Association
+(NRDC/IDA),”3   and the Ukrainian Congress Committee of America (UCCA)  raise concerns related to
+atmospheric effects caused by rocket launches and reentering satellites,”4 effects on the orbital
+environment from increased collision risk in space,”5 and impacts to professional and amateur astronomy
+and human  health and culture caused by satellites reflecting sunlight.”6
+        27.    We  reiterate that the FAA conducts environmental review of the environmental effects of
+rocket launches, and has thus reviewed or is reviewing any potential impacts from SpaceX’s launches.”7
+Under NEPA,   an agency need not undertake environmental review that is already conducted by another
+agency.”8 We  also reiterate that we have reviewed SpaceX’s orbital debris mitigation plans and
+SpaceX’s  commitments  to mitigate the impacts of its satellites’ reflectivity on astronomy under the
+Commission’s  rules, and our review indicates that allegations of a significant environmental effect in
+these contexts are insufficient to warrant further environmental review under NEpA.”9 As to the
+potential impacts of reentering satellites on the atmosphere, we found in the SpaceX Gen2 First Partial
+Grant that petitioners had not demonstrated potential impacts with the specificity necessary to overcome
+the categorical exclusion.’20 Specifically, the scientific evidence presented at the time, as confirmed by a
+Government  Accountability Office review, recognized that there was uncertainty surrounding potential
+
+112 Id. at 14933-34, para. 103. The Commission at that time found that the concerns raised on the record did not
+warrant environmental review under NEPA. Id. at 14935-36, para. 109. We note the Commission recently adopted
+a notice of proposed rulemaking proposing to modify its NEPA regulations to conform with recent changes to the
+NEPA  statute, Supreme Court decisions, and executive orders, including a proposal to explicitly exclude satellites
+and space-based operations from review under NEPA. See Modericing the Comn,ission ‘s National Environmental
+Policy Act Rules, Notice of Proposed Rulemaking. WT Docket No. 25-217, FCC 25-47, para. 33 (Aug. 7, 2025).
+(NEPA  NPRM).
+‘‘
+   We note the NRDC/IDA did not participate in the Gen2 Upgrade Application proceeding. though as part of the
+Commission’s commitment to revisit these concerns for a larger deployment of Gen2 Starlink satellites, we consider
+their comments filed in 2022 as part of this analysis. See NRDC/IDA Comments.
+“‘
+   See e.g. Viasat 2022 Petition at III-IV. 2, 56-61: NRDC/IDA Comments at 1-2.5-6,7, 8: Petition to Deny or
+Hold in Abeyance of Ukrainian Congress Committee of America, Inc., ICFS File Nos. SAT-MOD-2024101 1-00224
+and SAT-MOD-20240813-00183   at 3-4. 6-11 (filed Dec. 4,2024) (UCCA Petition)
+
+‘‘ See e.g. Viasat 2022 Petition at IV-V, 67.
+
+116 See e.g. Viasat 2022 Petition at IV. 2, 61-67; NRDC/IDA Comments at 9-10: Andy Lawrence September 18,
+2022 Letter: The Astronomical Society of Edinburgh September 23, 2022 Letter; Sierra Solter Hunt September 23,
+2022 Letter; Tyler Kokjohn September 26, 2022 Letter: Samantha Lawler September 30. 2022 Letter; Carrie Nugent
+September 30, 2022 Letter; Meredith Rawls October 5, 2022 Letter; Roberto Trotta October 6. 2022 Letter: Graeme
+Cuffy October 11. 2022 Letter; RAS November 10, 2022 Letter.
+‘‘
+   See SpaceX Gen2 First Partial Grant, 37 FCC Rcd at 14938-39. para. 115. See also Federal Aviation
+Administration, Final Environmental Assessment SpaceX Falcon 9 Operations at Space Launch Complex 40, Cape
+Canaveral Space Force Station. Florida,
+https://www.faa.gov/space/stakeholder engagement/SpaceX Falcon SLC 40 EA (Aug. 22, 2025): Federal
+Aviation Administration. SpaceX Starship-Super Heavy Project at Kennedy Space Center Launch Complex 39A,
+Draft Environmental Impact Statement, https://www.regulations.gov/document/FAA-2024-1395-0075 (Aug. 2025).
+
+ 118
+   47 CFR § 1.1311(e) (“An EA need not be submitted to the Commission if another agency of the Federal
+Government has assumed responsibility for determining whether [1 the facilities in question will have a significant
+effect on the quality of the human environment ): See also SpaceX Gen2 First Partial Grant. 37 FCC Rcd at
+ 14938-39, para. 115. We note that the Commission’s recent notice of proposed rulemaking to modify its NEPA
+regulations includes a proposal to amend these rules to comply with the amended NEPA or otherwise streamline the
+rules and how to document review by another agency. NEPA NPRM at paras. 74-79.
+
+ 119 See SpaceX Gen2 First Partial Grant, 37 FCC Rcd at 14943-45, para. 119, 122-23. 125, sections III.c and d.
+ ‘20Id at 14942-43,para. 117-118.
+
+                                                19
+                               Federal Communications   Commission                       DA 26-36
+
+ effects and that further study would be beneficial.12’ Three years later, petitioners have not presented any
+ new information on the record. Viasat merely incorporates its 2022 petition into the record of the Gen2
+ Upgrade Applications,’22 and while the UCCA provides an estimate of how many tons of Gen2 Starlink
+ satellites are expected to reenter the atmosphere daily, it provides no specific evidence supporting
+ potential or actual impacts on the atmosphere caused by these reentering satellites.’23 The record still
+does not demonstrate that reentering satellites may impact the human environment. We note that SpaceX
+ has committed to working with the scientific community to develop methods to study the effects of
+ reentering satellites on the atmosphere,’24 and we find at this time no additional review under NEPA is
+ necessary.
+        F.      UCCA’s  Motion  for Stay
+        28. Finally, we deny UCCA’s Motion for Stay.’25 The UCCA argues that Elon Musk’s
+ appointment as co-head of the Department of Government Efficiency (DOGE) was a violation of the
+ Federal Advisory Committee Act (FACA)  of 1972 and therefore the FCC should stop processing all
+ applications and requests filed by SpaceX until any conflicts of interest are eliminated’26 In considering
+ requests for a stay, the Commission generally looks to the four criteria set forth in Virginia Petroleum
+Jobbers Association.’27 These criteria are: (1) a likelihood of success on the merits; (2) the threat of
+ irreparable harm absent the grant of preliminary relief; (3) the degree of injury to other parties if relief is
+ granted; and (4) the issuance of the order will further the public interest.’28 The Commission then
+ balances these interests in order to determine an administrative response on a case-by-case basis.’29 We
+conclude that UCCA  has not demonstrated a likelihood of success on the merits. DOGE did not make
+any submissions in the record of the above-captioned proceedings. Accordingly, given the lack of any
+such submissions, the Commission did not rely on any input from DOGE in these proceedings. In
+ addition, Elon Musk left his government role around the end of May 2025,130 so the conflict-of-interest
+
+ 121 Id. at 14942-43, para. 117-118: see also GAO Technology Assessment, Large Constellations of Satellites,
+Mitigating Environmental and Other Effects. GAO-22-105 166. at 10-17 (Sept 2022).
+
+ 122 See Viasat 2025 Petition at 2: Viasat 2022 Petition at 58-61.
+
+ 123 See UCCA Petition at 3.
+
+ 121 Letter from David Goldman. Director. Satellite Policy, Space Exploration Technologies Corp., to Marlene H.
+ Dortch, Secretary, FCC. ICFS File Nos. SAT-LOA-20200526-00055 and SAT-AMD-20210818-00l05 at 2 (dated
+ Oct. 27, 2022) (SpaceX October 27, 2022 Letter): see also SpaceX Gen2 First Partial Grant. 37 FCC Rcd at 14942.
+para. 117.
+ 125 Ukrainian Congress Committee of America, Inc., Motion for Stay of Application of Space Exploration Holdings,
+LLC, for Amendment of Application for the SpaceX Gen2 NGSO Satellite System, ICFS File No. SAT-MOD-
+ 20241011-00224 (filed Dec. 4. 2024). We note that the Motion for Stay was filed in ICFS File No. SAT-MOD-
+ 202408 13-00183. which is SpaceX’s application for modification of the V-band NGSO Satellite System. The file
+ number in the caption of the Motion for Stay. however, is SAT-MOD-2024 1011-00224, the SpaceX Gen2 Upgrade
+Modification. We address this Motion for Stay here, as it is addressed to SpaceX’s Gen2 Upgrade Modification and
+ Amendment, rather than the SpaceX V-band Milestone Modification Application.
+
+ 26 UCCA Motion for Stay at 1-2 (“Musk’s dual role as head of SpaceX and his proposed role with DOGE violates
+ FACA.”).
+
+ 127
+   Virginia Petroleun, JobbersAss’n i’. Federal Power Con,n,ission, 259 F.2d 921, 925 (D.C. Cir. 1958). See also
+ Inpleinentatioi of Sections 309(j) and 337 of the Con,,nunications Act of 1934 as Amended. Order. 18 FCC Red
+ 25491, 25494, para. 6(2003) (PLMR NarrowbandStav Order).
+
+ 28 PLMR Narrowband Stay Order. 18 FCC Red at 25494, para. 6.
+
+ 129 Id.
+
+ 130 See CNBC. “Elon Musk Thanks Trump. Says He’s Leaving Government Work with DOGE” (May 29, 2025).
+ https://www.cnbc.com/2025/05/28/elon-musk-trump-doge.html.
+                                                20
+                           Federal Communications Commission                  DA  26-36
+
+concerns underlying the Motion for Stay are moot. We also find that staying the processing of all
+applications and requests filed by SpaceX as requested by UCCA would harm the public interest by
+delaying the deployment of new services to the public and that the other criteria in Virginia Petroleum
+Jobbers Association do not weigh in favor of a stay. Accordingly, we deny the Motion for Stay.
+IV.   ORDERING    CLAUSES
+      29. Accordingly, IT IS ORDERED, that the Gen2 Upgrade Applications filed by Space
+Exploration Holdings, LLC (SpaceX), ARE GRANTED-IN-PART and DEFERRED-IN-PART  to the
+extent set forth above, pursuant to sections 0.51 and 0.261 of the Commission’s rules, 47 CFR § 0.51
+and 0.261, and section 309(a) of the Communications Act of 1934, as amended, 47 USC § 309(a).
+       30. IT IS FURTHER ORDERED  that the petitions to deny filed by Viasat, Inc. in 2022 and 2025
+are DENIED-IN-PART  and DEFERRED-IN-PART,  to the extent set forth above.
+
+      31. IT IS FURTHER ORDERED   that the petition to deny filed by Echostar Corporation is
+DENIED.
+
+      32. IT IS FURTHER ORDERED   that the petition to deny filed by DISH Network Corporation in
+2022 is DENIED.
+
+      33. IT IS FURTHER ORDERED   that the petition to deny or hold in abeyance filed by the
+Ukrainian Congress Committee of America, Inc., is DENIED-IN-PART and DEFERRED-IN-PART, to
+the extent set forth above.
+
+      34. IT IS FURTHER ORDERED   that the opposition filed by Anuvu Licensing Holdings LLC is
+DENIED.
+
+       35. IT IS FURTHER ORDERED  that the petition filed by Iridium Constellation LLC is
+DENIED-IN-PART   and DEFERRED-IN-PART,  to the extent set forth above.
+
+       36. IT IS FURTHER ORDERED  that the petition filed by Globalstar Inc. is DEFERRED.
+       37. IT IS FURTHER ORDERED  that the motion for stay filed by the Ukrainian Congress
+Committee of America is DENIED.
+                                        FEDERAL  COMMUNICATIONS      COMMISSION
+
+
+                                        Jay Schwarz
+                                        Chief
+                                        Space Bureau
+
+
+                                          21

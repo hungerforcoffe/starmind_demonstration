@@ -1,0 +1,21 @@
+import * as C from './core.js';
+import * as sat from './satellite.es.js';
+let t=performance.now();
+const T = C.runCoreTests({satlib: sat, quick: false});
+for (const r of T) console.log(r.estado.padEnd(5), r.id.padEnd(5), r.obtenido.padEnd(40), '| esp', r.esperado, '|', r.nota);
+console.log('core tests ms', (performance.now()-t).toFixed(0));
+t=performance.now();
+const S = C.buildSynth(C.expandGroups(C.DEFAULT_STARMIND, 2), 12345);
+console.log('Starmind n=', S.n, 'build ms', (performance.now()-t).toFixed(0));
+const tRef = Date.UTC(2026,10,27,0,0);
+const src = C.synthSource(S, ()=>({tRef, deploy:1, on:[1,1,1], M:[7.87,7.87,5.7]}));
+t=performance.now();
+const ctxT = C.runContextTests([src], src, {nPoint:300});
+for (const r of ctxT) console.log(r.estado.padEnd(5), r.id.padEnd(6), r.obtenido, '| esp', r.esperado);
+console.log('context ms', (performance.now()-t).toFixed(0));
+console.log('chile offset nov', C.chileOffsetH(Date.UTC(2026,10,27)), 'jun', C.chileOffsetH(Date.UTC(2027,5,21)));
+const nw = C.nightWindow(Date.UTC(2026,10,26,20)); console.log('night', new Date(nw.start).toISOString(), new Date(nw.end).toISOString());
+const sm = C.solarMidnight(Date.UTC(2026,10,26,20)); console.log('solar midnight', new Date(sm.ms).toISOString(), sm.alt.toFixed(2));
+console.log('astro end', new Date(C.astroTwilightEnd(Date.UTC(2026,10,26,20))).toISOString());
+// streak peak example
+console.log(C.streakPeak(4.89, 688.8, 0.625, 'r'), 'sky', C.skyPerPix('r',30));

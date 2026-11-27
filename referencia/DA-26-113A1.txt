@@ -1,0 +1,43 @@
+﻿	Federal Communications Commission	DA 26-113
+
+
+						DA 26-113
+Released:  February 4, 2026
+
+SPACE BUREAU ACCEPTS FOR FILING 
+SPACEX’S APPLICATION FOR ORBITAL DATA CENTERS 
+
+ICFS File No. SAT-LOA-20260108-00016
+
+Comments/Petitions Due: March 6, 2026
+Response to Comments/Oppositions to Petition Due: March 16, 2026
+Replies to Responses/Oppositions Due: March 23, 2026 
+
+By this Public Notice, the Space Bureau (Bureau) accepts for filing and seeks comment on an application by Space Exploration Holdings, LLC (SpaceX) for a new non-geostationary orbit (NGSO) system of up to one million satellites. Space Exploration Holdings, LLC, Application for Authority to Launch and Operate the SpaceX Orbital Data Center System, ICFS File No. SAT-LOA-20260108-00016 (Call Sign S00798) (filed Jan. 30, 2026) (Application). 
+  This satellite system will represent the “first step towards becoming a Kardashev II-level civilization – one that can harness the Sun’s full power,” according to SpaceX. Application, Narrative at 1.  The Kardashev scale is a hypothetical method of measuring a civilization’s technological advancement based on its energy consumption; a Type II civilization can harness and utilize all the energy output of its host star.  See N.S. Kardashev, Transmission of Information by Extraterrestrial Civilizations, 8 Soviet Astronomy 217-221 (1964).
+  
+
+On January 30, 2026, SpaceX filed an application seeking authority to launch and operate a new NGSO satellite system of up to one million satellites to operate as the “SpaceX Orbital Data Center system” (System).  The System will operate at altitudes ranging from 500 km to 2,000 km and in 30 degree and sun-synchronous orbit inclinations within orbital shells spanning up to 50 km each. Application, Narrative at 1.  SpaceX plans to design and operate different versions of satellite hardware for its operations across orbital shells.
+  The proposed satellites will use high-bandwidth optical inter-satellite links and conduct telemetry, tracking, and command (TT&C) operations. Application, Attachment A at A-1 (Technical Attachment).
+  The Bureau seeks comment on the application and the associated requests for waiver.
+
+SpaceX’s proposed System will primarily rely on optical intersatellite-links, which may connect with other satellites in the proposed System and with satellites in SpaceX’s first- and second-generation Starlink systems. Application, Narrative at 6.  See e.g., Space Exploration Holdings, LLC Request for Orbital Deployment and Operating Authority for the SpaceX Gen2 NGSO Satellite System, Order and Authorization, 37 FCC Rcd 14882, 14927 (2022) (SpaceX Gen2 Authorization); Space Exploration Holdings, LLC Application for Authority for Modification of the SpaceX NGSO Satellite System, Order and Authorization, DA 26-36 (SB rel. Jan 9, 2026) (SpaceX Gen2 Upgrade Authorization); Space Exploration Holdings, LLC, Application for Approval for Orbital Deployment and Operating Authority for the SpaceX NGSO Satellite System, Memorandum Opinion, Order and Authorization, 33 FCC Rcd 3391 (2018) (SpaceX Gen1 Authorization); Space Exploration Holdings LLC, Grant Stamp, ICFS File No. SAT-MOD-20230215-00036 (Granted Aug. 16, 2024) (SpaceX Gen1 Fourth Modification Grant); Space Exploration Holdings, LLC, Request for Modification of the Authorization for the SpaceX NGSO Satellite System, Grant Stamp, ICFS File No. SAT-MOD-20241104-00251 (Mar. 17, 2025) (SpaceX Gen1 Swarm Modification).  SpaceX states that the “optical links will route traffic within the network and to satellites in the Starlink constellation, via its high capacity (petabit) and high reliability laser mesh, which in turn will transmit traffic to authorized earth stations on the ground.”  Application, Narrative at 1. 
+  SpaceX requests authority to use the 18.3-19.3 GHz (space-to-Earth) and 28.6-29.1 GHz (Earth-to-space) frequency bands on a non-interference, unprotected basis.
+
+In connection with its application, SpaceX requests the following waivers of the Commission’s rules Application, Waiver Requests. 
+: 
+· Waiver of sections 25.156(d) and 25.157 of the NGSO processing and processing round procedures to allow for consideration of its application for the requested use of the 18.3-19.3 GHz and 28.6-29.1 GHz frequency bands outside of a processing round. 
+· Waiver of section 25.164 to exempt the System from the NGSO milestone requirements and deployment obligations. 
+· Waiver of section 25.165 to exempt the System from the NGSO surety bond requirements and obligations. 
+· Waiver, to the extent necessary, of section 25.114(a)(1) governing information to be submitted on the Commission’s Schedule S form, with specific regard to channel plans for licensed beams, uplink and downlink beams, command beams, and orbital plane configurations. 
+
+Ex Parte Rules.  Pursuant to section 1.1200(a) of the Commission’s rules, 47 CFR § 1.1200(a).
+ the Commission may adopt modified or more stringent ex parte procedures in particular proceedings if the public interest so requires.  We announce that this proceeding will be governed by permit-but-disclose ex parte procedures that are applicable to non-restricted proceedings under section 1.1206 of the Commission’s rules. 47 CFR § 1.1206.  
+  This proceeding shall be treated as a “permit-but-disclose” proceeding in accordance with the Commission’s ex parte rules. 47 CFR §§ 1.1200 et seq.
+  Participants in this proceeding should familiarize themselves with the Commission’s ex parte rules. 
+Filing Procedures.  Interested parties may file comments and petitions on or before the dates indicated on the first page of this document. 47 CFR §§ 1.2, 1.405. 
+  All filings must be filed in the Commission’s International Communications Filing System (ICFS) and refer to ICFS File No. SAT-LOA-20260108-00016 in accordance with section 25.154 of the Commission’s rules.  
+People with Disabilities.  To request materials in accessible formats for people with disabilities (braille, large print, electronic files, audio format), send an e-mail to fcc504@fcc.gov or call the Consumer & Governmental Affairs Bureau at 202-418-0530 (voice). 
+Availability of Documents.  Comments and reply comments, petitions, and ex parte submissions will be available via ICFS.  Documents will be available electronically in ASCII, Microsoft Word, and/or Adobe Acrobat.
+-FCC-
+2
