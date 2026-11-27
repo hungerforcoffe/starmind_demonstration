@@ -13,7 +13,7 @@ RAW = [
     ('<meta property="og:site_name" content="Impacto orbital">', '<meta property="og:site_name" content="Orbital impact">'),
     ('content="El cielo de Rubin bajo un millón de satélites"', 'content="Rubin\'s sky under a million satellites"'),
     (f'<meta property="og:url" content="{SITE}">', f'<meta property="og:url" content="{SITE}en/">'),
-    (f'content="{SITE}og.png"', f'content="{SITE}og_en.png"'),
+    (f'content="{SITE}og.png?v=2"', f'content="{SITE}og_en.png?v=2"'),
     ('content="La Tierra rodeada por las órbitas de un millón de satélites Starmind; texto: 7 de cada 10 imágenes al anochecer tendrían trazas de satélites."',
      'content="The Earth surrounded by the orbits of a million Starmind satellites; text: 7 out of 10 images at dusk would show satellite streaks."'),
     ('<a class="lang-link" href="en/" hreflang="en" lang="en">English</a>', '<a class="lang-link" href="../" hreflang="es" lang="es">Español</a>'),
