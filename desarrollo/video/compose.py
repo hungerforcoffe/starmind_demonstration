@@ -36,7 +36,8 @@ T = {
    s4pre='Escenario con el despliegue completo (2040)', s4m='Plazos de la FCC: 10 % en 2035, 50 % en 2038 y el millón completo en 2040',
    s4a='7 de cada 10 imágenes al anochecer', s4b='tendrían trazas de satélites',
    s4c='La FCC solo aprobó el plan de desechos de las capas bajo 600 km', s4d='No impuso condiciones para la astronomía óptica',
-   s4e='Simulación con supuestos declarados · código abierto', url='hungerforcoffe.github.io/starmind_demonstration'),
+   s4v='El espacio es inmenso en volumen, pero un telescopio no ve volumen: ve el cielo como una superficie, y ahí se juntan todos los satélites que hay en la línea de visión.',
+   s4e='Es una simulación: el reparto por capa, la hora de paso de las órbitas y el brillo real no son públicos, así que son supuestos.'),
  'en': dict(
    brand='Orbital impact', brand2='Starmind 1M over Vera C. Rubin',
    s1a='The FCC authorized Starmind', s1b='1,000,000 satellites', s1c='25 November 2026 · between 500 and 1,002 km altitude',
@@ -49,7 +50,8 @@ T = {
    s4pre='Full deployment scenario (2040)', s4m='FCC deadlines: 10 % by 2035, 50 % by 2038 and the full million by 2040',
    s4a='7 out of 10 images at dusk', s4b='would show satellite streaks',
    s4c='The FCC approved the debris plan only for the shells below 600 km', s4d='It set no conditions for optical astronomy',
-   s4e='Simulation with declared assumptions · open source', url='hungerforcoffe.github.io/starmind_demonstration/en'),
+   s4v='Space is vast in volume, but a telescope does not see volume: it sees the sky as a surface, where every satellite along the line of sight piles up.',
+   s4e='This is a simulation: the split by shell, the orbit timing and the actual brightness are not public, so they are assumptions.'),
 }[LANG]
 
 meta = json.load(open(f'{SRC}/meta.json', encoding='utf8'))
@@ -175,12 +177,20 @@ def scene4(i, n):
                 img.alpha_composite(lay)
             alpha_text(img, (76, y), line, font(28, 500), TXT, a); y += 40
         y += 22
-    a = ease((t - 2.6) / 0.6)
-    alpha_text(img, (56, 900), T['url'], font(30, 500), CYAN, a)
-    alpha_text(img, (56, 950), T['s4e'], font(20, 400), MUT, a)
+    # cierre: por qué se nota en astronomía (el cielo es una superficie) y aclaración de los supuestos
+    a = ease((t - 2.8) / 0.7)
+    y = max(y + 18, 800)
+    lay = Image.new('RGBA', img.size, (0, 0, 0, 0)); ImageDraw.Draw(lay).line([56, y, 1024, y], fill=LINE + (int(255 * a),), width=1); img.alpha_composite(lay)
+    y += 26
+    for line in wrap(d, T['s4v'], font(27, 500), 968):
+        alpha_text(img, (56, y), line, font(27, 500), CYAN, a); y += 36
+    a2 = ease((t - 4.2) / 0.7)
+    y += 16
+    for line in wrap(d, T['s4e'], font(20, 400), 968):
+        alpha_text(img, (56, y), line, font(20, 400), MUT, a2); y += 27
     return img
 
-scenes = [(scene1, 210), (scene2, 300), (scene3, 180), (scene4, 195)]  # el cierre dura 1 s más por la viñeta de plazos
+scenes = [(scene1, 210), (scene2, 300), (scene3, 180), (scene4, 285)]  # el cierre deja tiempo para leer la idea final y la aclaración
 XF = 12  # cuadros de fundido entre escenas
 shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 k = 0; prev_tail = None
