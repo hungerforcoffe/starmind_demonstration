@@ -34753,13 +34753,15 @@ let glW = 0, glH = 0;
 function drawView(cv, scene, cam, bg) {
   const r = cv.getBoundingClientRect();
   if (r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth) return false;
-  const w = Math.round(r.width), h = Math.round(r.height), pw = Math.round(w * DPR), ph = Math.round(h * DPR);
+  // mismo redondeo hacia abajo que three.js en setViewport: si no, con escalado 125/150 % se copia 1 px de la otra vista
+  const w = Math.round(r.width), h = Math.round(r.height), pw = Math.floor(w * DPR), ph = Math.floor(h * DPR);
   if (w > glW || h > glH) { glW = Math.max(glW, w); glH = Math.max(glH, h); renderer.setSize(glW, glH, false); }
   if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
   if (cam.isPerspectiveCamera) { cam.aspect = w / h; cam.updateProjectionMatrix(); }
   else { const a = w / h; cam.left = -Math.max(1, a); cam.right = Math.max(1, a); cam.top = Math.max(1, 1 / a); cam.bottom = -Math.max(1, 1 / a); cam.updateProjectionMatrix(); }
-  renderer.setViewport(0, 0, w, h); renderer.setScissor(0, 0, w, h);
-  renderer.setClearColor(bg, 1); renderer.clear(); renderer.render(scene, cam);
+  renderer.setClearColor(bg, 1);
+  renderer.setScissorTest(false); renderer.clear(); renderer.setScissorTest(true); // sin restos de la vista anterior
+  renderer.setViewport(0, 0, w, h); renderer.setScissor(0, 0, w, h); renderer.render(scene, cam);
   const ctx = cv._ctx || (cv._ctx = cv.getContext('2d'));
   ctx.drawImage(glCanvas, 0, glCanvas.height - ph, pw, ph, 0, 0, pw, ph);
   return true;
