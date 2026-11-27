@@ -160,15 +160,17 @@ body[data-mode=expert] #simple,body[data-mode=simple] #expert{display:none}
 .learn-card p{color:var(--muted);max-width:620px}
 
 /* modo científico */
-.expert-layout{min-height:calc(100vh - 64px);display:grid;grid-template-columns:286px minmax(520px,1fr) 330px}
-.control-rail{border-right:1px solid var(--line);padding:18px 18px 40px;background:rgba(8,13,18,.7);overflow-y:auto;max-height:calc(100vh - 64px);position:sticky;top:64px}
+.expert-layout{min-height:calc(100vh - 64px);display:grid;grid-template-columns:340px minmax(420px,1fr) 330px}
+.control-rail{border-right:1px solid var(--line);padding:18px 20px 40px;background:rgba(8,13,18,.7);overflow-y:auto;overflow-x:hidden;max-height:calc(100vh - 64px);position:sticky;top:64px}
 .rail-title{font-size:13px;font-weight:600;padding:1px 2px 12px}
 .control-section{border-top:1px solid var(--line)}
 .control-section summary{list-style:none;cursor:pointer;min-height:43px;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:13px}
 .control-section summary::-webkit-details-marker{display:none}
 .control-section summary .icon{transition:transform .2s;color:var(--muted)}
 .control-section[open] summary .icon{transform:rotate(180deg)}
-.section-content{padding:0 0 16px;display:grid;gap:9px}
+.section-content{padding:0 0 16px;display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+.section-content>*{min-width:0}
+.control-rail .coord-switch button{white-space:normal;line-height:1.25}
 .input-with-icon{position:relative}
 .input-with-icon .icon{position:absolute;left:10px;top:11px;color:var(--muted);pointer-events:none}
 .input-with-icon input{width:100%;padding-left:34px}
@@ -179,7 +181,7 @@ body[data-mode=expert] #simple,body[data-mode=simple] #expert{display:none}
 .quick-links button{padding:6px 8px}
 .range-head{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:3px}
 .range-head strong{color:var(--text);font-family:var(--mono);font-weight:500}
-.range{accent-color:var(--orange);width:100%}
+.range{accent-color:var(--orange);width:100%;margin:0}
 .coords{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .coords label{color:var(--muted);font-size:11px;display:grid;gap:4px}
 .coords input,.coords select{width:100%;padding:8px}
@@ -227,8 +229,11 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
 .dialog footer{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
 .dialog footer .muted{margin-right:auto}
 
+@media (max-width:1300px){
+  .expert-main .scene-hint{display:none}
+}
 @media (max-width:1100px){
-  .expert-layout{grid-template-columns:255px minmax(420px,1fr) 295px}
+  .expert-layout{grid-template-columns:300px minmax(380px,1fr) 295px}
   .topbar{grid-template-columns:260px 1fr auto}
   .top-context{display:none}
   .simple-layout{width:calc(100% - 32px)}
@@ -433,7 +438,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
         <label class="scenario-row"><input type="checkbox" id="onS0" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--blue)"></span><span class="scenario-name">Starlink actual (TLE)</span><span class="scenario-count" id="nS0"></span></label>
         <label class="scenario-row"><input type="checkbox" id="onS1"><span class="fake-check"></span><span class="scenario-dot" style="background:var(--green)"></span><span class="scenario-name">Starlink Gen2</span><span class="scenario-count" id="nS1"></span></label>
         <label class="scenario-row"><input type="checkbox" id="onS2" checked><span class="fake-check"></span><span class="scenario-dot" style="background:var(--orange)"></span><span class="scenario-name">Starmind 1M</span><span class="scenario-count" id="nS2"></span></label>
-        <div class="coord-switch"><button class="active" data-layers="all" type="button">6 capas (hasta 1.002 km)</button><button data-layers="low" type="button">Solo &lt; 600 km</button></div>
+        <div class="coord-switch"><button class="active" data-layers="all" type="button">Las 6 capas</button><button data-layers="low" type="button">Solo bajo 600 km</button></div>
         <div class="muted">Solo las capas bajo 600 km tienen plan de desechos aprobado (DA 26-1273 ¶11, cond. 4).</div>
         <div class="range-head"><span>Starmind desplegado</span><strong id="deployLab">100 %</strong></div>
         <input class="range" type="range" id="deploy" min="0" max="100" step="1" value="100">
