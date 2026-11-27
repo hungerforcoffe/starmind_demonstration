@@ -2,13 +2,13 @@
 
 [Español](README.md) · **English**
 
-[![Rubin's sky under a million satellites](og.png)](https://hungerforcoffe.github.io/starmind_demonstration/)
+[![Rubin's sky under a million satellites](og_en.png)](https://hungerforcoffe.github.io/starmind_demonstration/en/)
 
 Interactive 3D simulator of the damage SpaceX's **Starmind** megaconstellation would cause to observations at the **Vera C. Rubin Observatory** (Cerro Pachón, Chile). Starmind covers up to 1,000,000 satellites operating as orbital data centers; the FCC authorized it on 25 Nov 2026 (DA 26-1273).
 
-### ▶ [Open the simulator](https://hungerforcoffe.github.io/starmind_demonstration/)
+### ▶ [Open the simulator](https://hungerforcoffe.github.io/starmind_demonstration/en/) · [versión en español](https://hungerforcoffe.github.io/starmind_demonstration/)
 
-It runs in the browser with nothing to install. The interface is in Spanish (see the glossary below).
+It runs in the browser with nothing to install. The page is available in English and Spanish; the link in the top bar switches language.
 
 ---
 
@@ -50,13 +50,13 @@ Starmind only, 200 random pointings above 30° altitude, 30 s exposures:
 - **Exposure:** tapping a point in the sky takes a 30 s exposure there and shows what LSSTCam would see. On load it shows a typical example: of 31 random fields, the one with the median number of streaks.
 - **Lost image:** shown for two cases side by side, "if the satellites are darkened like current Starlink" and "if they are not darkened".
 
-### Advanced mode ("Avanzado")
+### Advanced mode
 
 - **Time:** any date and time, accelerated playback and shortcuts (end of twilight, solar midnight, start of dawn, winter solstice).
 - **Scenarios:** checkboxes, Starmind shells, a deployed-fraction slider following the FCC milestones, a layer editor (altitude, inclination, N, planes, LTAN) and live TLE refresh from CelesTrak.
 - **Earth's shadow:** cylindrical or conical with penumbra. It changes which satellites are sunlit.
 - **LSSTCam:** click the sky or enter alt/az or RA/Dec (J2000) to point and expose. Under the image are Starmind's brightness (optimistic 6.0, central 5.7, pessimistic 2.7 or custom), the u–y band, 1 × 30 s or 2 × 15 s exposure and the Mallama 2023 phase function. These only change how each satellite looks, not how many cross the field.
-- **Tabs:**
+- **Tabs** (diagnostic test descriptions are in Spanish):
   - **Night chart:** sunlit satellites above 30° and streaks per exposure through the night, per scenario.
   - **Exposure:** details of the last exposure and statistics over N random pointings.
   - **Sources & assumptions:** every parameter with its status and source.
@@ -74,18 +74,6 @@ The page detects phones and draws 1 in 10 Starmind satellites so the views stay 
 | `?t=2026-11-27T01:00:00Z` | Opens at a given UTC date and time (default: today's end of astronomical twilight) |
 | `?diag=1` | Opens advanced mode and runs the diagnostics |
 | `?lite` · `?full` | Forces the light phone mode, or disables it |
-
-### UI glossary
-
-| Spanish | English |
-|---|---|
-| Constelaciones en el cielo · Todas sus capas · Solo bajo 600 km | Constellations in the sky · All shells · Below 600 km only |
-| Hora en Cerro Pachón · puesta / salida del sol | Time at Cerro Pachón · sunset / sunrise |
-| Impacto estimado · X de cada 10 imágenes saldrían con trazas | Estimated impact · X out of 10 images would show streaks |
-| Elige dónde apuntar · Lo que vería LSSTCam | Choose where to point · What LSSTCam would see |
-| Modo simple / avanzado | Simple / advanced mode |
-| Gráfico de la noche · Exposición · Fuentes y supuestos · Diagnóstico | Night chart · Exposure · Sources & assumptions · Diagnostics |
-| iluminado / en sombra · traza | sunlit / in shadow · streak |
 
 ## What the FCC says (DA 26-1273, 25 Nov 2026)
 
@@ -173,8 +161,9 @@ The full table and discussion (in Spanish) are in [`FASE3_FASE4.md`](FASE3_FASE4
 | Path | Contents |
 |---|---|
 | `index.html` | The whole simulator in a single file (what GitHub Pages serves) |
-| `og.png` | Link preview image (1200×630) |
-| `desarrollo/` | Sources: `core.js` (physics, no UI), `main.js` (scene, shaders, UI), `template.html` (styles and layout), `build.py` (generates `index.html` and holds the sources table), `test_core.mjs` (core tests with Node) |
+| `en/index.html` | The English version, generated from the same sources |
+| `og.png` · `og_en.png` | Link preview images (1200×630), Spanish and English |
+| `desarrollo/` | Sources: `core.js` (physics, no UI), `main.js` (scene, shaders, UI), `template.html` (styles and layout), `build.py` (generates `index.html` and `en/index.html`, and holds the sources table), `i18n_en.py` (English translation; `build.py` fails if a text is left untranslated), `test_core.mjs` (core tests with Node) |
 | `referencia/` | FCC texts, McDowell's subshell list, the Starlink GP snapshot from 26 Nov 2026 and reference Python scripts (`reference.py`, `montecarlo.py`) |
 | `FASE1_FASE2.md` | Source research, architecture, hand-checkable cases, test plan and review against the full FCC text (Spanish) |
 | `FASE3_FASE4.md` | Diagnostic results, limitations and what better data would change (Spanish) |

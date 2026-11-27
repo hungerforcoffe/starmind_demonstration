@@ -17,6 +17,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="La Tierra rodeada por las órbitas de un millón de satélites Starmind; texto: 7 de cada 10 imágenes al anochecer tendrían trazas de satélites.">
+<link rel="alternate" hreflang="es" href="https://hungerforcoffe.github.io/starmind_demonstration/">
+<link rel="alternate" hreflang="en" href="https://hungerforcoffe.github.io/starmind_demonstration/en/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="El cielo de Rubin bajo un millón de satélites">
 <meta name="twitter:description" content="Simulación interactiva del daño que la constelación Starmind de SpaceX (un millón de satélites, autorizada por la FCC en noviembre de 2026) causaría en las imágenes del Observatorio Vera C. Rubin.">
@@ -46,7 +48,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 *{scrollbar-width:thin;scrollbar-color:#30404a transparent}
 
 /* barra superior */
-.topbar{height:64px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:330px 1fr auto;align-items:center;padding:0 28px;position:sticky;top:0;z-index:50;background:rgba(5,9,13,.96);backdrop-filter:blur(16px)}
+.topbar{height:64px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:330px 1fr auto auto;column-gap:16px;align-items:center;padding:0 28px;position:sticky;top:0;z-index:50;background:rgba(5,9,13,.96);backdrop-filter:blur(16px)}
 .brand{display:inline-flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}
 .brand-copy{display:flex;flex-direction:column;gap:1px}
 .brand-copy strong{font-size:14px;line-height:1.2;font-weight:600}
@@ -58,6 +60,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 .mode-switch,.coord-switch{border:1px solid var(--line);background:var(--surface);padding:3px;border-radius:8px;display:flex}
 .mode-switch button,.coord-switch button{border:0;background:transparent;color:var(--muted);border-radius:5px;padding:7px 12px;font-size:12px}
 .mode-switch button.active,.coord-switch button.active{background:var(--surface-3);color:var(--text);box-shadow:0 0 0 1px var(--line-bright)}
+.lang-link{color:var(--muted);font-size:12px;text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:7px 10px}
+.lang-link:hover{color:var(--text);border-color:var(--line-bright)}
 .lite-note{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:9px 28px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
 
 .boot{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;padding:24px}
@@ -255,7 +259,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
 }
 @media (max-width:1100px){
   .expert-layout{grid-template-columns:300px minmax(380px,1fr) 295px}
-  .topbar{grid-template-columns:260px 1fr auto}
+  .topbar{grid-template-columns:260px 1fr auto auto}
   .top-context{display:none}
   .simple-layout{width:calc(100% - 32px)}
   .simple-intro{grid-template-columns:1fr 380px;gap:36px}
@@ -391,6 +395,7 @@ dialog.dialog::backdrop{background:rgba(1,4,6,.78);backdrop-filter:blur(6px)}
   <div class="mode-switch" role="group" aria-label="Modo de interfaz">
     <button id="mSimple" class="active">Simple</button><button id="mExpert">Avanzado</button>
   </div>
+  <a class="lang-link" href="en/" hreflang="en" lang="en">English</a>
 </header>
 <div class="lite-note" id="liteBanner" hidden><span id="liteText"></span><button class="text-button" id="bLiteFull">Mostrar todos</button></div>
 

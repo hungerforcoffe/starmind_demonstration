@@ -62,6 +62,37 @@ core = re.sub(r'^export ', '', core, flags=re.M)
 main = open(P('main.js'), encoding='utf8').read()
 tle = open(P('starlink_snapshot.tle'), encoding='utf8').read()
 assert '</script' not in tle
-html = tpl.replace('/*CORE*/', core).replace('/*MAIN*/', main).replace('%%TLE%%', tle).replace('%%FUENTES%%', json.dumps(fuentes, ensure_ascii=False).replace('</', '<\\/'))
+
+
+def assemble(template, rows):
+    return template.replace('/*CORE*/', core).replace('/*MAIN*/', main).replace('%%TLE%%', tle).replace('%%FUENTES%%', json.dumps(rows, ensure_ascii=False).replace('</', '<\\/'))
+
+
+def english(template):
+    """Aplica i18n_en al template; falla si algún par ya no existe (texto cambiado sin actualizar la traducción)."""
+    sys.path.insert(0, here)
+    import i18n_en as T
+    for es, en in T.RAW:
+        assert es in template, 'RAW sin uso: ' + es[:80]
+        template = template.replace(es, en)
+    for es, en in T.TEXT:
+        pat = re.compile(r'>(\s*)' + re.escape(es) + r'(\s*)<')
+        template, n = pat.subn(lambda m: '>' + m.group(1) + en + m.group(2) + '<', template)
+        assert n, 'TEXT sin uso: ' + es[:80]
+    rows = []
+    for r in fuentes:
+        assert r['id'] in T.FUENTES, 'fuente sin traducir: ' + r['id']
+        p_, v_, f_ = T.FUENTES[r['id']]
+        rows.append(dict(r, p=p_, v=v_, f=f_, label=T.LABELS.get(r['estado'], r['estado'])))
+    return template, rows
+
+
+html = assemble(tpl, fuentes)
 open(OUT, 'w', encoding='utf8', newline='\n').write(html)
 print('escrito', OUT, f'{len(html)/1e6:.2f} MB')
+tpl_en, rows_en = english(tpl)
+OUT_EN = os.path.join(os.path.dirname(OUT), 'en', 'index.html')
+os.makedirs(os.path.dirname(OUT_EN), exist_ok=True)
+html_en = assemble(tpl_en, rows_en)
+open(OUT_EN, 'w', encoding='utf8', newline='\n').write(html_en)
+print('escrito', OUT_EN, f'{len(html_en)/1e6:.2f} MB')

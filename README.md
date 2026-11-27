@@ -6,9 +6,9 @@
 
 Simulador 3D interactivo del daño que la megaconstelación **Starmind** de SpaceX causaría en las observaciones del **Observatorio Vera C. Rubin** (Cerro Pachón, Chile). Starmind contempla hasta 1.000.000 de satélites que funcionarían como centros de datos en órbita; la FCC la autorizó el 25-nov-2026 (DA 26-1273).
 
-### ▶ [Abrir el simulador](https://hungerforcoffe.github.io/starmind_demonstration/)
+### ▶ [Abrir el simulador](https://hungerforcoffe.github.io/starmind_demonstration/) · [English version](https://hungerforcoffe.github.io/starmind_demonstration/en/)
 
-Corre en el navegador y no hay que instalar nada. La interfaz está en español.
+Corre en el navegador y no hay que instalar nada. La página está en español y en inglés; el enlace de la barra superior cambia de idioma.
 
 ---
 
@@ -161,8 +161,9 @@ La tabla completa y la discusión están en [`FASE3_FASE4.md`](FASE3_FASE4.md).
 | Ruta | Contenido |
 |---|---|
 | `index.html` | El simulador completo en un solo archivo (es lo que sirve GitHub Pages) |
-| `og.png` | Imagen de vista previa al compartir el enlace (1200×630) |
-| `desarrollo/` | Fuentes: `core.js` (física, sin interfaz), `main.js` (escena, shaders, interfaz), `template.html` (estilos y diseño), `build.py` (genera `index.html` y contiene la tabla de fuentes), `test_core.mjs` (pruebas del núcleo con Node) |
+| `en/index.html` | La versión en inglés, generada desde las mismas fuentes |
+| `og.png` · `og_en.png` | Imágenes de vista previa al compartir el enlace (1200×630), en español e inglés |
+| `desarrollo/` | Fuentes: `core.js` (física, sin interfaz), `main.js` (escena, shaders, interfaz), `template.html` (estilos y diseño), `build.py` (genera `index.html` y `en/index.html`, y contiene la tabla de fuentes), `i18n_en.py` (traducción al inglés; `build.py` falla si un texto queda sin traducir), `test_core.mjs` (pruebas del núcleo con Node) |
 | `referencia/` | Textos de la FCC, lista de subcapas de McDowell, snapshot GP de Starlink del 26-nov-2026 y scripts Python de referencia (`reference.py`, `montecarlo.py`) |
 | `FASE1_FASE2.md` | Investigación de fuentes, arquitectura, casos verificables a mano, plan de pruebas y revisión contra el texto completo de la FCC |
 | `FASE3_FASE4.md` | Resultados del diagnóstico, limitaciones y qué cambiaría con mejores datos |
